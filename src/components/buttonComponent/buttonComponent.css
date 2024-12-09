@@ -1,0 +1,18 @@
+.button {
+  box-shadow: inset 0px 0px 0px 0px white;
+  color: black;
+  padding: var(--padding-m);
+  border-radius: var(--padding-m);
+  border: none;
+  transition: 500ms;
+}
+
+.button:hover{
+  box-shadow: inset 0px 60px 0px 0px blue;
+  color:white;
+}
+
+.button:focus{
+  box-shadow: inset 0px 60px 0px 0px rgb(13, 13, 145);
+  color:white;
+}

@@ -1,5 +1,6 @@
 import { Outlet, Link } from "react-router-dom";
 import "./navigationBar.css";
+import { ButtonComponent } from "../../components/buttonComponent/ButtonComponent";
 
 function NavigationBar() {
   return (
@@ -7,22 +8,35 @@ function NavigationBar() {
       <nav className="navigationBar">
         <ul className="linksContainer">
           <li>
-            <Link to="/">Inicio(post)</Link>
+            <Link to="/">
+              <ButtonComponent title="Inicio(Post)"></ButtonComponent>
+            </Link>
           </li>
           <li>
-            <Link to="/post">Post</Link>
+            <Link to="/post">
+              <ButtonComponent title="Post"></ButtonComponent>
+            </Link>
           </li>
           <li>
-            <Link to="/login">Login</Link>
+            <Link to="/login">
+              <ButtonComponent title="Login"></ButtonComponent>
+            </Link>
           </li>
           <li>
-            <Link to="/register">Registro</Link>
+            <Link to="/register">
+              <ButtonComponent title="Registro"></ButtonComponent>
+            </Link>
           </li>
           <li>
-            <Link to="/admin">Administración</Link>
+            <Link to="/admin">
+              <ButtonComponent title="Administración"></ButtonComponent>
+            </Link>
           </li>
           <li>
-            <Link to="/noPage">Página no encontrada</Link>
+            <Link to="/noPage">
+              {" "}
+              <ButtonComponent title="Página no encontrada"></ButtonComponent>
+            </Link>
           </li>
         </ul>
       </nav>

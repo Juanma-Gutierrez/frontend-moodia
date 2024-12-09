@@ -10,6 +10,7 @@
   justify-content: start;
   align-items: flex-start;
   height: 100vh;
+  padding-top: var(--padding-m);
 
   .navigationBar {
     display: flex;
@@ -27,7 +28,7 @@
       align-items: center;
 
       li {
-        padding-inline: var(--padding-l);
+        padding-inline: var(--padding-m);
         list-style: none;
       }
     }
