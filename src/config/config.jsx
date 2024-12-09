@@ -12,7 +12,7 @@ export const THEME_COLORS = {
 };
 
 export const globalVariables = {
-    userToken: null,
+    token: null,
     role: "user",
     theme: "light",
 };

@@ -6,8 +6,18 @@ import Register from "./register/Register";
 import NoPage from "./noPage/NoPage";
 import NavigationBar from "./navigationBar/NavigationBar";
 import Admin from "./admin/Admin";
+import { useEffect } from "react";
+import Auth from "../services/authService/Auth";
 
 function App() {
+  const init = () => {
+    Auth();
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>

@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import "./buttonComponent.css";
 
 export const ButtonComponent = ({ title }) => {
-  console.log(title);
   return (
     <button className="button" onClick={() => console.log({ title })}>
       {title}
@@ -11,6 +10,5 @@ export const ButtonComponent = ({ title }) => {
 };
 
 ButtonComponent.propTypes = {
-  title: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
 };
