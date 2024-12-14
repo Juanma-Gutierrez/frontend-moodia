@@ -1,18 +1,18 @@
-export const getTokenFromApi = () => {
-  console.log("entra en API");
+import { API_URL } from "../../config/config";
 
-  fetch("https://retoolapi.dev/GpZj85/data/1")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Error en la solicitud");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      localStorage.setItem("token", data["Column 1"]);
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
+export const getTokenFromApi = async () => {
+  try {
+    const number = Math.floor(Math.random() * 50) + 1;
+    const response = await fetch(API_URL + "/data/" + number);
+    if (!response.ok) {
+      throw new Error("Error en la solicitud");
+    }
+    const data = await response.json();
+    const tokenValue = data["Column 1"];
+    localStorage.setItem("token", tokenValue);
+    return tokenValue;
+  } catch (error) {
+    console.error("Error al obtener el token de la API:", error.message);
+    return null;
+  }
 };

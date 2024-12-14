@@ -1,5 +1,7 @@
 // API endpoints
-export const API_URL = "https://api.example.com";
+const env = "dev"
+
+export const API_URL = env === "dev" ? "https://retoolapi.dev/GpZj85" : "urlFinal";
 export const API_VERSION = "v1";
 
 // App settings
@@ -9,12 +11,6 @@ export const APP_NAME = "Moodia";
 export const THEME_COLORS = {
     primary: "#4CAF50",
     secondary: "#FF9800",
-};
-
-export const globalVariables = {
-    token: null,
-    role: "user",
-    theme: "light",
 };
 
 export const state = {

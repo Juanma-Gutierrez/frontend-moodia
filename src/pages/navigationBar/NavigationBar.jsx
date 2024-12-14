@@ -1,10 +1,14 @@
 import { Outlet, Link } from "react-router-dom";
 import "./navigationBar.css";
 import { ButtonComponent } from "../../components/buttonComponent/ButtonComponent";
+import { useAuth } from "../../context/AuthContext";
 
-function NavigationBar() {
+export default function NavigationBar() {
+  const { token } = useAuth();
+
   return (
     <div className="container">
+      {token}
       <nav className="navigationBar">
         <ul className="linksContainer">
           <li>
@@ -46,5 +50,3 @@ function NavigationBar() {
     </div>
   );
 }
-
-export default NavigationBar;

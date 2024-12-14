@@ -6,32 +6,25 @@ import Register from "./register/Register";
 import NoPage from "./noPage/NoPage";
 import NavigationBar from "./navigationBar/NavigationBar";
 import Admin from "./admin/Admin";
-import { useEffect } from "react";
 import Auth from "../services/authService/Auth";
+import { AuthProvider } from "../context/AuthContext";
 
-function App() {
-  const init = () => {
-    Auth();
-  };
-
-  useEffect(() => {
-    init();
-  }, []);
-
+export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<NavigationBar />}>
-          <Route index element={<Post />} />
-          <Route path="post" element={<Post />} />
-          <Route path="register" element={<Register />} />
-          <Route path="admin" element={<Admin />} />
-          <Route path="login" element={<Login />} />
-          <Route path="*" element={<NoPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Auth /> {/* Asegúrate de que Auth se renderiza */}
+        <Routes>
+          <Route path="/" element={<NavigationBar />}>
+            <Route index element={<Post />} />
+            <Route path="post" element={<Post />} />
+            <Route path="register" element={<Register />} />
+            <Route path="admin" element={<Admin />} />
+            <Route path="login" element={<Login />} />
+            <Route path="*" element={<NoPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
-
-export default App;

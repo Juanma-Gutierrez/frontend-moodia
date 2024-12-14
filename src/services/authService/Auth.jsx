@@ -1,17 +1,17 @@
-import { globalVariables } from "../../config/config";
-import { getTokenFromApi } from "../apiService/Api";
+import { useEffect } from "react";
+import { useAuth } from "../../context/AuthContext";
 
-function Auth() {
-  const token = localStorage.getItem("token");
-  console.log(token);
-  if (token) {
-    globalVariables.token = token;
-    console.log("Token encontrado:", token, globalVariables.token);
-  } else {
-    // Llamar a la api para pedir el token
-    console.log("Token no encontrado");
-    getTokenFromApi();
-  }
+export default function Auth() {
+  const { setToken, getTokenFromApi } = useAuth();
+
+
+  useEffect(() => {
+    getTokenFromApi().then((apiToken) => {
+      if (apiToken) {
+        setToken(apiToken);
+      }
+    });
+  }, [getTokenFromApi, setToken]);
+
+  return null;
 }
-
-export default Auth;
