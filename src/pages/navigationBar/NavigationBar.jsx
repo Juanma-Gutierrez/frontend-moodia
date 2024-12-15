@@ -8,7 +8,7 @@ export default function NavigationBar() {
 
   return (
     <div className="container">
-      {token}
+      <h6>{token}</h6>
       <nav className="navigationBar">
         <ul className="linksContainer">
           <li>
