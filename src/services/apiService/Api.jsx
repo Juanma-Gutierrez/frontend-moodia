@@ -1,10 +1,10 @@
 import { API_URL } from "../../config/config";
 
-export const getTokenFromApi = async () => {
+export const getTokenFromApi = async (email, password) => {
   try {
     const payload = {
-      email: "juanma@gmail.com",
-      password: "juanma123",
+      email: email,
+      password: password,
     };
 
     const response = await fetch(API_URL + "/auth/login", {
@@ -14,9 +14,11 @@ export const getTokenFromApi = async () => {
       },
       body: JSON.stringify(payload),
     });
+
     if (!response.ok) {
       throw new Error("Error en la solicitud");
     }
+
     const data = await response.json();
     const tokenValue = data["access_token"];
     localStorage.setItem("token", tokenValue);

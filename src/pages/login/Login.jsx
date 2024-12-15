@@ -1,10 +1,50 @@
-import Auth from "../../services/authService/Auth";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom"; // Importar useNavigate
+import "./login.scss";
+import { getTokenFromApi } from "../../services/apiService/Api";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate(); // Usar el hook useNavigate
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    console.log("Email:", email);
+    console.log("Password:", password);
+    const token = await getTokenFromApi(email, password);
+
+    if (token) {
+      navigate("/post");
+      console.log("navegar a post");
+    } else {
+      console.log("Error: Token no válido");
+    }
+  };
+
   return (
-    <div>
-      <Auth/>
-      <h3>Esta es la página de Login</h3>
+    <div className="login-container">
+      <h3>Iniciar Sesión</h3>
+      <form onSubmit={handleLogin}>
+        <input
+          type="email"
+          placeholder="Correo electrónico"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Contraseña"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Ingresar</button>
+      </form>
+      <p>
+        ¿No tienes una cuenta? <Link to="/register">Regístrate aquí</Link>
+      </p>
     </div>
   );
 }

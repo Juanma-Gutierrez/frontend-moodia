@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import "./buttonComponent.css";
+import "./buttonComponent.scss";
 
 export const ButtonComponent = ({ title }) => {
   return (
