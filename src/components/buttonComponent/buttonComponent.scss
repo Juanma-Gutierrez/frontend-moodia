@@ -1,18 +1,26 @@
 .button {
-  box-shadow: inset 0px 0px 0px 0px white;
-  color: black;
-  padding: var(--padding-m);
-  border-radius: var(--padding-m);
+  display: flex;
+  align-items: center;
   border: none;
-  transition: 500ms;
+  background-color: var(--primary-dark);
+  color: var(--secondary-light);
+  font-size: 16px;
+  cursor: pointer;
+  padding-left: 10px;
+  transition: color var(--transition-medium) ease;
 
   &:hover {
-    box-shadow: inset 0px 60px 0px 0px blue;
-    color: white;
+    color: red;
   }
 
-  &:focus {
-    box-shadow: inset 0px 60px 0px 0px rgb(13, 13, 145);
-    color: white;
+  svg {
+    margin: 10px 14px 10px 0px;
+    width: var(--icon-medium);
+    height: var(--icon-medium);
+  }
+
+  .button-text {
+    display: inline;
+    text-decoration: none;
   }
 }

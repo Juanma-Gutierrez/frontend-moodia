@@ -1,8 +1,9 @@
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./navigationBar.scss";
 import { ButtonComponent } from "../../components/buttonComponent/ButtonComponent";
 import { useAuth } from "../../context/AuthContext";
 import { useEffect } from "react";
+import { TestIcon } from "../../assets/icons/testIcon";
 
 export default function NavigationBar() {
   const { token } = useAuth();
@@ -20,32 +21,32 @@ export default function NavigationBar() {
   }, [token, navigate]);
 
   return (
-    <div className="container">
-      <nav className="navigationBar">
-        <ul className="linksContainer">
+    <div className="sidebar">
+      <nav>
+        <ul>
           <li>
             <Link to="/">
-              <ButtonComponent title="Inicio(Post)" />
+              <ButtonComponent title="Inicio(Post)" icon={TestIcon} />
             </Link>
           </li>
           <li>
             <Link to="/post">
-              <ButtonComponent title="Post" />
+              <ButtonComponent title="Post" icon={TestIcon}/>
             </Link>
           </li>
           <li>
             <Link to="/login">
-              <ButtonComponent title="Login" />
+              <ButtonComponent title="Login" icon={TestIcon}/>
             </Link>
           </li>
           <li>
             <Link to="/register">
-              <ButtonComponent title="Registro" />
+              <ButtonComponent title="Registro" icon={TestIcon}/>
             </Link>
           </li>
           <li>
             <Link to="/admin">
-              <ButtonComponent title="Administración" />
+              <ButtonComponent title="Administración" icon={TestIcon}/>
             </Link>
           </li>
           <li>
@@ -55,9 +56,6 @@ export default function NavigationBar() {
           </li>
         </ul>
       </nav>
-      <div className="outlet">
-        <Outlet />
-      </div>
     </div>
   );
 }

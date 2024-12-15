@@ -1,14 +1,16 @@
 import PropTypes from "prop-types";
 import "./buttonComponent.scss";
 
-export const ButtonComponent = ({ title }) => {
+export const ButtonComponent = ({ title, icon: Icon }) => {
   return (
     <button className="button" onClick={() => console.log({ title })}>
-      {title}
+      {Icon && <Icon className="button-icon" stroke="#eee"/>}
+      <span className="button-text">{title}</span>
     </button>
   );
 };
 
 ButtonComponent.propTypes = {
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  icon: PropTypes.string, // Ahora espera un string para la ruta de la imagen
 };
