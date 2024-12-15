@@ -8,20 +8,21 @@ import NavigationBar from "./navigationBar/NavigationBar";
 import Admin from "./admin/Admin";
 import Auth from "../services/authService/Auth";
 import { AuthProvider } from "../context/AuthContext";
+import PrivateRoute from "../services/privateRoute/privateRoute"; // Asegúrate de importar el componente PrivateRoute
 
 export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <Auth /> {/* Asegúrate de que Auth se renderiza */}
+        <Auth />
         <Routes>
           <Route path="/" element={<NavigationBar />}>
             <Route index element={<Post />} />
-            <Route path="post" element={<Post />} />
+            <Route path="post" element={<PrivateRoute><Post /></PrivateRoute>} />
             <Route path="register" element={<Register />} />
-            <Route path="admin" element={<Admin />} />
+            <Route path="admin" element={<PrivateRoute><Admin /></PrivateRoute>} />
             <Route path="login" element={<Login />} />
-            <Route path="*" element={<NoPage />} />
+            <Route path="*" element={<PrivateRoute><NoPage /></PrivateRoute>} />
           </Route>
         </Routes>
       </BrowserRouter>
