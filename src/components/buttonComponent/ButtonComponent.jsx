@@ -12,5 +12,5 @@ export const ButtonComponent = ({ title, icon: Icon }) => {
 
 ButtonComponent.propTypes = {
   title: PropTypes.string.isRequired,
-  icon: PropTypes.string, // Ahora espera un string para la ruta de la imagen
+  icon: PropTypes.elementType
 };
