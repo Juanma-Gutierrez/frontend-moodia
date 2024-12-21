@@ -7,7 +7,7 @@ import NoPage from "../noPage/NoPage";
 import NavigationBar from "../navigationBar/NavigationBar";
 import Admin from "../admin/Admin";
 import Auth from "../../services/authService/Auth";
-import { AuthProvider } from "../../context/AuthContext";
+import { AuthProvider } from "../../services/context/AuthContext";
 import PrivateRoute from "../../services/privateRoute/privateRoute";
 
 export default function App() {
@@ -28,7 +28,14 @@ export default function App() {
                   </PrivateRoute>
                 }
               />
-              <Route path="register" element={<Register />} />
+              <Route
+                path="register"
+                element={
+                  <PrivateRoute isPublic={true}>
+                    <Register />
+                  </PrivateRoute>
+                }
+              />
               <Route
                 path="admin"
                 element={

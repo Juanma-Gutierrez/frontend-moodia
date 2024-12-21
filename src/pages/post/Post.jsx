@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../services/context/AuthContext";
 import { useEffect } from "react";
 
 export default function Post() {

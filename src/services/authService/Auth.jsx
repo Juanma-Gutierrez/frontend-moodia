@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../services/context/AuthContext";
 
 export default function Auth() {
   const { setToken, getTokenFromApi } = useAuth();

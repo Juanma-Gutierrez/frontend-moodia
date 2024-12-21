@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { getTokenFromApi } from "../services/apiService/Api";
+import { getTokenFromApi } from "../../services/apiService/Api";
 
 const AuthContext = createContext();
 
@@ -16,8 +16,18 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem("token", token);
+    } else {
+      localStorage.removeItem("token");
+    }
+  }, [token]);
+
   return (
-    <AuthContext.Provider value={{ token, setToken, role, setRole, userId, setUserId, getTokenFromApi }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ token, setToken, role, setRole, userId, setUserId, getTokenFromApi }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 

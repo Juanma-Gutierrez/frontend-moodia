@@ -1,18 +1,20 @@
-import { Link, useNavigate } from "react-router-dom";
 import "./navigationBar.scss";
 import { ButtonComponent } from "../../components/buttonComponent/ButtonComponent";
-import { useAuth } from "../../context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
+import { adminIcon } from "../../assets/icons/adminIcon";
+import { homeIcon } from "../../assets/icons/homeIcon";
+import { loginIcon } from "../../assets/icons/loginIcon";
+import { logoutIcon } from "../../assets/icons/logoutIcon";
+import { registerIcon } from "../../assets/icons/registerIcon";
+import { useAuth } from "../../services/context/AuthContext";
 import { useEffect } from "react";
-import { TestIcon } from "../../assets/icons/testIcon";
 
 export default function NavigationBar() {
-  const { token } = useAuth();
+  const { token, role } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Verifica si hay token en localStorage al cargar la página
     if (token) {
-      // Solo redirige a /post si no está ya en la página de login (es decir, si la primera vez)
       const storedToken = localStorage.getItem("token");
       if (storedToken && window.location.pathname === "/login") {
         navigate("/post");
@@ -22,38 +24,45 @@ export default function NavigationBar() {
 
   return (
     <div className="sidebar">
+      <h1>{token}</h1>
       <nav>
         <ul>
-          <li>
-            <Link to="/">
-              <ButtonComponent title="Inicio(Post)" icon={TestIcon} />
-            </Link>
-          </li>
-          <li>
-            <Link to="/post">
-              <ButtonComponent title="Post" icon={TestIcon}/>
-            </Link>
-          </li>
-          <li>
-            <Link to="/login">
-              <ButtonComponent title="Login" icon={TestIcon}/>
-            </Link>
-          </li>
-          <li>
-            <Link to="/register">
-              <ButtonComponent title="Registro" icon={TestIcon}/>
-            </Link>
-          </li>
-          <li>
-            <Link to="/admin">
-              <ButtonComponent title="Administración" icon={TestIcon}/>
-            </Link>
-          </li>
-          <li>
-            <Link to="/noPage">
-              <ButtonComponent title="Página no encontrada" />
-            </Link>
-          </li>
+          {token != null && (
+            <li>
+              <Link to="/">
+                <ButtonComponent title="Post" icon={homeIcon} />
+              </Link>
+            </li>
+          )}
+          {token === null && (
+            <>
+              <li>
+                <Link to="/login">
+                  <ButtonComponent title="Login" icon={loginIcon} />
+                </Link>
+              </li>
+              <li>
+                <Link to="/register">
+                  <ButtonComponent title="Registro" icon={registerIcon} />
+                </Link>
+              </li>
+            </>
+          )}
+          <h1>{role}</h1>
+          {role === "admin" && (
+            <li>
+              <Link to="/admin">
+                <ButtonComponent title="Administración" icon={adminIcon} />
+              </Link>
+            </li>
+          )}
+          {token !== null && (
+            <li>
+              <Link to="/logout">
+                <ButtonComponent title="Cerrar sesión" icon={logoutIcon} />
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
     </div>

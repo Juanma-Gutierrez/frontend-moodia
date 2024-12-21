@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../services/apiService/registerUser";
 import "./register.scss";
 import { userAttributes } from "../../config/config";
 
 export default function Register() {
-  const [idExtendedUser] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -130,6 +129,9 @@ export default function Register() {
         <input type="hidden" value={idRole} />
         <button type="submit">Registrar</button>
       </form>
+      <p>
+        ¿Ya tienes una cuenta? <Link to="/login">Inicia sesión</Link>
+      </p>
     </div>
   );
 }
