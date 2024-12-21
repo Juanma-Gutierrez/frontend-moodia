@@ -17,7 +17,6 @@ export default function App() {
         <Auth />
         <div className="app-container">
           <NavigationBar />
-
           <div className="main-content">
             <Routes>
               <Route path="/" element={<Post />} />
