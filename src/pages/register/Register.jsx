@@ -1,19 +1,21 @@
-import { useState } from "react";
+import "./register.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../services/apiService/registerUser";
-import "./register.scss";
+import { useAuth } from "../../services/context/AuthContext";
+import { useState } from "react";
 import { userAttributes } from "../../config/config";
 
 export default function Register() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [birthDate, setBirthDate] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [idCivilStatus, setIdCivilStatus] = useState("");
+  const [idEmployment, setIdEmployment] = useState("");
   const [idGenre, setIdGenre] = useState("");
   const [idRole] = useState(1);
-  const [idEmployment, setIdEmployment] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const { setToken } = useAuth();
 
   const navigate = useNavigate();
 
@@ -55,6 +57,8 @@ export default function Register() {
       console.log(registerResponse.success);
       console.log("Registro y login exitosos. Redirigiendo a /post...");
       navigate("/post");
+      const token = localStorage.getItem("token");
+      setToken(token);
     } else {
       console.error("Error en el registro:", registerResponse.error);
     }
