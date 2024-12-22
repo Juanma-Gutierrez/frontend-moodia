@@ -8,14 +8,10 @@
   background-color: var(--primary-dark);
   padding: 20px 5px;
   overflow: hidden;
-  border-radius: 1rem 0 0 1rem;
   transition: .75s ease;
 
   &:hover {
     width: 200px;
-  }
-  h1 {
-    color:yellow;
   }
 
   .nav {

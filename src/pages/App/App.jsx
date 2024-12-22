@@ -1,6 +1,7 @@
 import "./app.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "../login/Login";
+import Logout from "../logout/Logout";
 import Post from "../post/Post";
 import Register from "../register/Register";
 import NoPage from "../noPage/NoPage";
@@ -45,6 +46,14 @@ export default function App() {
                 }
               />
               <Route path="login" element={<Login />} />
+              <Route
+                path="logout"
+                element={
+                  <PrivateRoute>
+                    <Logout />
+                  </PrivateRoute>
+                }
+              />
               <Route
                 path="*"
                 element={
