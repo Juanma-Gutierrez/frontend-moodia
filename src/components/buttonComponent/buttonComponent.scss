@@ -10,17 +10,28 @@
   transition: color var(--transition-medium) ease;
 
   &:hover {
-    color: red;
+    color: var(--secondary-medium);
+  }
+
+  &:disabled {
+    pointer-events: none;
+    color:var(--primary-light);
   }
 
   svg {
     margin: 10px 16px 10px 0px;
     width: var(--icon-medium);
     height: var(--icon-medium);
+    min-width: var(--icon-medium);
+  }
+
+  .button-icon {
+    min-width: 50px;
   }
 
   .button-text {
     display: inline;
     text-decoration: none;
+    white-space: nowrap;
   }
 }

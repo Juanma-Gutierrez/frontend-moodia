@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
 import "./buttonComponent.scss";
 
-export const ButtonComponent = ({ title, icon: Icon }) => {
+export const ButtonComponent = ({ title, icon: Icon, logo}) => {
+  const iconColor = getComputedStyle(document.documentElement).getPropertyValue('--icon-color');
+
   return (
-    <button className="button" onClick={() => console.log({ title })}>
-      {Icon && <Icon className="button-icon" stroke="#eee"/>}
+    <button className="button" onClick={() => console.log({ title })} disabled={logo}>
+      {Icon && <Icon className="button-icon" stroke={iconColor}/>}
       <span className="button-text">{title}</span>
     </button>
   );
@@ -12,5 +14,6 @@ export const ButtonComponent = ({ title, icon: Icon }) => {
 
 ButtonComponent.propTypes = {
   title: PropTypes.string.isRequired,
-  icon: PropTypes.elementType
+  icon: PropTypes.elementType,
+  logo: PropTypes.bool,
 };

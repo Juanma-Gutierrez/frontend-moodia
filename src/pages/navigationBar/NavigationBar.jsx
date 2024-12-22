@@ -8,6 +8,7 @@ import { logoutIcon } from "../../assets/icons/logoutIcon";
 import { registerIcon } from "../../assets/icons/registerIcon";
 import { useAuth } from "../../services/context/AuthContext";
 import { useEffect } from "react";
+import { logoIcon } from "../../assets/icons/logoIcon";
 
 export default function NavigationBar() {
   const { token, role } = useAuth();
@@ -24,9 +25,11 @@ export default function NavigationBar() {
 
   return (
     <div className="sidebar">
-      <h1>{token}</h1>
-      <nav>
+      <nav className="nav">
         <ul>
+          <li>
+              <ButtonComponent title="Moodia" icon={logoIcon} logo={true}/>
+          </li>
           {token != null && (
             <li>
               <Link to="/">
@@ -48,7 +51,6 @@ export default function NavigationBar() {
               </li>
             </>
           )}
-          <h1>{role}</h1>
           {role === "admin" && (
             <li>
               <Link to="/admin">
@@ -56,6 +58,8 @@ export default function NavigationBar() {
               </Link>
             </li>
           )}
+        </ul>
+        <ul>
           {token !== null && (
             <li>
               <Link to="/logout">

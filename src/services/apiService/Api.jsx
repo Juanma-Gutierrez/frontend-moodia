@@ -1,9 +1,10 @@
 import { API_URL } from "../../config/config";
 
-export const getTokenFromApi = async (email, password) => {
+export const getTokenFromApi = async (email, password, setToken) => {
   try {
     const tokenValue = await firstCall(email, password);
     const userData = await secondCall(tokenValue);
+    setToken(tokenValue);
 
     console.log("Datos del usuario:", userData);
     return { token: tokenValue, userData };
