@@ -3,13 +3,15 @@ import { useAuth } from "../../services/context/AuthContext";
 import "./logout.scss";
 
 export default function Logout() {
-  const { setToken } = useAuth();
+  const { setRole, setToken } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     // Limpiar el token y redirigir al login
     setToken(null);
+    setRole(null);
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
     localStorage.removeItem("userId");
     navigate("/login"); // Redirige al login
   };

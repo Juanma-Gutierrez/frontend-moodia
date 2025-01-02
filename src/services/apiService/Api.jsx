@@ -1,13 +1,18 @@
 import { API_URL } from "../../config/config";
 
-export const getTokenFromApi = async (email, password, setToken) => {
+export const apiGetUserData = async (email, password, setToken, setRole) => {
   try {
-    const tokenValue = await firstCall(email, password);
-    const userData = await secondCall(tokenValue);
-    setToken(tokenValue);
-
-    console.log("Datos del usuario:", userData);
-    return { token: tokenValue, userData };
+    const tokenValue = await apiGetToken(email, password);
+    if (tokenValue.token != undefined) {
+      const userMe = await apiGetMe(tokenValue.token);
+      if (userMe.userData.id) {
+        const role = await apiGetRole(tokenValue.token, userMe.userData.id);
+        setRole(role.roleData.data);
+        localStorage.setItem("role", role.roleData.data);
+      }
+      setToken(tokenValue.token);
+      return { token: tokenValue.token, userData: userMe };
+    }
   } catch (error) {
     console.error("Error al obtener el token o los datos del usuario:", error.message);
     return null;
@@ -15,46 +20,82 @@ export const getTokenFromApi = async (email, password, setToken) => {
 };
 
 // Función para obtener el token
-const firstCall = async (email, password) => {
+export const apiGetToken = async (email, password) => {
+  if (!email || !password) {
+    return { success: false, error: "Credenciales no válidas. Por favor, verifica email y password." };
+  }
+
   const payload = {
     email: email,
     password: password,
   };
 
-  const response = await fetch(API_URL + "/auth/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  });
+  try {
+    const response = await fetch(API_URL + "/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
 
-  if (!response.ok) {
-    throw new Error("Error en la solicitud para obtener el token");
+    // Verifica si la respuesta es válida antes de procesarla
+    if (!response.ok) {
+      console.error(`Error en la solicitud: ${response.status} ${response.statusText}`);
+      throw new Error("No se pudo obtener el token. Verifica tus credenciales o el servidor.");
+    }
+
+    const data = await response.json();
+    const tokenValue = data["access_token"];
+    if (!tokenValue) {
+      throw new Error("No se recibió un token válido en la respuesta del servidor.");
+    }
+
+    // Almacena el token en localStorage
+    localStorage.setItem("token", tokenValue);
+    return { success: true, token: tokenValue };
+  } catch (error) {
+    console.error("Error en la solicitud para obtener el token:", error.message);
+    return { success: false, error: error.message };
   }
-
-  const data = await response.json();
-  const tokenValue = data["access_token"];
-  localStorage.setItem("token", tokenValue);
-
-  return tokenValue;
 };
 
-// Función para obtener los datos del usuario
-const secondCall = async (tokenValue) => {
-  const userResponse = await fetch(API_URL + "/auth/me", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${tokenValue}`,
-    },
-  });
-
-  if (!userResponse.ok) {
-    throw new Error("Error al obtener los datos del usuario");
+// Función para obtener los datos me del usuario
+export const apiGetMe = async (tokenValue) => {
+  try {
+    const userResponse = await fetch(API_URL + "/auth/me", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${tokenValue}`,
+      },
+    });
+    if (!userResponse.ok) {
+      throw new Error("Error al obtener los datos del usuario");
+    }
+    const userData = await userResponse.json();
+    localStorage.setItem("userId", userData["id"]);
+    return { success: true, userData: userData };
+  } catch (error) {
+    return { success: false, error: error.message };
   }
+};
 
-  const userData = await userResponse.json();
-  localStorage.setItem("userId", userData["id"]);
-
-  return userData;
+// Función para obtener el rol del usuario
+export const apiGetRole = async (tokenValue, idUser) => {
+  try {
+    const roleResponse = await fetch(API_URL + "/extended_user/getRole/" + idUser, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${tokenValue}`,
+      },
+    });
+    if (!roleResponse.ok) {
+      throw new Error("Error al obtener los datos del usuario");
+    }
+    const roleData = await roleResponse.json();
+    console.log("role", roleData["role"]);
+    return { success: true, roleData: roleData };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
 };

@@ -1,4 +1,5 @@
 import { API_URL } from "../../config/config";
+import { apiGetMe, apiGetToken } from "./Api";
 
 // Función principal de registro
 export const registerUser = async (
@@ -15,18 +16,14 @@ export const registerUser = async (
   try {
     // Paso 1: Registrar al usuario
     await registerStepRegisterUser(name, email, password, passwordConfirmation);
-
     // Paso 2: Iniciar sesión automáticamente después del registro
-    const loginData = await registerStepLogin(email, password);
-
+    const tokenValue = await apiGetToken(email, password);
     // Paso 3: Obtener los datos del usuario
-    const userDataWithDetails = await registerStepMe(loginData.token);
-
+    const userDataWithDetails = await apiGetMe(tokenValue.token);
     // Paso 4: Grabar en la tabla extended_user con el id recibido
     console.log("userdatawithdetails", userDataWithDetails);
     await registerStepExtendedUser(userDataWithDetails.id, birthDate, idCivilStatus, idGenre, idRole, idEmployment);
-
-    return { success: true, userData: userDataWithDetails, token: loginData.token };
+    return { success: true, userData: userDataWithDetails, token: tokenValue.token };
   } catch (error) {
     console.error("Error en el registro:", error.message);
     return { success: false, error: error.message };
@@ -59,52 +56,6 @@ const registerStepRegisterUser = async (name, email, password, passwordConfirmat
   const data = await response.json();
   console.log("Usuario registrado correctamente:", data);
   return data; // Retornamos los datos del usuario
-};
-
-// Paso 2: Iniciar sesión automáticamente después del registro
-const registerStepLogin = async (email, password) => {
-  const payload = {
-    email: email,
-    password: password,
-  };
-
-  const response = await fetch(API_URL + "/auth/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  });
-
-  if (!response.ok) {
-    const errorData = await response.json();
-    console.error("Error en el login:", errorData);
-    throw new Error("Error en el login");
-  }
-
-  const data = await response.json();
-  const tokenValue = data["access_token"];
-  localStorage.setItem("token", tokenValue);
-
-  return { success: true, token: tokenValue };
-};
-
-// Paso 3: Obtener los datos del usuario
-const registerStepMe = async (tokenValue) => {
-  const userResponse = await fetch(API_URL + "/auth/me", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${tokenValue}`,
-    },
-  });
-
-  if (!userResponse.ok) {
-    throw new Error("Error al obtener los datos del usuario");
-  }
-
-  const userData = await userResponse.json();
-  localStorage.setItem("userId", userData["id"]);
-  return userData; // Retornamos los datos del usuario con su ID
 };
 
 // Paso 4: Grabar en la tabla extended_user

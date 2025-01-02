@@ -23,14 +23,20 @@ export default function NavigationBar() {
     }
   }, [token, navigate]);
 
+  useEffect(() => {
+    // if (role) {
+    //   navigate("/post");
+    // }
+  }, [role, navigate]);
+
   return (
     <div className="sidebar">
       <nav className="nav">
         <ul>
           <li>
-              <ButtonComponent title="Moodia" icon={logoIcon} logo={true}/>
+            <ButtonComponent title="Moodia" icon={logoIcon} logo={true} />
           </li>
-          {token != null && (
+          {token != null && role == "Usuario" && (
             <li>
               <Link to="/">
                 <ButtonComponent title="Post" icon={homeIcon} />
@@ -51,7 +57,7 @@ export default function NavigationBar() {
               </li>
             </>
           )}
-          {role === "admin" && (
+          {role === "Administrador" && (
             <li>
               <Link to="/admin">
                 <ButtonComponent title="Administración" icon={adminIcon} />
