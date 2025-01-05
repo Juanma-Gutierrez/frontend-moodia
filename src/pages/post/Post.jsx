@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../services/context/AuthContext";
+import { useAuthContext } from "../../services/context/AuthContext";
 import { useEffect } from "react";
 
 export default function Post() {
-  const { token } = useAuth();
+  const { token } = useAuthContext();
   const navigate = useNavigate();
 
   useEffect(() => {

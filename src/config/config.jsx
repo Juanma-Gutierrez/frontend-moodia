@@ -14,7 +14,14 @@ export const THEME_COLORS = {
   secondary: "#FF9800",
 };
 
-export const userAttributes = {
+export const CONSTANTS = {
+  lottie: {
+    width: "150px",
+    height: "100px",
+  },
+};
+
+export const USER_ATTRIBUTES = {
   role: ["Usuario", "Administrador"],
   genre: ["Masculino", "Femenino", "Otros", "Prefiero no decirlo"],
   civilStatus: ["Soltero/a", "Casado/a", "Divorciado/a", "Viudo/a", "En una relación", "Prefiero no decirlo"],

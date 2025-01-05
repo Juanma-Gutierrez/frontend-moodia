@@ -11,7 +11,8 @@ export const registerUser = async (
   idCivilStatus,
   idGenre,
   idRole,
-  idEmployment
+  idEmployment,
+  setRole
 ) => {
   try {
     // Paso 1: Registrar al usuario
@@ -22,7 +23,7 @@ export const registerUser = async (
     const userDataWithDetails = await apiGetMe(tokenValue.token);
     // Paso 4: Grabar en la tabla extended_user con el id recibido
     console.log("userdatawithdetails", userDataWithDetails);
-    await registerStepExtendedUser(userDataWithDetails.id, birthDate, idCivilStatus, idGenre, idRole, idEmployment);
+    await registerStepExtendedUser(userDataWithDetails.id, birthDate, idCivilStatus, idGenre, idRole, idEmployment, setRole);
     return { success: true, userData: userDataWithDetails, token: tokenValue.token };
   } catch (error) {
     console.error("Error en el registro:", error.message);
@@ -55,11 +56,11 @@ const registerStepRegisterUser = async (name, email, password, passwordConfirmat
 
   const data = await response.json();
   console.log("Usuario registrado correctamente:", data);
-  return data; // Retornamos los datos del usuario
+  return data;
 };
 
 // Paso 4: Grabar en la tabla extended_user
-const registerStepExtendedUser = async (idExtendedUser, birthDate, idCivilStatus, idGenre, idRole, idEmployment) => {
+const registerStepExtendedUser = async (idExtendedUser, birthDate, idCivilStatus, idGenre, idRole, idEmployment, setRole) => {
   const payload = {
     idExtendedUser: idExtendedUser,
     birthDate: birthDate,
@@ -82,6 +83,7 @@ const registerStepExtendedUser = async (idExtendedUser, birthDate, idCivilStatus
 
   if (response.ok) {
     console.log("Datos de extended_user guardados correctamente", payload);
+    setRole("Usuario");
   } else {
     const errorData = await response.json();
     console.error("Error al guardar los datos extendidos:", errorData);

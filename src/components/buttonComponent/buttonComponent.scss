@@ -15,11 +15,11 @@
 
   &:disabled {
     pointer-events: none;
-    color:var(--primary-light);
+    color: var(--white);
   }
 
   svg {
-    margin: 10px 16px 10px 0px;
+    margin: var(--margin-medium)var(--margin-large) var(--margin-medium) var(--margin-zero);
     width: var(--icon-medium);
     height: var(--icon-medium);
     min-width: var(--icon-medium);

@@ -2,10 +2,12 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Importar useNavigate
 import "./login.scss";
 import { apiGetUserData } from "../../services/apiService/Api";
-import { useAuth } from "../../services/context/AuthContext";
+import { useAuthContext } from "../../services/context/AuthContext";
+import { useIsLoadingContext } from "../../services/context/IsLoadingContext";
 
 export default function Login() {
-  const { setRole, setToken } = useAuth();
+  const { setRole, setToken } = useAuthContext();
+  const { setIsLoading } = useIsLoadingContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -14,13 +16,14 @@ export default function Login() {
     e.preventDefault();
     console.log("Email:", email);
     console.log("Password:", password);
-    const token = await apiGetUserData(email, password, setToken, setRole);
+    const token = await apiGetUserData(email, password, setToken, setRole, setIsLoading);
     if (token) {
       navigate("/post");
       console.log("navegar a post");
     } else {
       console.log("Error: Token no válido");
     }
+    setIsLoading(false);
   };
 
   return (

@@ -1,9 +1,10 @@
 import "./register.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../services/apiService/registerUser";
-import { useAuth } from "../../services/context/AuthContext";
+import { useAuthContext } from "../../services/context/AuthContext";
 import { useState } from "react";
-import { userAttributes } from "../../config/config";
+import { USER_ATTRIBUTES } from "../../config/config";
+import { useIsLoadingContext } from "../../services/context/IsLoadingContext";
 
 export default function Register() {
   const [birthDate, setBirthDate] = useState("");
@@ -15,7 +16,8 @@ export default function Register() {
   const [idRole] = useState(1);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const { setToken } = useAuth();
+  const { setToken, setRole } = useAuthContext();
+  const { setIsLoading } = useIsLoadingContext();
 
   const navigate = useNavigate();
 
@@ -26,7 +28,7 @@ export default function Register() {
       console.error("Error: Las contraseñas no coinciden");
       return;
     }
-
+    setIsLoading(true);
     const userData = {
       name,
       email,
@@ -50,7 +52,8 @@ export default function Register() {
       idCivilStatus,
       idGenre,
       idRole,
-      idEmployment
+      idEmployment,
+      setRole
     );
 
     if (registerResponse.success) {
@@ -62,6 +65,7 @@ export default function Register() {
     } else {
       console.error("Error en el registro:", registerResponse.error);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -101,7 +105,7 @@ export default function Register() {
           <label htmlFor="civilStatus">Estado civil:</label>
           <select id="civilStatus" value={idCivilStatus} onChange={(e) => setIdCivilStatus(e.target.value)} required>
             <option value="">Selecciona tu estado civil</option>
-            {userAttributes.civilStatus.map((status, index) => (
+            {USER_ATTRIBUTES.civilStatus.map((status, index) => (
               <option key={index} value={index + 1}>
                 {status}
               </option>
@@ -112,7 +116,7 @@ export default function Register() {
           <label htmlFor="genre">Género:</label>
           <select id="genre" value={idGenre} onChange={(e) => setIdGenre(e.target.value)} required>
             <option value="">Selecciona tu género</option>
-            {userAttributes.genre.map((genre, index) => (
+            {USER_ATTRIBUTES.genre.map((genre, index) => (
               <option key={index} value={index + 1}>
                 {genre}
               </option>
@@ -123,7 +127,7 @@ export default function Register() {
           <label htmlFor="genre">Situación laboral:</label>
           <select value={idEmployment} onChange={(e) => setIdEmployment(e.target.value)} required>
             <option value="">Selecciona tu situación laboral</option>
-            {userAttributes.employment.map((employment, index) => (
+            {USER_ATTRIBUTES.employment.map((employment, index) => (
               <option key={index} value={index + 1}>
                 {employment}
               </option>

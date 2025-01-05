@@ -6,12 +6,12 @@ import { homeIcon } from "../../assets/icons/homeIcon";
 import { loginIcon } from "../../assets/icons/loginIcon";
 import { logoutIcon } from "../../assets/icons/logoutIcon";
 import { registerIcon } from "../../assets/icons/registerIcon";
-import { useAuth } from "../../services/context/AuthContext";
+import { useAuthContext } from "../../services/context/AuthContext";
 import { useEffect } from "react";
 import { logoIcon } from "../../assets/icons/logoIcon";
 
 export default function NavigationBar() {
-  const { token, role } = useAuth();
+  const { token, role } = useAuthContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,11 +23,11 @@ export default function NavigationBar() {
     }
   }, [token, navigate]);
 
-  useEffect(() => {
-    // if (role) {
-    //   navigate("/post");
-    // }
-  }, [role, navigate]);
+  // useEffect(() => {
+  //   // if (role) {
+  //   //   navigate("/post");
+  //   // }
+  // }, [role, navigate]);
 
   return (
     <div className="sidebar">

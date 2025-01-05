@@ -10,12 +10,17 @@ import Admin from "../admin/Admin";
 import Auth from "../../services/authService/Auth";
 import { AuthProvider } from "../../services/context/AuthContext";
 import PrivateRoute from "../../services/privateRoute/privateRoute";
+import { useIsLoadingContext } from "../../services/context/IsLoadingContext";
+import { IsLoading } from "../../components/isLoadingComponent/isLoadingComponent";
 
 export default function App() {
+  const { isLoading } = useIsLoadingContext();
+
   return (
     <AuthProvider>
       <BrowserRouter>
-        <Auth />
+        <Auth />{isLoading && <IsLoading isLoading={isLoading}>Cargando</IsLoading>}
+
         <div className="app-container">
           <NavigationBar />
           <div className="main-content">

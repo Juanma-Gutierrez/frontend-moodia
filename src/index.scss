@@ -8,11 +8,6 @@
   color: var(--black-light);
   background-color: var(--primary-light);
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
   // Colors
   --white: #fff;
   --white-light: #ddd;
@@ -23,16 +18,45 @@
   --primary-light: #9f8d8d;
   --secondary-medium: #d9ae8e;
   --secondary-light: #ffddba;
-  --logo-color: var(--primary-light);
+  --logo-color: var(--white);
   --icon-color: var(--secondary-light);
 
+  // Fonts
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  // FontSizes
+  --font-small: 0.5rem;
+  --font-medium: 1rem;
+  --font-large: 1.4rem;
+  // FontWeights
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
   // Sizes
-  --padding-m: 10px;
-  --padding-l: 20px;
+  // Padding
+  --padding-zero: 0px;
+  --padding-small: 4px;
+  --padding-medium: 8px;
+  --padding-large: 16px;
+  // Margin
+  --margin-zero: 0px;
+  --margin-small: 4px;
+  --margin-medium: 8px;
+  --margin-large: 16px;
+  // Icons
+  --icon-small: 16px;
+  --icon-medium: 32px;
+  --icon-large: 64px;
+  // Lotties
+  --lottie-small: 100px;
+  --lottie-medium: 200px;
+  --lottie-large: 300px;
+  // NavigationBar
   --navigationBarHeight: 50px;
-  --icon-small: 20px;
-  --icon-medium: 30px;
-  --icon-large: 60px;
 
   // Transition
   --transition-fast: 0.2s;

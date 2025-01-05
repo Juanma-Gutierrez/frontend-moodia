@@ -1,9 +1,11 @@
 import { useEffect } from "react";
-import { useAuth } from "../../services/context/AuthContext";
+import { useAuthContext } from "../../services/context/AuthContext";
 import { apiGetRole } from "../apiService/Api";
+import { useIsLoadingContext } from "../context/IsLoadingContext";
 
 export default function Auth() {
-  const { setToken, setRole, apiGetUserData: apiGetUserData } = useAuth();
+  const { setToken, setRole, apiGetUserData: apiGetUserData } = useAuthContext();
+  const { setIsLoading } = useIsLoadingContext();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -28,7 +30,8 @@ export default function Auth() {
         setRole(role);
       }
     }
-  }, [setToken, setRole, apiGetUserData]);
+    setIsLoading(false);
+  }, [setToken, setRole, apiGetUserData, setIsLoading]);
 
   return null;
 }

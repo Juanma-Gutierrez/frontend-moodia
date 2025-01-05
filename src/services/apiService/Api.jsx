@@ -1,7 +1,9 @@
 import { API_URL } from "../../config/config";
 
-export const apiGetUserData = async (email, password, setToken, setRole) => {
+export const apiGetUserData = async (email, password, setToken, setRole, setIsLoading) => {
   try {
+    console.log("Entra a obtener el token");
+    setIsLoading(true);
     const tokenValue = await apiGetToken(email, password);
     if (tokenValue.token != undefined) {
       const userMe = await apiGetMe(tokenValue.token);
@@ -13,8 +15,11 @@ export const apiGetUserData = async (email, password, setToken, setRole) => {
       setToken(tokenValue.token);
       return { token: tokenValue.token, userData: userMe };
     }
+    console.log("Entra a modificar el rol");
+    setIsLoading(false);
   } catch (error) {
     console.error("Error al obtener el token o los datos del usuario:", error.message);
+    setIsLoading(false);
     return null;
   }
 };

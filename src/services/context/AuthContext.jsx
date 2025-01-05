@@ -29,7 +29,17 @@ export const AuthProvider = ({ children }) => {
   }, [token]);
 
   return (
-    <AuthContext.Provider value={{ token, setToken, role, setRole, userId, setUserId, apiGetUserData: apiGetUserData }}>
+    <AuthContext.Provider
+      value={{
+        token,
+        setToken,
+        role,
+        setRole,
+        userId,
+        setUserId,
+        apiGetUserData: apiGetUserData,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -39,6 +49,6 @@ AuthProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export const useAuth = () => {
+export const useAuthContext = () => {
   return useContext(AuthContext);
 };

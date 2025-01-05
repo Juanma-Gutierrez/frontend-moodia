@@ -1,9 +1,9 @@
 import { Navigate, useLocation } from "react-router-dom";
-import { useAuth } from "../../services/context/AuthContext";
+import { useAuthContext } from "../../services/context/AuthContext";
 import PropTypes from "prop-types";
 
 const PrivateRoute = ({ children, isPublic = false }) => {
-  const { token } = useAuth();
+  const { token } = useAuthContext();
   const location = useLocation();
   const hasToken = token || localStorage.getItem("token");
 
