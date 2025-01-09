@@ -19,8 +19,8 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <Auth />{isLoading && <IsLoading isLoading={isLoading}>Cargando</IsLoading>}
-
+        <Auth />
+        {isLoading && <IsLoading isLoading={isLoading}>Cargando</IsLoading>}
         <div className="app-container">
           <NavigationBar />
           <div className="main-content">

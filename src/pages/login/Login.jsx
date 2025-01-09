@@ -18,8 +18,14 @@ export default function Login() {
     console.log("Password:", password);
     const token = await apiGetUserData(email, password, setToken, setRole, setIsLoading);
     if (token) {
-      navigate("/post");
-      console.log("navegar a post");
+      let role = localStorage.getItem("role");
+      if (role === "Administrador") {
+        console.log("navegar a admin");
+        navigate("/admin");
+      } else if (role === "Usuario") {
+        console.log("navegar a post");
+        navigate("/post");
+      }
     } else {
       console.log("Error: Token no válido");
     }

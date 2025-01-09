@@ -34,22 +34,3 @@ IsLoading.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
 };
-
-// import PropTypes from "prop-types";
-// import "./IsLoadingComponent.scss";
-
-// export const IsLoading = ({ isLoading, children }) => {
-//   if (isLoading) {
-//     return (
-//       <div className="overlay">
-//         <div className="spinner"></div>
-//       </div>
-//     );
-//   }
-//   return <>{children}</>;
-// };
-
-// IsLoading.propTypes = {
-//   isLoading: PropTypes.bool.isRequired,
-//   children: PropTypes.node.isRequired,
-// };

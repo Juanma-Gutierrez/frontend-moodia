@@ -5,6 +5,7 @@ import { useAuthContext } from "../../services/context/AuthContext";
 import { useState } from "react";
 import { USER_ATTRIBUTES } from "../../config/config";
 import { useIsLoadingContext } from "../../services/context/IsLoadingContext";
+import { useEnvironmentContext } from "../../services/context/EnvironmentContext";
 
 export default function Register() {
   const [birthDate, setBirthDate] = useState("");
@@ -18,7 +19,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const { setToken, setRole } = useAuthContext();
   const { setIsLoading } = useIsLoadingContext();
-
+  const { genres, civilStatus, employment } = useEnvironmentContext();
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
@@ -102,34 +103,31 @@ export default function Register() {
           required
         />
         <div>
-          <label htmlFor="civilStatus">Estado civil:</label>
           <select id="civilStatus" value={idCivilStatus} onChange={(e) => setIdCivilStatus(e.target.value)} required>
             <option value="">Selecciona tu estado civil</option>
-            {USER_ATTRIBUTES.civilStatus.map((status, index) => (
-              <option key={index} value={index + 1}>
-                {status}
+            {civilStatus.map((status) => (
+              <option key={status.idCivilStatus} value={status.idCivilStatus}>
+                {status.status}
               </option>
             ))}
           </select>
         </div>
         <div>
-          <label htmlFor="genre">Género:</label>
           <select id="genre" value={idGenre} onChange={(e) => setIdGenre(e.target.value)} required>
             <option value="">Selecciona tu género</option>
-            {USER_ATTRIBUTES.genre.map((genre, index) => (
-              <option key={index} value={index + 1}>
-                {genre}
+            {genres.map((genre) => (
+              <option key={genre.idGenre} value={genre.idGenre}>
+                {genre.genre}
               </option>
             ))}
           </select>
         </div>
         <div>
-          <label htmlFor="genre">Situación laboral:</label>
-          <select value={idEmployment} onChange={(e) => setIdEmployment(e.target.value)} required>
+          <select id="employment" value={idEmployment} onChange={(e) => setIdEmployment(e.target.value)} required>
             <option value="">Selecciona tu situación laboral</option>
-            {USER_ATTRIBUTES.employment.map((employment, index) => (
-              <option key={index} value={index + 1}>
-                {employment}
+            {employment.map((employment) => (
+              <option key={employment.idEmployment} value={employment.idEmployment}>
+                {employment.employment}
               </option>
             ))}
           </select>
