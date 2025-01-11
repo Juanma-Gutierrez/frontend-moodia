@@ -1,8 +1,8 @@
-import PropTypes from "prop-types";
-import Lottie from "react-lottie";
-import isLoadingLottie from "../../assets/lotties/isLoadingLottie.json";
 import "./IsLoadingComponent.scss";
-import { CONSTANTS } from "../../config/config";
+import Lottie from "react-lottie";
+import PropTypes from "prop-types";
+import isLoadingLottie from "../../assets/lotties/isLoadingLottie.json";
+import { CONSTANTS } from "../../constants/constants";
 
 export const IsLoading = ({ isLoading, children }) => {
   if (isLoading) {
@@ -20,8 +20,8 @@ export const IsLoading = ({ isLoading, children }) => {
         <Lottie
           options={defaultOptions}
           className="lottie"
-          height={CONSTANTS.lottie.height}
-          width={CONSTANTS.lottie.width}
+          height={CONSTANTS.lottie_medium.height}
+          width={CONSTANTS.lottie_medium.width}
         />
         <p className="loading-text">Cargando...</p>
       </div>

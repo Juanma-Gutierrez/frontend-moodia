@@ -1,4 +1,4 @@
-import { API_URL } from "../../config/config";
+import { API_URL } from "../../constants/constants";
 
 export const apiGetUserData = async (email, password, setToken, setRole, setIsLoading) => {
   try {

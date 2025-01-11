@@ -1,6 +1,6 @@
-import { API_URL } from "../../config/config";
+import { API_URL } from "../../constants/Constants";
 
-export const apiGetData = async (endpoint) => {
+export const apiGetData = async (endpoint, setKOScreenVisible) => {
   try {
     const response = await fetch(`${API_URL}/${endpoint}`, {
       method: "POST",
@@ -11,6 +11,7 @@ export const apiGetData = async (endpoint) => {
     });
 
     if (!response.ok) {
+      setKOScreenVisible(true);
       console.error(`Error en la solicitud: ${response.status} ${response.statusText}`);
       throw new Error(`No se pudo obtener los datos desde ${endpoint}. Verifica el servidor.`);
     }
@@ -18,6 +19,7 @@ export const apiGetData = async (endpoint) => {
     const data = await response.json();
     return { success: true, data };
   } catch (error) {
+    setKOScreenVisible(true);
     console.error(`Error en la solicitud para obtener los datos desde ${endpoint}:`, error.message);
     return { success: false, error: error.message };
   }

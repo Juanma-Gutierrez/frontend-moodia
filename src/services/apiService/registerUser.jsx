@@ -1,4 +1,4 @@
-import { API_URL } from "../../config/config";
+import { API_URL } from "../../constants/constants";
 import { apiGetMe, apiGetToken } from "./Api";
 
 // Función principal de registro
@@ -23,7 +23,15 @@ export const registerUser = async (
     const userDataWithDetails = await apiGetMe(tokenValue.token);
     // Paso 4: Grabar en la tabla extended_user con el id recibido
     console.log("userdatawithdetails", userDataWithDetails);
-    await registerStepExtendedUser(userDataWithDetails.id, birthDate, idCivilStatus, idGenre, idRole, idEmployment, setRole);
+    await registerStepExtendedUser(
+      userDataWithDetails.id,
+      birthDate,
+      idCivilStatus,
+      idGenre,
+      idRole,
+      idEmployment,
+      setRole
+    );
     return { success: true, userData: userDataWithDetails, token: tokenValue.token };
   } catch (error) {
     console.error("Error en el registro:", error.message);
@@ -60,7 +68,15 @@ const registerStepRegisterUser = async (name, email, password, passwordConfirmat
 };
 
 // Paso 4: Grabar en la tabla extended_user
-const registerStepExtendedUser = async (idExtendedUser, birthDate, idCivilStatus, idGenre, idRole, idEmployment, setRole) => {
+const registerStepExtendedUser = async (
+  idExtendedUser,
+  birthDate,
+  idCivilStatus,
+  idGenre,
+  idRole,
+  idEmployment,
+  setRole
+) => {
   const payload = {
     idExtendedUser: idExtendedUser,
     birthDate: birthDate,
