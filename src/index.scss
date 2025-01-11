@@ -27,7 +27,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   // FontSizes
-  --font-small: 0.5rem;
+  --font-small: 0.6rem;
   --font-medium: 1rem;
   --font-large: 1.4rem;
   // FontWeights
@@ -57,6 +57,19 @@
   --lottie-large: 300px;
   // NavigationBar
   --navigationBarHeight: 50px;
+  // Radius
+  --radius-small: 4px;
+  --radius-medium: 8px;
+  --radius-large: 16px;
+  --radius-full: 100px;
+
+  // Translation
+  --translation-small-neg: -2px;
+  --translation-small-pos: 2px;
+  --translation-medium-neg: -4px;
+  --translation-medium-pos: 4px;
+  --translation-large-neg: -8px;
+  --translation-large-pos: 8px;
 
   // Transition
   --transition-fast: 0.2s;
