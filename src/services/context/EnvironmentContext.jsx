@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useState, useEffect, useContext, createContext } from "react";
-import { apiGetGenres, apiGetCivilStatus, apiGetEmployment } from "../apiService/apiGetData";
+import { apiGetGenres, apiGetCivilStatus, apiGetEmployment, apiGetCategory } from "../apiService/apiGetData";
 
 const EnvironmentContext = createContext();
 
@@ -8,14 +8,15 @@ export const EnvironmentProvider = ({ children }) => {
   const [genres, setGenres] = useState([]);
   const [civilStatus, setCivilStatus] = useState([]);
   const [employment, setEmployment] = useState([]);
+  const [category, setCategory] = useState([]);
 
   // Función reutilizable para cargar datos
   const fetchData = async (apiFunction, setter, label) => {
     try {
       const response = await apiFunction();
       if (response.success) {
-        setter(response.data);
-        console.log(`${label} cargados correctamente`, response.data);
+        setter(response.data.data);
+        console.log(`${label} cargado correctamente`, response.data);
       }
     } catch (error) {
       console.error(`Error al cargar ${label}`, error);
@@ -28,12 +29,15 @@ export const EnvironmentProvider = ({ children }) => {
       await fetchData(apiGetGenres, setGenres, "Géneros");
       await fetchData(apiGetCivilStatus, setCivilStatus, "Estados civiles");
       await fetchData(apiGetEmployment, setEmployment, "Empleos");
+      await fetchData(apiGetCategory, setCategory, "Categorias");
     };
     init();
   }, []);
 
   return (
-    <EnvironmentContext.Provider value={{ genres, civilStatus, employment }}>{children}</EnvironmentContext.Provider>
+    <EnvironmentContext.Provider value={{ genres, civilStatus, employment, category }}>
+      {children}
+    </EnvironmentContext.Provider>
   );
 };
 

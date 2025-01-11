@@ -2,10 +2,9 @@ import "./register.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../services/apiService/registerUser";
 import { useAuthContext } from "../../services/context/AuthContext";
-import { useState } from "react";
-import { USER_ATTRIBUTES } from "../../config/config";
-import { useIsLoadingContext } from "../../services/context/IsLoadingContext";
 import { useEnvironmentContext } from "../../services/context/EnvironmentContext";
+import { useIsLoadingContext } from "../../services/context/IsLoadingContext";
+import { useState } from "react";
 
 export default function Register() {
   const [birthDate, setBirthDate] = useState("");
@@ -17,10 +16,10 @@ export default function Register() {
   const [idRole] = useState(1);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const { setToken, setRole } = useAuthContext();
-  const { setIsLoading } = useIsLoadingContext();
-  const { genres, civilStatus, employment } = useEnvironmentContext();
   const navigate = useNavigate();
+  const { genres = [], civilStatus = [], employment = [] } = useEnvironmentContext();
+  const { setIsLoading } = useIsLoadingContext();
+  const { setToken, setRole } = useAuthContext();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -105,31 +104,34 @@ export default function Register() {
         <div>
           <select id="civilStatus" value={idCivilStatus} onChange={(e) => setIdCivilStatus(e.target.value)} required>
             <option value="">Selecciona tu estado civil</option>
-            {civilStatus.map((status) => (
-              <option key={status.idCivilStatus} value={status.idCivilStatus}>
-                {status.status}
-              </option>
-            ))}
+            {Array.isArray(civilStatus) &&
+              civilStatus.map((status) => (
+                <option key={status.idCivilStatus} value={status.idCivilStatus}>
+                  {status.status}
+                </option>
+              ))}
           </select>
         </div>
         <div>
           <select id="genre" value={idGenre} onChange={(e) => setIdGenre(e.target.value)} required>
             <option value="">Selecciona tu género</option>
-            {genres.map((genre) => (
-              <option key={genre.idGenre} value={genre.idGenre}>
-                {genre.genre}
-              </option>
-            ))}
+            {Array.isArray(genres) &&
+              genres.map((genre) => (
+                <option key={genre.idGenre} value={genre.idGenre}>
+                  {genre.genre}
+                </option>
+              ))}
           </select>
         </div>
         <div>
           <select id="employment" value={idEmployment} onChange={(e) => setIdEmployment(e.target.value)} required>
             <option value="">Selecciona tu situación laboral</option>
-            {employment.map((employment) => (
-              <option key={employment.idEmployment} value={employment.idEmployment}>
-                {employment.employment}
-              </option>
-            ))}
+            {Array.isArray(employment) &&
+              employment.map((employment) => (
+                <option key={employment.idEmployment} value={employment.idEmployment}>
+                  {employment.employment}
+                </option>
+              ))}
           </select>
         </div>
         <input type="hidden" value={idRole} />

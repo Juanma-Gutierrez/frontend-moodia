@@ -26,3 +26,4 @@ export const apiGetData = async (endpoint) => {
 export const apiGetEmployment = () => apiGetData("employment/get");
 export const apiGetGenres = () => apiGetData("genre/get");
 export const apiGetCivilStatus = () => apiGetData("civil_status/get");
+export const apiGetCategory = () => apiGetData("category/get");
