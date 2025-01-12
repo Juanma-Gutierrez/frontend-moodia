@@ -1,4 +1,4 @@
-import { API_URL } from "../../constants/constants";
+import { API_URL } from "../../constants/Constants";
 import { apiGetMe, apiGetToken } from "./Api";
 
 // Función principal de registro

@@ -1,0 +1,37 @@
+.navigation-button {
+  display: flex;
+  align-items: center;
+  border: none;
+  background-color: var(--primary-dark);
+  color: var(--secondary-light);
+  font-size: 16px;
+  cursor: pointer;
+  padding-left: 10px;
+  transition: color var(--transition-medium) ease;
+
+  &:hover {
+    color: var(--secondary-medium);
+  }
+
+  &:disabled {
+    pointer-events: none;
+    color: var(--white);
+  }
+
+  svg {
+    margin: var(--margin-medium)var(--margin-large) var(--margin-medium) var(--margin-zero);
+    width: var(--icon-medium);
+    height: var(--icon-medium);
+    min-width: var(--icon-medium);
+  }
+
+  .button-icon {
+    min-width: 50px;
+  }
+
+  .button-text {
+    display: inline;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+}

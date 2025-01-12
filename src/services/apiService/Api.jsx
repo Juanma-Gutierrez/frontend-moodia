@@ -1,4 +1,4 @@
-import { API_URL } from "../../constants/constants";
+import { API_URL } from "../../constants/Constants";
 
 export const apiGetUserData = async (email, password, setToken, setRole, setIsLoading) => {
   try {

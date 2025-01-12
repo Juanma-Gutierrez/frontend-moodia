@@ -1,14 +1,15 @@
 import "./navigationBar.scss";
-import { ButtonComponent } from "../../components/buttonComponent/ButtonComponent";
+
 import { Link, useNavigate } from "react-router-dom";
-import { adminIcon } from "../../assets/icons/adminIcon";
-import { homeIcon } from "../../assets/icons/homeIcon";
-import { loginIcon } from "../../assets/icons/loginIcon";
-import { logoutIcon } from "../../assets/icons/logoutIcon";
-import { registerIcon } from "../../assets/icons/registerIcon";
+import { NavigationButtonComponent } from "../../components/NavigationButtonComponent/NavigationButtonComponent";
+import { adminIcon } from "../../assets/Icons/NavigationBarIcons/AdminIcon";
+import { homeIcon } from "../../assets/Icons/NavigationBarIcons/HomeIcon";
+import { loginIcon } from "../../assets/Icons/NavigationBarIcons/LoginIcon";
+import { logoIcon } from "../../assets/Icons/NavigationBarIcons/LogoIcon";
+import { logoutIcon } from "../../assets/Icons/NavigationBarIcons/LogoutIcon";
+import { registerIcon } from "../../assets/Icons/NavigationBarIcons/RegisterIcon";
 import { useAuthContext } from "../../services/context/AuthContext";
 import { useEffect } from "react";
-import { logoIcon } from "../../assets/icons/logoIcon";
 
 export default function NavigationBar() {
   const { token, role } = useAuthContext();
@@ -23,23 +24,17 @@ export default function NavigationBar() {
     }
   }, [token, navigate]);
 
-  // useEffect(() => {
-  //   // if (role) {
-  //   //   navigate("/post");
-  //   // }
-  // }, [role, navigate]);
-
   return (
     <div className="sidebar">
       <nav className="nav">
         <ul>
           <li>
-            <ButtonComponent title="Moodia" icon={logoIcon} logo={true} />
+            <NavigationButtonComponent title="Moodia" icon={logoIcon} logo={true} />
           </li>
           {token != null && role == "Usuario" && (
             <li>
               <Link to="/">
-                <ButtonComponent title="Post" icon={homeIcon} />
+                <NavigationButtonComponent title="Post" icon={homeIcon} />
               </Link>
             </li>
           )}
@@ -47,12 +42,12 @@ export default function NavigationBar() {
             <>
               <li>
                 <Link to="/login">
-                  <ButtonComponent title="Login" icon={loginIcon} />
+                  <NavigationButtonComponent title="Login" icon={loginIcon} />
                 </Link>
               </li>
               <li>
                 <Link to="/register">
-                  <ButtonComponent title="Registro" icon={registerIcon} />
+                  <NavigationButtonComponent title="Registro" icon={registerIcon} />
                 </Link>
               </li>
             </>
@@ -60,7 +55,7 @@ export default function NavigationBar() {
           {role === "Administrador" && (
             <li>
               <Link to="/admin">
-                <ButtonComponent title="Administración" icon={adminIcon} />
+                <NavigationButtonComponent title="Administración" icon={adminIcon} />
               </Link>
             </li>
           )}
@@ -69,7 +64,7 @@ export default function NavigationBar() {
           {token !== null && (
             <li>
               <Link to="/logout">
-                <ButtonComponent title="Cerrar sesión" icon={logoutIcon} />
+                <NavigationButtonComponent title="Cerrar sesión" icon={logoutIcon} />
               </Link>
             </li>
           )}

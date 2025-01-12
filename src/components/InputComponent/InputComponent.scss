@@ -1,0 +1,36 @@
+/* InputComponent.scss */
+.InputComponent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--margin-small);
+  width: 100%;
+
+  .InputComponent-label {
+    font-size: var(--font-medium);
+    font-weight: var(--font-weight-medium);
+    color: var(--primary-dark);
+  }
+
+  .InputComponent-input, .InputComponent-textarea {
+    padding: var(--padding-medium);
+    font-size: var(--font-medium);
+    color: var(--black-light);
+    background-color: var(--white);
+    border: 1px solid var(--primary-medium);
+    border-radius: var(--radius-small);
+    transition: border-color var(--transition-medium);
+
+    &:focus {
+      border-color: var(--secondary-medium);
+      outline: none;
+    }
+
+    &:hover {
+      border-color: var(--secondary-light);
+    }
+
+    &::placeholder {
+      color: var(--primary-light);
+    }
+  }
+}

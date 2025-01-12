@@ -2,7 +2,7 @@ import "./KOScreenComponent.scss";
 import Lottie from "react-lottie";
 import PropTypes from "prop-types";
 import koScreenLottie from "../../assets/lotties/koScreenLottie.json";
-import { CONSTANTS } from "../../constants/constants";
+import { CONSTANTS } from "../../constants/Constants";
 
 export const KOScreen = () => {
   const defaultOptions = {

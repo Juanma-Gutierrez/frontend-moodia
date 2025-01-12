@@ -1,10 +1,10 @@
 import "./ChipComponent.scss";
 import PropTypes from "prop-types";
 
-export const Chip = ({ text }) => {
+export const ChipComponent = ({ text }) => {
   return <div className="chip">{text}</div>;
 };
 
-Chip.propTypes = {
+ChipComponent.propTypes = {
   text: PropTypes.string.isRequired,
 };

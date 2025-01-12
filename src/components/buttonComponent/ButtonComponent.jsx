@@ -1,21 +1,24 @@
 import PropTypes from "prop-types";
-import "./buttonComponent.scss";
+import "./ButtonComponent.scss";
 
-export const ButtonComponent = ({ title, icon: Icon, logo }) => {
-  const iconColor = logo
-    ? getComputedStyle(document.documentElement).getPropertyValue("--logo-color")
-    : getComputedStyle(document.documentElement).getPropertyValue("--icon-color");
+export const ButtonComponent = ({ text, icon: Icon, onClick, disabled }) => {
+  const iconColor = getComputedStyle(document.documentElement).getPropertyValue("--icon-color");
 
   return (
-    <button className="button" onClick={() => console.log({ title })} disabled={logo}>
-      {Icon && <Icon className="button-icon" stroke={iconColor} />}
-      <span className="button-text">{title}</span>
+    <button className="button" onClick={onClick} disabled={disabled}>
+      {Icon && (
+        <Icon className="svg" stroke={iconColor}>
+          Icono
+        </Icon>
+      )}
+      <span className="text">{text}</span>
     </button>
   );
 };
 
 ButtonComponent.propTypes = {
-  title: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
   icon: PropTypes.elementType,
-  logo: PropTypes.bool,
+  onClick: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
 };
