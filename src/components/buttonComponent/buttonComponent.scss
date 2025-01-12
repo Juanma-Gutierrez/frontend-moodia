@@ -1,6 +1,5 @@
 .button {
   align-items: center;
-  background-color: var(--primary-medium);
   border-radius: var(--radius-medium);
   border: none;
   color: var(--secondary-light);
@@ -11,6 +10,7 @@
   margin: var(--margin-medium);
   padding: var(--padding-medium);
   transition: var(--transition-medium);
+  min-width: var(--button-min-width);
 
   &:hover {
     background-color: var(--primary-dark);
@@ -22,7 +22,7 @@
   }
 
   svg {
-    margin:var(--margin-small);
+    margin: var(--margin-small);
     width: var(--icon-small);
     height: var(--icon-small);
     min-width: var(--icon-small);
@@ -36,5 +36,21 @@
   &:disabled {
     opacity: 0.5;
     pointer-events: none;
+  }
+
+  &.button-accept {
+    background-color: var(--button-accept);
+  }
+
+  &.button-accept:hover {
+    background-color: var(--button-accept-hover);
+  }
+
+  &.button-cancel {
+    background-color: var(--button-cancel);
+  }
+
+  &.button-cancel:hover {
+    background-color: var(--button-cancel-hover);
   }
 }

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../services/context/AuthContext";
 import "./logout.scss";
+import { ButtonComponent } from "../../components/ButtonComponent/ButtonComponent";
 
 export default function Logout() {
   const { setRole, setToken } = useAuthContext();
@@ -13,11 +14,11 @@ export default function Logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
     localStorage.removeItem("userId");
-    navigate("/login"); // Redirige al login
+    navigate("/login");
   };
 
   const handleCancel = () => {
-    navigate("/"); // Si el usuario cancela, lo redirige a la página principal
+    navigate("/");
   };
 
   return (
@@ -25,10 +26,10 @@ export default function Logout() {
       <div className="logout-prompt">
         <h3>¿Quieres cerrar sesión?</h3>
         <div className="button-container">
-          <button onClick={handleLogout}>Sí, quiero cerrar sesión</button>
-          <button onClick={handleCancel} className="logout-cancel">
+          <ButtonComponent onClick={handleLogout} text="Salir" colorClass="button-accept"></ButtonComponent>
+          <ButtonComponent onClick={handleCancel} text="Cancelar" className="logout-cancel" colorClass="button-cancel">
             No, volver
-          </button>
+          </ButtonComponent>
         </div>
       </div>
     </div>

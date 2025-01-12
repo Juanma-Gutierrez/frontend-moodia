@@ -48,7 +48,7 @@ export const NewPostCardComponent = ({ category }) => {
         )}
       </div>
       <div className="publish-button-container">
-        <ButtonComponent text="Publicar" icon={editIcon} onClick={handleClick} disabled={isButtonDisabled} />
+        <ButtonComponent text="Publicar" icon={editIcon} onClick={handleClick} disabled={isButtonDisabled} colorClass="button-accept"/>
       </div>
     </div>
   );

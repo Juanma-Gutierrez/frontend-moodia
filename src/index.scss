@@ -20,6 +20,10 @@
   --secondary-light: #ffddba;
   --logo-color: var(--white);
   --icon-color: var(--secondary-light);
+  --button-accept: #4caf50;
+  --button-accept-hover: #2d7b30;
+  --button-cancel: #f44336;
+  --button-cancel-hover: #af271d;
 
   // Fonts
   font-synthesis: none;
@@ -63,6 +67,8 @@
   --radius-medium: 8px;
   --radius-large: 16px;
   --radius-full: 100px;
+  // Button
+  --button-min-width: 100px;
 
   // Translation
   --translation-small-neg: -2px;

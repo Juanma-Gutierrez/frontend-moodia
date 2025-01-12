@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 import "./ButtonComponent.scss";
 
-export const ButtonComponent = ({ text, icon: Icon, onClick, disabled }) => {
+export const ButtonComponent = ({ text, icon: Icon, onClick, disabled, colorClass }) => {
   const iconColor = getComputedStyle(document.documentElement).getPropertyValue("--icon-color");
 
   return (
-    <button className="button" onClick={onClick} disabled={disabled}>
+    <button className={`button ${colorClass}`} onClick={onClick} disabled={disabled}>
       {Icon && (
         <Icon className="svg" stroke={iconColor}>
           Icono
