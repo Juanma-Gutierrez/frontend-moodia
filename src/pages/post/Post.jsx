@@ -3,6 +3,7 @@ import { useAuthContext } from "../../services/context/AuthContext";
 import { useEffect } from "react";
 import { NewPostComponent } from "../../components/NewPostComponent/NewPostComponent";
 import { PostComponent } from "../../components/PostComponent/PostComponent";
+import "./Post.scss";
 
 export default function Post() {
   const { token } = useAuthContext();
@@ -68,15 +69,17 @@ export default function Post() {
   }, [token, navigate]);
 
   return (
-    <div>
-      <NewPostComponent />
-      {Array.isArray(post) &&
-        post.map(
-          (p, index) => {
-            return <PostComponent key={index} title={p.title} entry={p.entry} />;
-          },
-          [post]
-        )}
+    <div className="post-container">
+      <div className="post">
+        <NewPostComponent />
+        {Array.isArray(post) &&
+          post.map(
+            (p, index) => {
+              return <PostComponent key={index} title={p.title} entry={p.entry} />;
+            },
+            [post]
+          )}
+      </div>
     </div>
   );
 }
