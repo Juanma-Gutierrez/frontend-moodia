@@ -46,7 +46,8 @@ export default function Post() {
                   key={index}
                   title={post.title}
                   entry={post.message}
-                  creationDate={formatDate(post.creationDate)}
+                  creationDate={formatDate(post.created_at, "dd/MM/yyyy")}
+                  score={post.score}
                 />
               );
             },

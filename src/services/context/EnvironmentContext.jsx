@@ -18,7 +18,6 @@ export const EnvironmentProvider = ({ children }) => {
       const response = await apiFunction();
       if (response.success) {
         setter(response.data.data);
-        console.log(`${label} cargado correctamente`, response.data);
       }
     } catch (error) {
       setKOScreenVisible(true);
