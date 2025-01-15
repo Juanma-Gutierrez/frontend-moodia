@@ -17,6 +17,7 @@ export const NewPostCardComponent = ({ category }) => {
   const [entry, setEntry] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [categorySelected, setCategorySelected] = useState([]);
+  const [selectedEmoji, setSelectedEmoji] = useState(null);
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -25,6 +26,14 @@ export const NewPostCardComponent = ({ category }) => {
   const handleEntryChange = (event) => {
     setEntry(event.target.value);
   };
+
+  const emojis = [
+    { id: 1, icon: emojiIcon1 },
+    { id: 2, icon: emojiIcon2 },
+    { id: 3, icon: emojiIcon3 },
+    { id: 4, icon: emojiIcon4 },
+    { id: 5, icon: emojiIcon5 },
+  ];
 
   useEffect(() => {
     setIsButtonDisabled(!title.trim() || !entry.trim());
@@ -47,9 +56,13 @@ export const NewPostCardComponent = ({ category }) => {
     console.log("Publicar");
   };
 
+  const handleEmojiClick = (emojiIndex) => {
+    setSelectedEmoji(emojiIndex);
+  };
+
   return (
     <div className="newPostCardComponent">
-      <h3>Cuéntame lo que quieras</h3>
+      <h3>Cuéntame lo que quieras {selectedEmoji}</h3>
       <InputComponent label="Título" value={title} placeholder="Introduce el título" onChange={handleTitleChange} />
       <InputComponent
         label="Entrada"
@@ -75,11 +88,15 @@ export const NewPostCardComponent = ({ category }) => {
       </div>
       <div className="publish-container">
         <div className="emoji-container">
-          <div className="emoji">{emojiIcon1()}</div>
-          <div className="emoji">{emojiIcon2()}</div>
-          <div className="emoji">{emojiIcon3()}</div>
-          <div className="emoji">{emojiIcon4()}</div>
-          <div className="emoji">{emojiIcon5()}</div>
+          {emojis.map(({ id, icon }) => (
+            <div
+              key={id}
+              className={`emoji ${selectedEmoji === id ? "selected" : ""}`}
+              onClick={() => handleEmojiClick(id)}
+            >
+              {icon()}
+            </div>
+          ))}
         </div>
         <div className="button-container">
           <ButtonComponent

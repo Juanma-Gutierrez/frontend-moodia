@@ -1,4 +1,5 @@
 import { API_URL } from "../../constants/Constants";
+import { HttpMethod } from "./RequestModel";
 
 export const apiGetUserData = async (email, password, setToken, setRole, setIsLoading) => {
   try {
@@ -100,6 +101,37 @@ export const apiGetRole = async (tokenValue, idUser) => {
     const roleData = await roleResponse.json();
     console.log("role", roleData["role"]);
     return { success: true, roleData: roleData };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+// Petición genérica a la API
+export const apiRequest = async (apiRequestInstance) => {
+  try {
+    // Desestructurar la instancia de ApiRequest
+    const { endpoint, method = HttpMethod.GET, body = null, token = null } = apiRequestInstance;
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    // Si el token está presente, se añade al header
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+    const options = {
+      method: method,
+      headers: headers,
+    };
+    // Si el método es POST o PUT, se añade el cuerpo de la petición
+    if (body) {
+      options.body = JSON.stringify(body);
+    }
+    const response = await fetch(API_URL + endpoint, options);
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status} ${response.statusText}`);
+    }
+    const data = await response.json();
+    return { success: true, data };
   } catch (error) {
     return { success: false, error: error.message };
   }

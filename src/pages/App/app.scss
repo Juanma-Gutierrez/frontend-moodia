@@ -6,7 +6,7 @@
 .main-content {
   flex: 1;
   padding: 20px;
-  background-color: $app-background-color;
+  background-color: var(--app-background-color);
   overflow-y: auto;
 }
 
@@ -19,6 +19,6 @@
   border-radius: 5px;
 
   &:hover {
-    background-color: $sidebar-link-hover-color;
+    background-color: var(--primary-dark);
   }
 }

@@ -1,11 +1,12 @@
 import "./PostComponent.scss";
 import PropTypes from "prop-types";
 
-export const PostComponent = ({ title, entry }) => {
+export const PostComponent = ({ title, entry, creationDate }) => {
   return (
     <div className="post-card-component">
       <h3>{title}</h3>
       <p>{entry}</p>
+      <p className="post-date">{creationDate}</p>
     </div>
   );
 };
@@ -13,4 +14,5 @@ export const PostComponent = ({ title, entry }) => {
 PostComponent.propTypes = {
   title: PropTypes.string,
   entry: PropTypes.string,
+  creationDate: PropTypes.string
 };
