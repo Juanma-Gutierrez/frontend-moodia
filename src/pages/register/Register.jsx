@@ -4,7 +4,9 @@ import { registerUser } from "../../services/apiService/registerUser";
 import { useAuthContext } from "../../services/context/AuthContext";
 import { useEnvironmentContext } from "../../services/context/EnvironmentContext";
 import { useIsLoadingContext } from "../../services/context/IsLoadingContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ModalComponent } from "../../components/ModalComponent/ModalComponent";
+import ModalModel from "../../components/ModalComponent/ModalModel";
 
 export default function Register() {
   const [birthDate, setBirthDate] = useState("");
@@ -14,12 +16,22 @@ export default function Register() {
   const [idEmployment, setIdEmployment] = useState("");
   const [idGenre, setIdGenre] = useState("");
   const [idRole] = useState(1);
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalResult, setModalResult] = useState(null);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { genres = [], civilStatus = [], employment = [] } = useEnvironmentContext();
   const { setIsLoading } = useIsLoadingContext();
   const { setToken, setRole } = useAuthContext();
+
+  const modalModel = new ModalModel(
+    "Registro de usuario",
+    "¿Seguro que los datos son correctos y quieres continuar?",
+    "Registrar",
+    "Cancelar"
+  );
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -28,44 +40,70 @@ export default function Register() {
       console.error("Error: Las contraseñas no coinciden");
       return;
     }
-    setIsLoading(true);
-    const userData = {
-      name,
-      email,
-      password,
-      confirmPassword,
-      birthDate,
-      idCivilStatus,
-      idGenre,
-      idRole,
-      idEmployment,
-    };
 
-    console.log("Datos enviados para el registro:", userData);
+    setModalOpen(true);
+  };
 
-    const registerResponse = await registerUser(
-      name,
-      email,
-      password,
-      confirmPassword,
-      birthDate,
-      idCivilStatus,
-      idGenre,
-      idRole,
-      idEmployment,
-      setRole
-    );
+  useEffect(() => {
+    const formValid =
+      name &&
+      email &&
+      password &&
+      confirmPassword &&
+      birthDate &&
+      idCivilStatus &&
+      idEmployment &&
+      idGenre &&
+      password === confirmPassword;
+    setIsFormValid(formValid);
+  }, [name, email, password, confirmPassword, birthDate, idCivilStatus, idEmployment, idGenre]);
 
-    if (registerResponse.success) {
-      console.log(registerResponse.success);
-      console.log("Registro y login exitosos. Redirigiendo a /post...");
-      navigate("/post");
-      const token = localStorage.getItem("token");
-      setToken(token);
+  const handleModalClose = async (result) => {
+    setModalOpen(false);
+    setModalResult(result);
+
+    if (result) {
+      setIsLoading(true);
+      const userData = {
+        name,
+        email,
+        password,
+        confirmPassword,
+        birthDate,
+        idCivilStatus,
+        idGenre,
+        idRole,
+        idEmployment,
+      };
+
+      console.log("Datos enviados para el registro:", userData);
+
+      const registerResponse = await registerUser(
+        name,
+        email,
+        password,
+        confirmPassword,
+        birthDate,
+        idCivilStatus,
+        idGenre,
+        idRole,
+        idEmployment,
+        setRole
+      );
+
+      if (registerResponse.success) {
+        console.log("Registro exitoso. Redirigiendo...");
+        navigate("/post");
+        const token = localStorage.getItem("token");
+        setToken(token);
+      } else {
+        console.error("Error en el registro:", registerResponse.error);
+      }
+      setIsLoading(false);
     } else {
-      console.error("Error en el registro:", registerResponse.error);
+      // TODO: Añadir un snackbar informativo
+      console.log("El usuario canceló el registro. ");
     }
-    setIsLoading(false);
   };
 
   return (
@@ -135,11 +173,21 @@ export default function Register() {
           </select>
         </div>
         <input type="hidden" value={idRole} />
-        <button type="submit">Registrar</button>
+        <button type="submit" disabled={!isFormValid}>Registrar</button>
       </form>
       <p>
         ¿Ya tienes una cuenta? <Link to="/login">Inicia sesión</Link>
       </p>
+      {modalOpen && (
+        <ModalComponent
+          modalModel={modalModel}
+          // onClose={(result) => {
+          //   setModalOpen(false);
+          //   setModalResult(result);
+          // }}
+          onClose={handleModalClose}
+        />
+      )}
     </div>
   );
 }

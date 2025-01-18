@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 60px;
+  width: var(--navigationBar-height);
   height: 100vh;
   background-color: var(--primary-dark);
   padding: 20px 5px;

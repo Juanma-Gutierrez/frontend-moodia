@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Importar useNavigate
 import "./login.scss";
 import { apiGetUserData } from "../../services/apiService/Api";
@@ -11,11 +11,18 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    const formValid = email && password;
+    setIsFormValid(formValid);
+  }, [email, password]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     console.log("Email:", email);
     console.log("Password:", password);
+
     const token = await apiGetUserData(email, password, setToken, setRole, setIsLoading);
     if (token) {
       let role = localStorage.getItem("role");
@@ -50,7 +57,9 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Ingresar</button>
+        <button type="submit" disabled={!isFormValid}>
+          Ingresar
+        </button>
       </form>
       <p>
         ¿No tienes una cuenta? <Link to="/register">Regístrate aquí</Link>

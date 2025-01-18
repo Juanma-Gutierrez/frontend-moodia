@@ -1,0 +1,88 @@
+.modal-overlay {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: var(--navigationBar-height);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--modal-background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  .modal-container {
+    max-width: var(--general-width);
+    //margin: auto;
+    text-align: center;
+    background-color: var(--white);
+    padding: var(--padding-large);
+    border-radius: var(--radius-medium);
+    box-shadow: 0px 4px 6px var(--icon-shadow);
+    font-family: var(--font-family);
+    line-height: var(--line-height);
+
+    .modal-title {
+      margin-bottom: var(--margin-large);
+      font-size: var(--font-title-size);
+      font-weight: bold;
+      color: var(--black-light);
+    }
+
+    .modal-message {
+      margin-bottom: var(--margin-large);
+      color: var(--primary-medium);
+
+      a {
+        color: var(--primary-dark);
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .modal-buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      gap: var(--padding-medium);
+      margin-top: var(--margin-large);
+
+      .modal-button {
+        min-width: var(--button-min-width);
+        padding: var(--padding-medium);
+        border-radius: var(--radius-small);
+        border: none;
+        cursor: pointer;
+        font-size: var(--font-medium);
+        font-weight: var(--font-weight-medium);
+        transition: background-color var(--transition-fast);
+
+        &.accept {
+          background-color: var(--button-accept);
+          color: var(--white);
+
+          &:hover {
+            background-color: var(--button-accept-hover);
+          }
+        }
+
+        &.cancel {
+          background-color: var(--button-cancel);
+          color: var(--white);
+
+          &:hover {
+            background-color: var(--button-cancel-hover);
+          }
+        }
+      }
+    }
+  }
+}
