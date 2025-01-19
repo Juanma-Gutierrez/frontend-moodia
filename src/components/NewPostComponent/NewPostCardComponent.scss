@@ -2,7 +2,14 @@
   background-color: var(--white-light);
   border-radius: var(--radius-large);
   border: 1px solid var(--primary-light);
-  padding: var(--padding-large);
+  padding: var(--padding-post);
+
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: var(--padding-large);
+    gap:var(--margin-large);
+  }
 
   .category-container {
     display: flex;
@@ -37,7 +44,7 @@
         cursor: default;
         filter: drop-shadow(0px 5px 5px var(--primary-light));
         transform: scale(1.1) translateY(-5px);
-        animation: rotateEmoji 0.5s ease-in-out;
+        animation: rotateEmoji var(--transition-medium) ease-in-out;
       }
     }
   }

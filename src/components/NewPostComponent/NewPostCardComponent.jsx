@@ -4,13 +4,9 @@ import { ChipComponent } from "../ChipComponent/ChipComponent";
 import { InputComponent } from "../InputComponent/InputComponent";
 import { ButtonComponent } from "../ButtonComponent/ButtonComponent";
 import { editIcon } from "../../assets/Icons/ButtonIcons/EditIcon";
-import { emojiIcon1 } from "../../assets/Icons/EmojiIcons/EmojiIcon1";
-import { emojiIcon2 } from "../../assets/Icons/EmojiIcons/EmojiIcon2";
-import { emojiIcon3 } from "../../assets/Icons/EmojiIcons/EmojiIcon3";
-import { emojiIcon4 } from "../../assets/Icons/EmojiIcons/EmojiIcon4";
-import { emojiIcon5 } from "../../assets/Icons/EmojiIcons/EmojiIcon5";
 import { useState } from "react";
 import { useEffect } from "react";
+import { emojis } from "../../assets/Icons/EmojiIcons/EmojiList";
 
 export const NewPostCardComponent = ({ category }) => {
   const [title, setTitle] = useState("");
@@ -27,17 +23,9 @@ export const NewPostCardComponent = ({ category }) => {
     setEntry(event.target.value);
   };
 
-  const emojis = [
-    { id: 1, icon: emojiIcon1 },
-    { id: 2, icon: emojiIcon2 },
-    { id: 3, icon: emojiIcon3 },
-    { id: 4, icon: emojiIcon4 },
-    { id: 5, icon: emojiIcon5 },
-  ];
-
   useEffect(() => {
-    setIsButtonDisabled(!title.trim() || !entry.trim());
-  }, [title, entry]);
+    setIsButtonDisabled(!title.trim() || !entry.trim() || !selectedEmoji);
+  }, [title, entry, selectedEmoji]);
 
   const handleClickChip = (chipValue) => {
     setCategorySelected((prevSelected) => {
@@ -63,14 +51,15 @@ export const NewPostCardComponent = ({ category }) => {
   return (
     <div className="newPostCardComponent">
       <h3>Cuéntame lo que quieras {selectedEmoji}</h3>
-      <InputComponent label="Título" value={title} placeholder="Introduce el título" onChange={handleTitleChange} />
-      <InputComponent
-        label="Entrada"
-        placeholder="Introduce tu post diario"
-        value={entry}
-        type="message"
-        onChange={handleEntryChange}
-      />
+      <div className="input-container">
+        <InputComponent value={title} placeholder="Introduce el título" onChange={handleTitleChange} />
+        <InputComponent
+          placeholder="Introduce tu post diario"
+          value={entry}
+          type="message"
+          onChange={handleEntryChange}
+        />
+      </div>
       <div className="category-container">
         {category.map(
           (cat, index) => {
@@ -104,7 +93,7 @@ export const NewPostCardComponent = ({ category }) => {
             icon={editIcon}
             onClick={handleClickPublishButton}
             disabled={isButtonDisabled}
-            colorClass="button-accept"
+            type="info-accept"
           />
         </div>
       </div>

@@ -3,7 +3,7 @@ import "./ButtonComponent.scss";
 import { CONSTANTS } from "../../constants/Constants";
 
 export const ButtonComponent = ({ text, icon: Icon, onClick, disabled = false, type = "info", width = "normal" }) => {
-  const iconColor = getComputedStyle(document.documentElement).getPropertyValue("--icon-color");
+  const iconColor = getComputedStyle(document.documentElement).getPropertyValue("--button-icon-color");
   const buttonWidth =
     width === "full" ? CONSTANTS.BUTTON.WIDTH.FULL : width === "normal" ? CONSTANTS.BUTTON.WIDTH.NORMAL : "auto";
 
