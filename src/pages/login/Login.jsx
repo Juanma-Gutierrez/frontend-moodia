@@ -4,6 +4,9 @@ import "./login.scss";
 import { apiGetUserData } from "../../services/apiService/Api";
 import { useAuthContext } from "../../services/context/AuthContext";
 import { useIsLoadingContext } from "../../services/context/IsLoadingContext";
+import { ModalComponent } from "../../components/ModalComponent/ModalComponent";
+import ModalModel from "../../components/ModalComponent/ModalModel";
+import { ButtonComponent } from "../../components/ButtonComponent/ButtonComponent";
 
 export default function Login() {
   const { setRole, setToken } = useAuthContext();
@@ -12,6 +15,14 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [isFormValid, setIsFormValid] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const modalModel = new ModalModel({
+    title: "Login de usuario",
+    message: "Hay un error en el correo electrónico o en la contraseña. Revisa los datos.",
+    button1: "Aceptar",
+    type: "warning",
+  });
 
   useEffect(() => {
     const formValid = email && password;
@@ -35,6 +46,7 @@ export default function Login() {
       }
     } else {
       console.log("Error: Token no válido");
+      setModalOpen(true);
     }
     setIsLoading(false);
   };
@@ -57,13 +69,12 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit" disabled={!isFormValid}>
-          Ingresar
-        </button>
+        <ButtonComponent type="info" disabled={!isFormValid} text="Iniciar sesión" />
       </form>
       <p>
         ¿No tienes una cuenta? <Link to="/register">Regístrate aquí</Link>
       </p>
+      {modalOpen && <ModalComponent modalModel={modalModel} onClose={() => setModalOpen(false)}/>}
     </div>
   );
 }

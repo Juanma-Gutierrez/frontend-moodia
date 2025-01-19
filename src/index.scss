@@ -16,14 +16,22 @@
   --primary-dark: #232220;
   --primary-medium: #4e4c4f;
   --primary-light: #9f8d8d;
+  --secondary-dark: #6a503c;
   --secondary-medium: #d9ae8e;
   --secondary-light: #ffddba;
   --logo-color: var(--white);
   --icon-color: var(--secondary-light);
-  --button-accept: #4caf50;
-  --button-accept-hover: #2d7b30;
-  --button-cancel: #f44336;
-  --button-cancel-hover: #af271d;
+  --button-general: #40659c;
+  --button-general-hover: #2c4974;
+  --button-general-disabled: #8ca5cd;
+  --button-info-accept: var(--button-general);
+  --button-info-accept-hover: var(--button-general-hover);
+  --button-confirm-accept: #4caf50;
+  --button-confirm-accept-hover: #2d7b30;
+  --button-confirm-cancel: #f44336;
+  --button-confirm-cancel-hover: #af271d;
+  --button-warning-accept: #f44336;
+  --button-warning-accept-hover: #af271d;
   --app-background-color: #d8e0e8;
   --icon-shadow: rgba(0, 0, 0, 0.4);
   --modal-background: rgba(78, 76, 79, 0.4);
@@ -75,7 +83,7 @@
   // Input
   --input-radius: 5px;
   // Button
-  --button-min-width: 100px;
+  --button-min-width: 120px;
   --button-radius: 5px;
   --button-font-size: 1.1rem;
   // Skeleton

@@ -29,7 +29,7 @@
     button {
       width: 100%;
       padding: var(--padding-medium);
-      background-color: var(--button-accept);
+      background-color: var(--button-general);
       color: var(--white);
       border: none;
       border-radius: var(--button-radius);
@@ -37,11 +37,12 @@
       transition: background-color var(--transition-fast);
 
       &:hover {
-        background-color: var(--button-accept-hover);
+        background-color: var(--button-general-hover);
       }
 
       &:disabled {
-        background-color: var(--primary-light);
+        background-color: var(--button-general-disabled);
+        pointer-events: none;
       }
     }
   }

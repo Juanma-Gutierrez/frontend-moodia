@@ -17,7 +17,6 @@
 
   .modal-container {
     max-width: var(--general-width);
-    //margin: auto;
     text-align: center;
     background-color: var(--white);
     padding: var(--padding-large);
@@ -54,35 +53,6 @@
       align-items: center;
       gap: var(--padding-medium);
       margin-top: var(--margin-large);
-
-      .modal-button {
-        min-width: var(--button-min-width);
-        padding: var(--padding-medium);
-        border-radius: var(--radius-small);
-        border: none;
-        cursor: pointer;
-        font-size: var(--font-medium);
-        font-weight: var(--font-weight-medium);
-        transition: background-color var(--transition-fast);
-
-        &.accept {
-          background-color: var(--button-accept);
-          color: var(--white);
-
-          &:hover {
-            background-color: var(--button-accept-hover);
-          }
-        }
-
-        &.cancel {
-          background-color: var(--button-cancel);
-          color: var(--white);
-
-          &:hover {
-            background-color: var(--button-cancel-hover);
-          }
-        }
-      }
     }
   }
 }

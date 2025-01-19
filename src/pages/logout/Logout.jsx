@@ -26,10 +26,8 @@ export default function Logout() {
       <div className="logout-prompt">
         <h3>¿Quieres cerrar sesión?</h3>
         <div className="button-container">
-          <ButtonComponent onClick={handleLogout} text="Salir" colorClass="button-accept"></ButtonComponent>
-          <ButtonComponent onClick={handleCancel} text="Cancelar" className="logout-cancel" colorClass="button-cancel">
-            No, volver
-          </ButtonComponent>
+          <ButtonComponent text="Salir" onClick={handleLogout} type="confirm-accept" />
+          <ButtonComponent text="Cancelar" onClick={handleCancel} type="confirm-cancel" />
         </div>
       </div>
     </div>

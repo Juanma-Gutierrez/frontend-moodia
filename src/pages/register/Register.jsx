@@ -7,6 +7,7 @@ import { useIsLoadingContext } from "../../services/context/IsLoadingContext";
 import { useEffect, useState } from "react";
 import { ModalComponent } from "../../components/ModalComponent/ModalComponent";
 import ModalModel from "../../components/ModalComponent/ModalModel";
+import { ButtonComponent } from "../../components/ButtonComponent/ButtonComponent";
 
 export default function Register() {
   const [birthDate, setBirthDate] = useState("");
@@ -26,12 +27,13 @@ export default function Register() {
   const { setIsLoading } = useIsLoadingContext();
   const { setToken, setRole } = useAuthContext();
 
-  const modalModel = new ModalModel(
-    "Registro de usuario",
-    "¿Seguro que los datos son correctos y quieres continuar?",
-    "Registrar",
-    "Cancelar"
-  );
+  const modalModel = new ModalModel({
+    title: "Registro de usuario",
+    message: "¿Seguro que los datos son correctos y quieres continuar?",
+    button1: "Registrar",
+    button2: "Cancelar",
+    type: "confirm",
+  });
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -173,21 +175,12 @@ export default function Register() {
           </select>
         </div>
         <input type="hidden" value={idRole} />
-        <button type="submit" disabled={!isFormValid}>Registrar</button>
+        <ButtonComponent type="info" disabled={!isFormValid} text="Registrar" />
       </form>
       <p>
         ¿Ya tienes una cuenta? <Link to="/login">Inicia sesión</Link>
       </p>
-      {modalOpen && (
-        <ModalComponent
-          modalModel={modalModel}
-          // onClose={(result) => {
-          //   setModalOpen(false);
-          //   setModalResult(result);
-          // }}
-          onClose={handleModalClose}
-        />
-      )}
+      {modalOpen && <ModalComponent modalModel={modalModel} onClose={handleModalClose} />}
     </div>
   );
 }

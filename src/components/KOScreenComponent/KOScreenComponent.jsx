@@ -19,8 +19,8 @@ export const KOScreen = () => {
       <Lottie
         options={defaultOptions}
         className="lottie"
-        height={CONSTANTS.lottie_large.height}
-        width={CONSTANTS.lottie_large.width}
+        height={CONSTANTS.LOTTIE.LARGE.HEIGHT}
+        width={CONSTANTS.LOTTIE.LARGE.WIDTH}
       />
       <p className="loading-text">vaya, parece que hay algún problema</p>
     </div>

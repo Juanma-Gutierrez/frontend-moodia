@@ -17,12 +17,20 @@ export const API_VERSION = "v1";
 export const APP_NAME = "Moodia";
 
 export const CONSTANTS = {
-  lottie_medium: {
-    width: "150px",
-    height: "100px",
+  LOTTIE: {
+    MEDIUM: {
+      WIDTH: "150px",
+      HEIGHT: "100px",
+    },
+    LARGE: {
+      WIDTH: "250px",
+      HEIGHT: "250px",
+    },
   },
-  lottie_large: {
-    width: "250px",
-    height: "250px",
+  BUTTON: {
+    WIDTH: {
+      NORMAL: "120px",
+      FULL: "100%"
+    }
   },
 };

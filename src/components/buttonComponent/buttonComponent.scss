@@ -2,19 +2,14 @@
   align-items: center;
   border-radius: var(--radius-medium);
   border: none;
-  color: var(--secondary-light);
+  color: var(--white);
   cursor: pointer;
   display: inline-flex;
   gap: var(--margin-small);
   justify-content: center;
-  margin: var(--margin-medium);
   padding: var(--padding-medium);
-  transition: var(--transition-medium);
+  transition: var(--transition-fast);
   min-width: var(--button-min-width);
-
-  &:hover {
-    background-color: var(--primary-dark);
-  }
 
   &.active {
     background-color: var(--primary-dark);
@@ -38,19 +33,35 @@
     pointer-events: none;
   }
 
-  &.button-accept {
-    background-color: var(--button-accept);
+  &.button-info-accept {
+    background-color: var(--button-info-accept);
   }
 
-  &.button-accept:hover {
-    background-color: var(--button-accept-hover);
+  &.button-info-accept:hover {
+    background-color: var(--button-info-accept-hover);
   }
 
-  &.button-cancel {
-    background-color: var(--button-cancel);
+  &.button-confirm-accept {
+    background-color: var(--button-confirm-accept);
   }
 
-  &.button-cancel:hover {
-    background-color: var(--button-cancel-hover);
+  &.button-confirm-accept:hover {
+    background-color: var(--button-confirm-accept-hover);
+  }
+
+  &.button-confirm-cancel {
+    background-color: var(--button-confirm-cancel);
+  }
+
+  &.button-confirm-cancel:hover {
+    background-color: var(--button-confirm-cancel-hover);
+  }
+
+  &.button-warning-accept {
+    background-color: var(--button-warning-accept);
+  }
+
+  &.button-warning-accept:hover {
+    background-color: var(--button-warning-accept-hover);
   }
 }
