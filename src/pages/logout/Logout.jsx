@@ -1,11 +1,22 @@
-import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../../services/context/AuthContext";
 import "./logout.scss";
+import LogoutLottie from "../../assets/lotties/LogoutLottie.json";
+import Lottie from "react-lottie";
 import { ButtonComponent } from "../../components/ButtonComponent/ButtonComponent";
+import { CONSTANTS } from "../../constants/Constants";
+import { useAuthContext } from "../../services/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Logout() {
   const { setRole, setToken } = useAuthContext();
   const navigate = useNavigate();
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: LogoutLottie,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
 
   const handleLogout = () => {
     // Limpiar el token y redirigir al login
@@ -29,6 +40,11 @@ export default function Logout() {
           <ButtonComponent text="Salir" onClick={handleLogout} type="confirm-accept" />
           <ButtonComponent text="Cancelar" onClick={handleCancel} type="confirm-cancel" />
         </div>
+        <Lottie
+        options={defaultOptions}
+        height={CONSTANTS.LOTTIE.LARGE.HEIGHT}
+        width={CONSTANTS.LOTTIE.LARGE.WIDTH}
+      />
       </div>
     </div>
   );

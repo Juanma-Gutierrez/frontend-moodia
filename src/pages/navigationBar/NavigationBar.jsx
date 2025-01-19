@@ -31,7 +31,7 @@ export default function NavigationBar() {
           <li>
             <NavigationButtonComponent title="Moodia" icon={logoIcon} logo={true} />
           </li>
-          {token != null && role == "Usuario" && (
+          {token != null && (
             <li>
               <Link to="/">
                 <NavigationButtonComponent title="Post" icon={homeIcon} />

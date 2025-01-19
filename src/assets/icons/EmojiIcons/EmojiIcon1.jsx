@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export const emojiIcon1 = (props) => (
+export const EmojiIcon1 = (props) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" {...props}>
     <defs>
       <style>{".b1{fill:#e7c930}.c1{fill:#864e20}"}</style>
@@ -40,6 +40,6 @@ export const emojiIcon1 = (props) => (
   </svg>
 );
 
-emojiIcon1.propTypes = {
+EmojiIcon1.propTypes = {
   props: PropTypes.string,
 };

@@ -1,33 +1,35 @@
 .logout-container {
-  max-width: 400px;
-  margin: auto;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 
-  h3 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: bold;
-  }
-
-  .button-container {
+  .logout-prompt {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: var(--padding-l);
-  }
+    width: var(--general-width);
+    gap: var(--margin-large);
 
-  p {
-    margin-top: 15px;
-    font-size: 14px;
+    h3 {
+      font-size: 24px;
+      font-weight: bold;
+    }
 
-    a {
-      color: #007bff;
-      text-decoration: none;
+    .button-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 100%;
+      gap: var(--padding-l);
+    }
 
-      &:hover {
-        text-decoration: underline;
-      }
+    .lottie {
+      height: var(--lotie-medium);
+      width: var(--lotie-medium);
     }
   }
 }

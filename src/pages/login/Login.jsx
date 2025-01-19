@@ -7,6 +7,9 @@ import { useIsLoadingContext } from "../../services/context/IsLoadingContext";
 import { ModalComponent } from "../../components/ModalComponent/ModalComponent";
 import ModalModel from "../../components/ModalComponent/ModalModel";
 import { ButtonComponent } from "../../components/ButtonComponent/ButtonComponent";
+import LoginLottie from "../../assets/lotties/LoginLottie.json";
+import Lottie from "react-lottie";
+import { CONSTANTS } from "../../constants/Constants";
 
 export default function Login() {
   const { setRole, setToken } = useAuthContext();
@@ -15,7 +18,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [isFormValid, setIsFormValid] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const modalModel = new ModalModel({
     title: "Iniciar sesión",
@@ -23,6 +26,15 @@ export default function Login() {
     button1: "Aceptar",
     type: "warning",
   });
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: LoginLottie,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
 
   useEffect(() => {
     const formValid = email && password;
@@ -46,7 +58,7 @@ export default function Login() {
       }
     } else {
       console.log("Error: Token no válido");
-      setModalOpen(true);
+      setIsModalVisible(true);
     }
     setIsLoading(false);
   };
@@ -74,7 +86,12 @@ export default function Login() {
       <p>
         ¿No tienes una cuenta? <Link to="/register">Regístrate aquí</Link>
       </p>
-      {modalOpen && <ModalComponent modalModel={modalModel} onClose={() => setModalOpen(false)} />}
+      <Lottie
+        options={defaultOptions}
+        height={CONSTANTS.LOTTIE.LARGE.HEIGHT}
+        width={CONSTANTS.LOTTIE.LARGE.WIDTH}
+      />
+      {isModalVisible && <ModalComponent modalModel={modalModel} onClose={() => setIsModalVisible(false)} />}
     </div>
   );
 }

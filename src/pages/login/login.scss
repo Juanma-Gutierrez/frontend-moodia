@@ -1,6 +1,7 @@
 .login-container {
   max-width: var(--general-width);
-  margin: auto;
+  margin-inline: auto;
+  margin-top: var(--margin-container);
   text-align: center;
 
   h3 {
