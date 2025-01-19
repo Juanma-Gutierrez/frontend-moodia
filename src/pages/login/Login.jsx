@@ -18,7 +18,7 @@ export default function Login() {
   const [modalOpen, setModalOpen] = useState(false);
 
   const modalModel = new ModalModel({
-    title: "Login de usuario",
+    title: "Iniciar sesión",
     message: "Hay un error en el correo electrónico o en la contraseña. Revisa los datos.",
     button1: "Aceptar",
     type: "warning",
@@ -53,7 +53,7 @@ export default function Login() {
 
   return (
     <div className="login-container">
-      <h3>Iniciar Sesión</h3>
+      <h3>Iniciar sesión</h3>
       <form onSubmit={handleLogin}>
         <input
           type="email"
@@ -74,7 +74,7 @@ export default function Login() {
       <p>
         ¿No tienes una cuenta? <Link to="/register">Regístrate aquí</Link>
       </p>
-      {modalOpen && <ModalComponent modalModel={modalModel} onClose={() => setModalOpen(false)}/>}
+      {modalOpen && <ModalComponent modalModel={modalModel} onClose={() => setModalOpen(false)} />}
     </div>
   );
 }

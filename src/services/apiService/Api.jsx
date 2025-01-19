@@ -4,7 +4,7 @@ import { HttpMethod } from "./RequestModel";
 export const apiGetUserData = async (email, password, setToken, setRole, setIsLoading) => {
   try {
     console.log("Entra a obtener el token");
-    setIsLoading(true);
+    loading(true, setIsLoading)
     const tokenValue = await apiGetToken(email, password);
     if (tokenValue.token != undefined) {
       const userMe = await apiGetMe(tokenValue.token);
@@ -17,13 +17,19 @@ export const apiGetUserData = async (email, password, setToken, setRole, setIsLo
       return { token: tokenValue.token, userData: userMe };
     }
     console.log("Entra a modificar el rol");
-    setIsLoading(false);
+    loading(false, setIsLoading)
   } catch (error) {
     console.error("Error al obtener el token o los datos del usuario:", error.message);
-    setIsLoading(false);
+    loading(false, setIsLoading)
     return null;
   }
 };
+
+function loading(loading, setIsLoading) {
+  if (typeof setIsLoading === "function") {
+    setIsLoading(loading);
+  }
+}
 
 // Función para obtener el token
 export const apiGetToken = async (email, password) => {
@@ -99,7 +105,6 @@ export const apiGetRole = async (tokenValue, idUser) => {
       throw new Error("Error al obtener los datos del usuario");
     }
     const roleData = await roleResponse.json();
-    console.log("role", roleData["role"]);
     return { success: true, roleData: roleData };
   } catch (error) {
     return { success: false, error: error.message };

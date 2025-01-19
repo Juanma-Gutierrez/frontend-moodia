@@ -50,5 +50,9 @@ AuthProvider.propTypes = {
 };
 
 export const useAuthContext = () => {
-  return useContext(AuthContext);
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuthContext debe usarse dentro de un AuthContextProvider");
+  }
+  return context;
 };

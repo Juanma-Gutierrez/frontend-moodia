@@ -35,7 +35,7 @@ export const ButtonComponent = ({ text, icon: Icon, onClick, disabled = false, t
 ButtonComponent.propTypes = {
   text: PropTypes.string.isRequired,
   icon: PropTypes.elementType,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   disabled: PropTypes.bool,
   type: PropTypes.string,
   width: PropTypes.string,
