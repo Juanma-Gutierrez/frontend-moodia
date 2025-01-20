@@ -4,15 +4,16 @@
   border-radius: var(--radius-large);
   border: 1px solid var(--primary-light);
   padding: var(--padding-post);
+  padding-bottom: 60px;
   margin: var(--margin-large)0;
 
   h3 {
     color: var(--secondary-dark);
   }
 
-  .date-container {
+  .footer-container {
     position: absolute;
-    top: var(--padding-large);
+    bottom: var(--padding-large);
     right: var(--padding-post);
     display: flex;
     flex-direction: row;
@@ -25,8 +26,14 @@
       color: var(--secondary-dark);
     }
 
+    .icon-container {
+      width: var(--icon-container);
+    }
+
     .icon {
       width: var(--icon-medium);
     }
   }
+
+
 }

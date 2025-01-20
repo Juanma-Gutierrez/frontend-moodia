@@ -3,7 +3,7 @@ import "./ButtonComponent.scss";
 import { CONSTANTS } from "../../constants/Constants";
 
 export const ButtonComponent = ({ text, icon: Icon, onClick, disabled = false, type = "info", width = "normal" }) => {
-  const iconColor = getComputedStyle(document.documentElement).getPropertyValue("--button-icon-color");
+  const stroke = getComputedStyle(document.documentElement).getPropertyValue("--button-icon-color");
   const buttonWidth =
     width === "full" ? CONSTANTS.BUTTON.WIDTH.FULL : width === "normal" ? CONSTANTS.BUTTON.WIDTH.NORMAL : "auto";
 
@@ -22,11 +22,7 @@ export const ButtonComponent = ({ text, icon: Icon, onClick, disabled = false, t
 
   return (
     <button className={`button ${colorClass}`} onClick={onClick} disabled={disabled} style={{ width: buttonWidth }}>
-      {Icon && (
-        <Icon className="svg" stroke={iconColor}>
-          Icono
-        </Icon>
-      )}
+      {Icon && <Icon className="svg" stroke={stroke} />}
       <span className="text">{text}</span>
     </button>
   );

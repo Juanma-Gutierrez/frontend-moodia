@@ -1,13 +1,19 @@
 import PropTypes from "prop-types";
-
-export const loginIcon = ({ stroke }) => (
+// OK
+export const LoginIcon = ({ stroke }) => (
   <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24">
-    <g fill={stroke} strokeLinecap="round" strokeLinejoin="round">
-      <path d="M8 12c3.309 0 6-2.691 6-6s-2.691-6-6-6-6 2.691-6 6 2.691 6 6 6ZM8 2c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4Zm1.99 13.211a.997.997 0 0 1-1.131.85A6.006 6.006 0 0 0 2 22v1a1 1 0 1 1-2 0v-1c0-4.411 3.589-8 8-8 .38 0 .764.027 1.141.081.547.078.927.584.85 1.131ZM20 14h-4v-1a2.002 2.002 0 0 1 3.492-1.333 1 1 0 0 0 1.488-1.335A4.006 4.006 0 0 0 18 9c-2.206 0-4 1.794-4 4v1.537A4.003 4.003 0 0 0 12 18v2c0 2.206 1.794 4 4 4h4c2.206 0 4-1.794 4-4v-2c0-2.206-1.794-4-4-4Zm2 6c0 1.103-.897 2-2 2h-4c-1.103 0-2-.897-2-2v-2c0-1.103.897-2 2-2h4c1.103 0 2 .897 2 2v2Zm-2.5-1a1.5 1.5 0 1 1-3.001-.001A1.5 1.5 0 0 1 19.5 19Z" />
+    <g fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <path
+        stroke={stroke}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M4 21a7.001 7.001 0 0 1 6-6.93m9.873 1.134a3.432 3.432 0 0 1-.206.006c-1.025 0-1.96-.458-2.667-1.21-.708.752-1.642 1.21-2.667 1.21-.069 0-.137-.002-.206-.006A5.606 5.606 0 0 0 14 16.398c0 2.214 1.275 4.075 3 4.602 1.725-.527 3-2.388 3-4.602 0-.412-.044-.813-.127-1.194ZM15 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"
+      />
     </g>
   </svg>
 );
 
-loginIcon.propTypes = {
+LoginIcon.propTypes = {
   stroke: PropTypes.string,
 };

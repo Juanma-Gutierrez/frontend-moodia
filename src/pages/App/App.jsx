@@ -12,6 +12,8 @@ import { AuthProvider } from "../../services/context/AuthContext";
 import PrivateRoute from "../../services/privateRoute/privateRoute";
 import { useIsLoadingContext } from "../../services/context/IsLoadingContext";
 import { IsLoading } from "../../components/isLoadingComponent/isLoadingComponent";
+import Challenge from "../Challenge/Challenge";
+import Report from "../Report/Report";
 
 export default function App() {
   const { isLoading } = useIsLoadingContext();
@@ -31,6 +33,22 @@ export default function App() {
                 element={
                   <PrivateRoute>
                     <Post />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="challenge"
+                element={
+                  <PrivateRoute>
+                    <Challenge />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="report"
+                element={
+                  <PrivateRoute>
+                    <Report />
                   </PrivateRoute>
                 }
               />

@@ -3,11 +3,13 @@ import "./navigationBar.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { NavigationButtonComponent } from "../../components/NavigationButtonComponent/NavigationButtonComponent";
 import { adminIcon } from "../../assets/Icons/NavigationBarIcons/AdminIcon";
-import { homeIcon } from "../../assets/Icons/NavigationBarIcons/HomeIcon";
-import { loginIcon } from "../../assets/Icons/NavigationBarIcons/LoginIcon";
-import { logoIcon } from "../../assets/Icons/NavigationBarIcons/LogoIcon";
-import { logoutIcon } from "../../assets/Icons/NavigationBarIcons/LogoutIcon";
-import { registerIcon } from "../../assets/Icons/NavigationBarIcons/RegisterIcon";
+import { PostIcon } from "../../assets/Icons/NavigationBarIcons/PostIcon";
+import { challengeIcon } from "../../assets/Icons/NavigationBarIcons/ChallengeIcon";
+import { LoginIcon } from "../../assets/Icons/NavigationBarIcons/LoginIcon";
+import { LogoIcon } from "../../assets/Icons/NavigationBarIcons/LogoIcon";
+import { LogoutIcon } from "../../assets/Icons/NavigationBarIcons/LogoutIcon";
+import { RegisterIcon } from "../../assets/Icons/NavigationBarIcons/RegisterIcon";
+import { reportIcon } from "../../assets/Icons/NavigationBarIcons/ReportIcon";
 import { useAuthContext } from "../../services/context/AuthContext";
 import { useEffect } from "react";
 
@@ -29,12 +31,26 @@ export default function NavigationBar() {
       <nav className="nav">
         <ul>
           <li>
-            <NavigationButtonComponent title="Moodia" icon={logoIcon} logo={true} />
+            <NavigationButtonComponent title="Moodia" icon={LogoIcon} logo={true} />
           </li>
           {token != null && (
             <li>
               <Link to="/">
-                <NavigationButtonComponent title="Post" icon={homeIcon} />
+                <NavigationButtonComponent title="Post" icon={PostIcon} />
+              </Link>
+            </li>
+          )}
+          {token != null && (
+            <li>
+              <Link to="/challenge">
+                <NavigationButtonComponent title="Reto diario" icon={challengeIcon} />
+              </Link>
+            </li>
+          )}
+          {token != null && (
+            <li>
+              <Link to="/report">
+                <NavigationButtonComponent title="Informes" icon={reportIcon} />
               </Link>
             </li>
           )}
@@ -42,12 +58,12 @@ export default function NavigationBar() {
             <>
               <li>
                 <Link to="/login">
-                  <NavigationButtonComponent title="Login" icon={loginIcon} />
+                  <NavigationButtonComponent title="Login" icon={LoginIcon} />
                 </Link>
               </li>
               <li>
                 <Link to="/register">
-                  <NavigationButtonComponent title="Registro" icon={registerIcon} />
+                  <NavigationButtonComponent title="Registro" icon={RegisterIcon} />
                 </Link>
               </li>
             </>
@@ -64,7 +80,7 @@ export default function NavigationBar() {
           {token !== null && (
             <li>
               <Link to="/logout">
-                <NavigationButtonComponent title="Cerrar sesión" icon={logoutIcon} />
+                <NavigationButtonComponent title="Cerrar sesión" icon={LogoutIcon} />
               </Link>
             </li>
           )}

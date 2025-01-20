@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export const logoIcon = ({ stroke }) => (
+export const LogoIcon = ({ stroke }) => (
   <svg
     version="1.0"
     xmlns="http://www.w3.org/2000/svg"
@@ -44,6 +44,6 @@ export const logoIcon = ({ stroke }) => (
   </svg>
 );
 
-logoIcon.propTypes = {
+LogoIcon.propTypes = {
   stroke: PropTypes.string,
 };

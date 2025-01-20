@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { ChipComponent } from "../ChipComponent/ChipComponent";
 import { InputComponent } from "../InputComponent/InputComponent";
 import { ButtonComponent } from "../ButtonComponent/ButtonComponent";
-import { editIcon } from "../../assets/Icons/ButtonIcons/EditIcon";
+import { EditIcon } from "../../assets/Icons/ButtonIcons/EditIcon";
 import { useState } from "react";
 import { useEffect } from "react";
 import { emojis } from "../../assets/Icons/EmojiIcons/EmojiList";
@@ -90,7 +90,7 @@ export const NewPostCardComponent = ({ category }) => {
         <div className="button-container">
           <ButtonComponent
             text="Publicar"
-            icon={editIcon}
+            icon={EditIcon}
             onClick={handleClickPublishButton}
             disabled={isButtonDisabled}
             type="info-accept"
