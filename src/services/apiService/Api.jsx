@@ -11,7 +11,6 @@ export const apiGetUserData = async (email, password, setToken, setRole, setIsLo
       if (userMe.userData.id) {
         const role = await apiGetRole(tokenValue.token, userMe.userData.id);
         setRole(role.roleData.data);
-        localStorage.setItem("role", role.roleData.data);
       }
       setToken(tokenValue.token);
       return { token: tokenValue.token, userData: userMe };

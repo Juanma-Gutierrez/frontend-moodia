@@ -11,12 +11,8 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
-    const storedRole = localStorage.getItem("role");
     if (storedToken) {
       setToken(storedToken);
-    }
-    if (storedRole) {
-      setRole(storedRole);
     }
   }, []);
 

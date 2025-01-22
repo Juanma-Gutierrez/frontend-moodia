@@ -2,20 +2,21 @@ import "./navigationBar.scss";
 
 import { Link, useNavigate } from "react-router-dom";
 import { NavigationButtonComponent } from "../../components/NavigationButtonComponent/NavigationButtonComponent";
-import { adminIcon } from "../../assets/Icons/NavigationBarIcons/AdminIcon";
+import { AdminIcon } from "../../assets/Icons/NavigationBarIcons/AdminIcon";
 import { PostIcon } from "../../assets/Icons/NavigationBarIcons/PostIcon";
-import { challengeIcon } from "../../assets/Icons/NavigationBarIcons/ChallengeIcon";
+import { ChallengeIcon } from "../../assets/Icons/NavigationBarIcons/ChallengeIcon";
 import { LoginIcon } from "../../assets/Icons/NavigationBarIcons/LoginIcon";
 import { LogoIcon } from "../../assets/Icons/NavigationBarIcons/LogoIcon";
 import { LogoutIcon } from "../../assets/Icons/NavigationBarIcons/LogoutIcon";
 import { RegisterIcon } from "../../assets/Icons/NavigationBarIcons/RegisterIcon";
-import { reportIcon } from "../../assets/Icons/NavigationBarIcons/ReportIcon";
+import { ReportIcon } from "../../assets/Icons/NavigationBarIcons/ReportIcon";
 import { useAuthContext } from "../../services/context/AuthContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function NavigationBar() {
   const { token, role } = useAuthContext();
   const navigate = useNavigate();
+  const [admin, setAdmin] = useState();
 
   useEffect(() => {
     if (token) {
@@ -25,6 +26,11 @@ export default function NavigationBar() {
       }
     }
   }, [token, navigate]);
+
+  useEffect(() => {
+    console.log("*****************", role);
+    setAdmin(role == "Administrador");
+  }, [role]);
 
   return (
     <div className="sidebar">
@@ -43,14 +49,14 @@ export default function NavigationBar() {
           {token != null && (
             <li>
               <Link to="/challenge">
-                <NavigationButtonComponent title="Reto diario" icon={challengeIcon} />
+                <NavigationButtonComponent title="Reto diario" icon={ChallengeIcon} />
               </Link>
             </li>
           )}
           {token != null && (
             <li>
               <Link to="/report">
-                <NavigationButtonComponent title="Informes" icon={reportIcon} />
+                <NavigationButtonComponent title="Informes" icon={ReportIcon} />
               </Link>
             </li>
           )}
@@ -68,10 +74,11 @@ export default function NavigationBar() {
               </li>
             </>
           )}
-          {role === "Administrador" && (
+          {/* {role === "Administrador" && ( */}
+          {admin && (
             <li>
               <Link to="/admin">
-                <NavigationButtonComponent title="Administración" icon={adminIcon} />
+                <NavigationButtonComponent title="Administración" icon={AdminIcon} />
               </Link>
             </li>
           )}
