@@ -1,13 +1,13 @@
 import { API_URL } from "../../constants/Constants";
 
-export const apiGetData = async (endpoint, setKOScreenVisible) => {
+export const apiGenericRequest = async (endpoint, body, setKOScreenVisible) => {
   try {
     const response = await fetch(`${API_URL}/${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({}),
+      body: JSON.stringify(body),
     });
 
     if (!response.ok) {
@@ -25,7 +25,7 @@ export const apiGetData = async (endpoint, setKOScreenVisible) => {
   }
 };
 
-export const apiGetEmployment = () => apiGetData("employment/get");
-export const apiGetGenres = () => apiGetData("genre/get");
-export const apiGetCivilStatus = () => apiGetData("civil_status/get");
-export const apiGetCategory = () => apiGetData("category/get");
+export const apiGetEmployment = () => apiGenericRequest("employment/get");
+export const apiGetGenres = () => apiGenericRequest("genre/get");
+export const apiGetCivilStatus = () => apiGenericRequest("civil_status/get");
+export const apiGetCategory = () => apiGenericRequest("category/get");

@@ -28,7 +28,6 @@ export default function NavigationBar() {
   }, [token, navigate]);
 
   useEffect(() => {
-    console.log("*****************", role);
     setAdmin(role == "Administrador");
   }, [role]);
 

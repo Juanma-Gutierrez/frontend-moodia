@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useState, useEffect, useContext, createContext } from "react";
-import { apiGetGenres, apiGetCivilStatus, apiGetEmployment, apiGetCategory } from "../apiService/apiGetData";
+import { apiGetGenres, apiGetCivilStatus, apiGetEmployment, apiGetCategory } from "../apiService/ApiGenericRequest";
 import { KOScreen } from "../../components/KOScreenComponent/KOScreenComponent";
 
 const EnvironmentContext = createContext();
@@ -38,7 +38,7 @@ export const EnvironmentProvider = ({ children }) => {
 
   return (
     <EnvironmentContext.Provider value={{ genres, civilStatus, employment, category }}>
-            {isKOScreenVisible && <KOScreen />}
+      {isKOScreenVisible && <KOScreen />}
       {children}
     </EnvironmentContext.Provider>
   );

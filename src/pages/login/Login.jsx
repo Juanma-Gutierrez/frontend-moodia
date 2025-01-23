@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Importar useNavigate
 import "./login.scss";
-import { apiGetUserData } from "../../services/apiService/Api";
-import { useAuthContext } from "../../services/context/AuthContext";
-import { useIsLoadingContext } from "../../services/context/IsLoadingContext";
-import { ModalComponent } from "../../components/ModalComponent/ModalComponent";
-import ModalModel from "../../components/ModalComponent/ModalModel";
-import { ButtonComponent } from "../../components/ButtonComponent/ButtonComponent";
 import LoginLottie from "../../assets/lotties/LoginLottie.json";
 import Lottie from "react-lottie";
+import ModalModel from "../../components/ModalComponent/ModalModel";
+import { ButtonComponent } from "../../components/ButtonComponent/ButtonComponent";
 import { CONSTANTS } from "../../constants/Constants";
+import { Link, useNavigate } from "react-router-dom";
+import { ModalComponent } from "../../components/ModalComponent/ModalComponent";
+import { apiGetUserData } from "../../services/apiService/Api";
+import { useAuthContext } from "../../services/context/AuthContext";
+import { useEffect, useState } from "react";
+import { useIsLoadingContext } from "../../services/context/IsLoadingContext";
 
 export default function Login() {
   const { setRole, setToken } = useAuthContext();

@@ -1,12 +1,15 @@
 // API endpoints
 const env = import.meta.env.MODE === "development" ? "dev" : "prod";
 
-// export const API_URL = env === "dev" ? "http://127.0.0.1:8000/api" : "urlFinal"; // configuración BBDD local
-// export const API_URL = env === "dev" ? "https://retoolapi.dev/GpZj85" : "urlFinal"; // configuración API fake
+// export const API_URL =
+// env === "dev"
+//   ? "http://127.0.0.1:5174/api" // configuración BBDD local en modo debug en Laravel, puerto 9003
+//   : "https://retoolapi.dev/GpZj85"; // url Final configuración BBDD en producción // configuración API fake
+
 export const API_URL =
   env === "dev"
     ? "http://127.0.0.1:8000/api" // configuración BBDD local
-    : "https://retoolapi.dev/GpZj85"; // url Final configuración BBDD en producción
+    : "https://retoolapi.dev/GpZj85"; // url Final configuración BBDD en producción // configuración API fake
 
 // console.log(`Entorno actual: ${env}`);
 // console.log(`API_URL configurada: ${API_URL}`);

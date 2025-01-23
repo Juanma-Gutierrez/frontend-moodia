@@ -10,19 +10,17 @@
   .skeleton-title {
     width: 40%;
     height: 20px;
-    background-color: var(--white-light);
     border-radius: var(--radius-small);
     margin: var(--margin-small);
-    animation: skeleton-loading var(--transition-medium) infinite ease-in-out;
+    animation: skeleton-loading var(--transition-slow) infinite ease-in-out;
   }
 
   .skeleton-text {
     width: 100%;
     height: var(--skeleton-line-medium);
-    background-color: var(--white-light);
     border-radius: var(--radius-small);
     margin: var(--margin-medium);
-    animation: skeleton-loading var(--transition-medium) infinite ease-in-out;
+    animation: skeleton-loading var(--transition-slow) infinite ease-in-out;
   }
 
   .skeleton-chip {
@@ -38,7 +36,7 @@
       background-color: var(--secondary-light);
       border-radius: var(--radius-full);
       margin: var(--margin-small);
-      animation: skeleton-loading var(--transition-medium) infinite ease-in-out;
+      animation: skeleton-loading var(--transition-slow) infinite ease-in-out;
     }
   }
 
@@ -59,37 +57,31 @@
       .skeleton-emoji-item {
         width: 60px;
         height: 60px;
-        background-color: var(--secondary-light);
         border-radius: var(--radius-full);
-        animation: skeleton-loading var(--transition-medium) infinite ease-in-out;
+        animation: skeleton-loading var(--transition-slow) infinite ease-in-out;
       }
     }
 
     .skeleton-button {
       width: 100px;
       height: var(--icon-large);
-      background-color: var(--secondary-light);
       border-radius: var(--radius-medium);
-      animation: skeleton-loading var(--transition-medium) infinite ease-in-out;
+      animation: skeleton-loading var(--transition-slow) infinite ease-in-out;
     }
-
   }
-
-
 }
-
 
 /* Loading animation */
 @keyframes skeleton-loading {
   0% {
-    background-color: var(--white-light);
+    background-color: var(--skeleton-start);
   }
 
   50% {
-    background-color: var(--secondary-light);
+    background-color: var(--skeleton-end);
   }
 
   100% {
-    background-color: var(--white-light);
+    background-color: var(--skeleton-start);
   }
 }

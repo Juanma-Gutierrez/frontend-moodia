@@ -10,12 +10,15 @@ import { formatDate } from "../../services/extensions/Extensions";
 import { useAuthContext } from "../../services/context/AuthContext";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useEnvironmentContext } from "../../services/context/EnvironmentContext";
+
 
 export default function Post() {
-  const { token } = useAuthContext();
-  const navigate = useNavigate();
-  const [posts, setPosts] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [shouldReloadPosts, setShouldReloadPosts] = useState(false);
+  const navigate = useNavigate();
+  const { token } = useAuthContext();
 
   const modalModel = new ModalModel({
     title: "Error",
@@ -45,10 +48,17 @@ export default function Post() {
     }
   }, [token, navigate]);
 
+  useEffect(() => {
+    if (shouldReloadPosts) {
+      getPostList(token);
+      setShouldReloadPosts(false);
+    }
+  }, [shouldReloadPosts]);
+
   return (
     <div className="post-container">
       <div className="post">
-        <NewPostComponent />
+        <NewPostComponent onPostCreated={() => setShouldReloadPosts(true)} />
         {Array.isArray(posts) &&
           posts.map(
             (post, index) => {
