@@ -4,7 +4,7 @@ import { emojis } from "../../assets/Icons/EmojiIcons/EmojiList";
 import { EditIcon } from "../../assets/Icons/ButtonIcons/EditIcon";
 import { DeleteIcon } from "../../assets/Icons/ButtonIcons/DeleteIcon";
 
-export const PostComponent = ({ title, entry, creationDate, score }) => {
+export const PostComponent = ({ title, entry, creationDate, score, categories }) => {
   const emoji = emojis.find((e) => e.id === score)?.icon();
   const stroke = getComputedStyle(document.documentElement).getPropertyValue("--secondary-dark");
 
@@ -13,13 +13,26 @@ export const PostComponent = ({ title, entry, creationDate, score }) => {
       <h3>{title}</h3>
       <p>{entry}</p>
       <div className="footer-container">
-        <div className="date">{creationDate}</div>
-        <div className="icon">{emoji}</div>
-        <div className="icon-container">
-          <EditIcon stroke={stroke} />
+        <div className="start">
+          {Array.isArray(categories) && categories.length > 0 ? (
+            <>
+              {categories.map((category) => (
+                <p key={category.idCategory}>{category.idCategory}</p>
+              ))}
+            </>
+          ) : (
+            <></>
+          )}
         </div>
-        <div className="icon-container">
-          <DeleteIcon stroke={stroke} />
+        <div className="end">
+          <div className="date">{creationDate}</div>
+          <div className="icon">{emoji}</div>
+          <div className="icon-container">
+            <EditIcon stroke={stroke} />
+          </div>
+          <div className="icon-container">
+            <DeleteIcon stroke={stroke} />
+          </div>
         </div>
       </div>
     </div>

@@ -69,6 +69,7 @@ export default function Post() {
                   entry={post.message}
                   creationDate={formatDate(post.created_at, "dd/MM/yyyy")}
                   score={post.score}
+                  categories={post.categories}
                 />
               );
             },
