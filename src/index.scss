@@ -39,6 +39,8 @@
   --icon-shadow: rgba(0, 0, 0, 0.4);
   --modal-background: rgba(78, 76, 79, 0.4);
   --link: #007bff;
+  --skeleton-start-color: #ccc;
+  --skeleton-end-color: #bbb;
 
   // Fonts
   font-synthesis: none;
@@ -110,6 +112,7 @@
   --transition-fast: 0.2s;
   --transition-medium: 0.8s;
   --transition-slow: 2s;
+  --skeleton-animation: skeleton-loading 0.7s infinite linear alternate;
 }
 
 * {

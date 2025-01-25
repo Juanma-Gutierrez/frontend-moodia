@@ -12,7 +12,7 @@
     height: 20px;
     border-radius: var(--radius-small);
     margin: var(--margin-small);
-    animation: skeleton-loading var(--transition-slow) infinite ease-in-out;
+    animation: var(--skeleton-animation);
   }
 
   .skeleton-text {
@@ -20,7 +20,7 @@
     height: var(--skeleton-line-medium);
     border-radius: var(--radius-small);
     margin: var(--margin-medium);
-    animation: skeleton-loading var(--transition-slow) infinite ease-in-out;
+    animation: var(--skeleton-animation);
   }
 
   .skeleton-chip {
@@ -33,10 +33,9 @@
     .skeleton-chip-item {
       width: 60px;
       height: 20px;
-      background-color: var(--secondary-light);
       border-radius: var(--radius-full);
       margin: var(--margin-small);
-      animation: skeleton-loading var(--transition-slow) infinite ease-in-out;
+      animation: var(--skeleton-animation);
     }
   }
 
@@ -58,7 +57,7 @@
         width: 60px;
         height: 60px;
         border-radius: var(--radius-full);
-        animation: skeleton-loading var(--transition-slow) infinite ease-in-out;
+        animation: var(--skeleton-animation);
       }
     }
 
@@ -66,7 +65,7 @@
       width: 100px;
       height: var(--icon-large);
       border-radius: var(--radius-medium);
-      animation: skeleton-loading var(--transition-slow) infinite ease-in-out;
+      animation: var(--skeleton-animation);
     }
   }
 }
@@ -74,14 +73,9 @@
 /* Loading animation */
 @keyframes skeleton-loading {
   0% {
-    background-color: var(--skeleton-start);
+    background-color: var(--skeleton-start-color);
   }
-
-  50% {
-    background-color: var(--skeleton-end);
-  }
-
   100% {
-    background-color: var(--skeleton-start);
+    background-color: var(--skeleton-end-color);
   }
 }

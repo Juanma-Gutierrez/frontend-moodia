@@ -7,17 +7,18 @@ export const apiGenericRequest = async (endpoint, body, setKOScreenVisible) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(body),
+      body: body ? JSON.stringify(body) : null,
     });
-
     if (!response.ok) {
       setKOScreenVisible(true);
       console.error(`Error en la solicitud: ${response.status} ${response.statusText}`);
       throw new Error(`No se pudo obtener los datos desde ${endpoint}. Verifica el servidor.`);
     }
-
     const data = await response.json();
-    return { success: true, data };
+
+    if (response.ok) {
+      return { success: true, data };
+    }
   } catch (error) {
     setKOScreenVisible(true);
     console.error(`Error en la solicitud para obtener los datos desde ${endpoint}:`, error.message);

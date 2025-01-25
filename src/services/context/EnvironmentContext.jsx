@@ -17,6 +17,7 @@ export const EnvironmentProvider = ({ children }) => {
     try {
       const response = await apiFunction();
       if (response.success) {
+        console.log(response.data.message, "\n", response.data.data);
         setter(response.data.data);
       }
     } catch (error) {
