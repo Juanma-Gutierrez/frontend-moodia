@@ -6,6 +6,7 @@ import { ButtonComponent } from "../../components/ButtonComponent/ButtonComponen
 import { CONSTANTS } from "../../constants/Constants";
 import { HttpMethod } from "../../services/apiService/HttpMethod";
 import { Link, useNavigate } from "react-router-dom";
+import { LogoIcon } from "../../assets/Icons/NavigationBarIcons/LogoIcon";
 import { ModalComponent } from "../../components/ModalComponent/ModalComponent";
 import { apiGenericRequest } from "../../services/apiService/ApiGenericRequest";
 import { useAuthContext } from "../../services/context/AuthContext";
@@ -96,6 +97,12 @@ export default function Login() {
 
   return (
     <div className="login-container">
+      <div className="login-title">
+        <div className="logo">
+          <LogoIcon className="logo" size="64" stroke="#36332d"/>
+        </div>
+        <h1>Moodia</h1>
+      </div>
       <h3>Iniciar sesión</h3>
       <form onSubmit={handleLogin}>
         <input

@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 
-export const LogoIcon = ({ stroke }) => (
+export const LogoIcon = ({ stroke, size }) => (
   <svg
     version="1.0"
     xmlns="http://www.w3.org/2000/svg"
-    width="100.000000pt"
-    height="100.000000pt"
+    width={size || "100.000000pt"}
+    height={size || "100.000000pt"}
     viewBox="0 0 100.000000 100.000000"
     preserveAspectRatio="xMidYMid meet"
   >
