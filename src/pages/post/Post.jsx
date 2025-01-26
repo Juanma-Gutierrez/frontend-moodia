@@ -1,17 +1,14 @@
 import "./Post.scss";
 import ModalModel from "../../components/ModalComponent/ModalModel";
-import { ApiRequest } from "../../services/apiService/RequestModel";
-import { HttpMethod } from "../../services/apiService/RequestModel";
+import { HttpMethod } from "../../services/apiService/HttpMethod";
 import { ModalComponent } from "../../components/ModalComponent/ModalComponent";
 import { NewPostComponent } from "../../components/NewPostComponent/NewPostComponent";
 import { PostComponent } from "../../components/PostComponent/PostComponent";
-import { apiRequest } from "../../services/apiService/Api";
+import { apiGenericRequest } from "../../services/apiService/ApiGenericRequest";
 import { formatDate } from "../../services/extensions/Extensions";
 import { useAuthContext } from "../../services/context/AuthContext";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useEnvironmentContext } from "../../services/context/EnvironmentContext";
-
 
 export default function Post() {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -27,16 +24,19 @@ export default function Post() {
     type: "warning",
   });
 
-  const getPostList = (token) => {
-    const request = new ApiRequest("/post/list", HttpMethod.GET, null, token);
-    apiRequest(request).then((response) => {
-      if (response.success) {
-        setPosts(response.data.data);
-      } else {
-        console.error(response.error);
-        setIsModalVisible(true);
+  const getPostList = async (token) => {
+    if (token) {
+      const response = await apiGenericRequest("post/list", null, HttpMethod.GET, token);
+      switch (response.success) {
+        case true:
+          setPosts(response.data.data);
+          break;
+        case false:
+          console.error(response.error);
+          setIsModalVisible(true);
+          break;
       }
-    });
+    }
   };
 
   useEffect(() => {
@@ -49,6 +49,7 @@ export default function Post() {
   }, [token, navigate]);
 
   useEffect(() => {
+    let token = localStorage.getItem("token");
     if (shouldReloadPosts) {
       getPostList(token);
       setShouldReloadPosts(false);

@@ -7,7 +7,7 @@ import { useAuthContext } from "../../services/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Logout() {
-  const { setRole, setToken } = useAuthContext();
+  const { setToken, setUser, setExtendedUser } = useAuthContext();
   const navigate = useNavigate();
   const defaultOptions = {
     loop: true,
@@ -21,10 +21,9 @@ export default function Logout() {
   const handleLogout = () => {
     // Limpiar el token y redirigir al login
     setToken(null);
-    setRole(null);
+    setUser(null);
+    setExtendedUser(null);
     localStorage.removeItem("token");
-    localStorage.removeItem("role");
-    localStorage.removeItem("userId");
     navigate("/login");
   };
 
@@ -40,11 +39,7 @@ export default function Logout() {
           <ButtonComponent text="Salir" onClick={handleLogout} type="confirm-accept" />
           <ButtonComponent text="Cancelar" onClick={handleCancel} type="confirm-cancel" />
         </div>
-        <Lottie
-        options={defaultOptions}
-        height={CONSTANTS.LOTTIE.LARGE.HEIGHT}
-        width={CONSTANTS.LOTTIE.LARGE.WIDTH}
-      />
+        <Lottie options={defaultOptions} height={CONSTANTS.LOTTIE.LARGE.HEIGHT} width={CONSTANTS.LOTTIE.LARGE.WIDTH} />
       </div>
     </div>
   );

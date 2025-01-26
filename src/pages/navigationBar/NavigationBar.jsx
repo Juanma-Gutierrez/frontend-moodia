@@ -1,22 +1,21 @@
-import "./navigationBar.scss";
-
-import { Link, useNavigate } from "react-router-dom";
-import { NavigationButtonComponent } from "../../components/NavigationButtonComponent/NavigationButtonComponent";
+import "./NavigationBar.scss";
 import { AdminIcon } from "../../assets/Icons/NavigationBarIcons/AdminIcon";
-import { PostIcon } from "../../assets/Icons/NavigationBarIcons/PostIcon";
 import { ChallengeIcon } from "../../assets/Icons/NavigationBarIcons/ChallengeIcon";
+import { Link, useNavigate } from "react-router-dom";
 import { LoginIcon } from "../../assets/Icons/NavigationBarIcons/LoginIcon";
 import { LogoIcon } from "../../assets/Icons/NavigationBarIcons/LogoIcon";
 import { LogoutIcon } from "../../assets/Icons/NavigationBarIcons/LogoutIcon";
+import { NavigationButtonComponent } from "../../components/NavigationButtonComponent/NavigationButtonComponent";
+import { PostIcon } from "../../assets/Icons/NavigationBarIcons/PostIcon";
 import { RegisterIcon } from "../../assets/Icons/NavigationBarIcons/RegisterIcon";
 import { ReportIcon } from "../../assets/Icons/NavigationBarIcons/ReportIcon";
 import { useAuthContext } from "../../services/context/AuthContext";
 import { useEffect, useState } from "react";
 
 export default function NavigationBar() {
-  const { token, role } = useAuthContext();
-  const navigate = useNavigate();
   const [admin, setAdmin] = useState();
+  const navigate = useNavigate();
+  const { token, user, extendedUser } = useAuthContext();
 
   useEffect(() => {
     if (token) {
@@ -28,8 +27,9 @@ export default function NavigationBar() {
   }, [token, navigate]);
 
   useEffect(() => {
-    setAdmin(role == "Administrador");
-  }, [role]);
+    // 1: Usuario // 2: Administrador
+    setAdmin(extendedUser && extendedUser.idRole === 2);
+  }, [user, extendedUser, token]);
 
   return (
     <div className="sidebar">
@@ -38,21 +38,21 @@ export default function NavigationBar() {
           <li>
             <NavigationButtonComponent title="Moodia" icon={LogoIcon} logo={true} />
           </li>
-          {token != null && (
+          {token !== null && (
             <li>
               <Link to="/">
                 <NavigationButtonComponent title="Post" icon={PostIcon} />
               </Link>
             </li>
           )}
-          {token != null && (
+          {token !== null && (
             <li>
               <Link to="/challenge">
                 <NavigationButtonComponent title="Reto diario" icon={ChallengeIcon} />
               </Link>
             </li>
           )}
-          {token != null && (
+          {token !== null && (
             <li>
               <Link to="/report">
                 <NavigationButtonComponent title="Informes" icon={ReportIcon} />

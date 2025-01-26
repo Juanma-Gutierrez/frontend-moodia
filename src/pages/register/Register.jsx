@@ -1,17 +1,17 @@
 import "./register.scss";
-import { Link, useNavigate } from "react-router-dom";
-import { registerUser } from "../../services/apiService/registerUser";
-import { useAuthContext } from "../../services/context/AuthContext";
-import { useEnvironmentContext } from "../../services/context/EnvironmentContext";
-import { useIsLoadingContext } from "../../services/context/IsLoadingContext";
-import { useEffect, useState } from "react";
-import { ModalComponent } from "../../components/ModalComponent/ModalComponent";
 import ModalModel from "../../components/ModalComponent/ModalModel";
 import { ButtonComponent } from "../../components/ButtonComponent/ButtonComponent";
+import { Link, useNavigate } from "react-router-dom";
+import { ModalComponent } from "../../components/ModalComponent/ModalComponent";
+import { apiGenericRequest } from "../../services/apiService/ApiGenericRequest";
+import { useAuthContext } from "../../services/context/AuthContext";
+import { useEffect, useState } from "react";
+import { useEnvironmentContext } from "../../services/context/EnvironmentContext";
+import { useIsLoadingContext } from "../../services/context/IsLoadingContext";
 
 export default function Register() {
   const [birthDate, setBirthDate] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [password_confirmation, setPasswordConfirmation] = useState("");
   const [email, setEmail] = useState("");
   const [idCivilStatus, setIdCivilStatus] = useState("");
   const [idEmployment, setIdEmployment] = useState("");
@@ -23,9 +23,15 @@ export default function Register() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { genres = [], civilStatus = [], employment = [] } = useEnvironmentContext();
+  const {
+    genres = [],
+    civilStatus = [],
+    employment = [],
+    isKOScreenVisible,
+    setKOScreenVisible,
+  } = useEnvironmentContext();
   const { setIsLoading } = useIsLoadingContext();
-  const { setToken, setRole } = useAuthContext();
+  const { setUser, setExtendedUser, setToken } = useAuthContext();
 
   const modalModel = new ModalModel({
     title: "Registro de usuario",
@@ -38,7 +44,7 @@ export default function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
+    if (password !== password_confirmation) {
       console.error("Error: Las contraseñas no coinciden");
       return;
     }
@@ -51,14 +57,14 @@ export default function Register() {
       name &&
       email &&
       password &&
-      confirmPassword &&
+      password_confirmation &&
       birthDate &&
       idCivilStatus &&
       idEmployment &&
       idGenre &&
-      password === confirmPassword;
+      password === password_confirmation;
     setIsFormValid(formValid);
-  }, [name, email, password, confirmPassword, birthDate, idCivilStatus, idEmployment, idGenre]);
+  }, [name, email, password, password_confirmation, birthDate, idCivilStatus, idEmployment, idGenre]);
 
   const handleModalClose = async (result) => {
     setModalOpen(false);
@@ -70,35 +76,24 @@ export default function Register() {
         name,
         email,
         password,
-        confirmPassword,
+        password_confirmation,
         birthDate,
         idCivilStatus,
         idGenre,
         idRole,
         idEmployment,
       };
-
       console.log("Datos enviados para el registro:", userData);
-
-      const registerResponse = await registerUser(
-        name,
-        email,
-        password,
-        confirmPassword,
-        birthDate,
-        idCivilStatus,
-        idGenre,
-        idRole,
-        idEmployment,
-        setRole
-      );
-
-      if (registerResponse.success) {
-        console.log("Registro exitoso. Redirigiendo...");
+      const response = await apiGenericRequest("auth/register", userData);
+      if (response.success) {
+        setToken(response.data.token);
+        setUser(response.data.user);
+        setExtendedUser(response.data.extendedUser);
+        localStorage.setItem("token", response.data.token);
+        // TODO: MOSTRAR MODAL CON INFO REGISTRO CORRECTO
         navigate("/post");
-        const token = localStorage.getItem("token");
-        setToken(token);
       } else {
+        setKOScreenVisible(true);
         console.error("Error en el registro:", registerResponse.error);
       }
       setIsLoading(false);
@@ -130,8 +125,8 @@ export default function Register() {
         <input
           type="password"
           placeholder="Confirmar Contraseña"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          value={password_confirmation}
+          onChange={(e) => setPasswordConfirmation(e.target.value)}
           required
         />
         <input

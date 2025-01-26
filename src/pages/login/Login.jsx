@@ -4,21 +4,23 @@ import Lottie from "react-lottie";
 import ModalModel from "../../components/ModalComponent/ModalModel";
 import { ButtonComponent } from "../../components/ButtonComponent/ButtonComponent";
 import { CONSTANTS } from "../../constants/Constants";
+import { HttpMethod } from "../../services/apiService/HttpMethod";
 import { Link, useNavigate } from "react-router-dom";
 import { ModalComponent } from "../../components/ModalComponent/ModalComponent";
-import { apiGetUserData } from "../../services/apiService/Api";
+import { apiGenericRequest } from "../../services/apiService/ApiGenericRequest";
 import { useAuthContext } from "../../services/context/AuthContext";
 import { useEffect, useState } from "react";
 import { useIsLoadingContext } from "../../services/context/IsLoadingContext";
 
 export default function Login() {
-  const { setRole, setToken } = useAuthContext();
+  const { setToken, setUser, extendedUser, setExtendedUser } = useAuthContext();
   const { setIsLoading } = useIsLoadingContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [isFormValid, setIsFormValid] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [extendedUserLocal, setExtendedUserLocal] = useState({});
 
   const modalModel = new ModalModel({
     title: "Iniciar sesión",
@@ -37,28 +39,57 @@ export default function Login() {
   };
 
   useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+    }
+  }, []);
+
+  useEffect(() => {
+    setExtendedUserLocal(extendedUser);
+  }, [extendedUser]);
+
+  useEffect(() => {
     const formValid = email && password;
     setIsFormValid(formValid);
   }, [email, password]);
 
   const handleLogin = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     console.log("Email:", email);
     console.log("Password:", password);
 
-    const token = await apiGetUserData(email, password, setToken, setRole, setIsLoading);
-    if (token) {
-      let role = localStorage.getItem("role");
-      if (role === "Administrador") {
-        console.log("navegar a admin");
-        navigate("/admin");
-      } else if (role === "Usuario") {
-        console.log("navegar a post");
-        navigate("/post");
+    const body = {
+      email,
+      password,
+    };
+    const responseToken = await apiGenericRequest("auth/login", body);
+    switch (responseToken.success) {
+      case true: {
+        const responseUser = await apiGenericRequest("auth/me", null, HttpMethod.POST, responseToken.data.access_token);
+        const responseExtendedUser = await apiGenericRequest(
+          `extended_user/${responseUser.data.id}`,
+          null,
+          HttpMethod.POST,
+          responseToken.data.access_token
+        );
+        if (responseUser.data) {
+          setToken(responseToken.data.access_token);
+          setUser(responseUser.data);
+          setExtendedUser(responseExtendedUser.data);
+          if (responseExtendedUser.data.idRole === 1) {
+            navigate("/post");
+          } else if (responseExtendedUser.data.idRole === 2) {
+            navigate("/admin");
+          }
+        }
+        break;
       }
-    } else {
-      console.log("Error: Token no válido");
-      setIsModalVisible(true);
+      case false: {
+        console.log("Error: Token no válido");
+        setIsModalVisible(true);
+        break;
+      }
     }
     setIsLoading(false);
   };
@@ -86,11 +117,7 @@ export default function Login() {
       <p>
         ¿No tienes una cuenta? <Link to="/register">Regístrate aquí</Link>
       </p>
-      <Lottie
-        options={defaultOptions}
-        height={CONSTANTS.LOTTIE.LARGE.HEIGHT}
-        width={CONSTANTS.LOTTIE.LARGE.WIDTH}
-      />
+      <Lottie options={defaultOptions} height={CONSTANTS.LOTTIE.LARGE.HEIGHT} width={CONSTANTS.LOTTIE.LARGE.WIDTH} />
       {isModalVisible && <ModalComponent modalModel={modalModel} onClose={() => setIsModalVisible(false)} />}
     </div>
   );

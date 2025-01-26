@@ -1,18 +1,27 @@
 import { API_URL } from "../../constants/Constants";
+import { HttpMethod } from "./HttpMethod";
 
-export const apiGenericRequest = async (endpoint, body, setKOScreenVisible) => {
+export const apiGenericRequest = async (endpoint, body, method = HttpMethod.POST, token = null) => {
   try {
-    const response = await fetch(`${API_URL}/${endpoint}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: body ? JSON.stringify(body) : null,
-    });
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+    const options = {
+      method: method,
+      headers: headers,
+    };
+    if (body && method !== HttpMethod.GET) {
+      options.body = JSON.stringify(body);
+    }
+    const response = await fetch(`${API_URL}/${endpoint}`, options);
     if (!response.ok) {
-      setKOScreenVisible(true);
       console.error(`Error en la solicitud: ${response.status} ${response.statusText}`);
-      throw new Error(`No se pudo obtener los datos desde ${endpoint}. Verifica el servidor.`);
+      throw new Error(
+        `Error en ${endpoint}: ${response.status} ${response.statusText}. ${errorResponse.message || ""}`
+      );
     }
     const data = await response.json();
 
@@ -20,9 +29,8 @@ export const apiGenericRequest = async (endpoint, body, setKOScreenVisible) => {
       return { success: true, data };
     }
   } catch (error) {
-    setKOScreenVisible(true);
     console.error(`Error en la solicitud para obtener los datos desde ${endpoint}:`, error.message);
-    return { success: false, error: error.message };
+    throw new Error(`Error en apiGenericRequest: ${error.message}`);
   }
 };
 

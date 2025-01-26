@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 import { createContext, useContext, useState, useEffect } from "react";
-import { apiGetUserData } from "../../services/apiService/Api";
+// import { apiGetUserData } from "../../services/apiService/Api";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [role, setRole] = useState(null);
   const [token, setToken] = useState(null);
-  const [userId, setUserId] = useState(null);
+  const [user, setUser] = useState({});
+  const [extendedUser, setExtendedUser] = useState({});
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -29,11 +29,10 @@ export const AuthProvider = ({ children }) => {
       value={{
         token,
         setToken,
-        role,
-        setRole,
-        userId,
-        setUserId,
-        apiGetUserData: apiGetUserData,
+        user,
+        setUser,
+        extendedUser,
+        setExtendedUser,
       }}
     >
       {children}

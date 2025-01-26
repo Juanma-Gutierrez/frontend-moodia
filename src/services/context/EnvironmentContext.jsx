@@ -6,10 +6,10 @@ import { KOScreen } from "../../components/KOScreenComponent/KOScreenComponent";
 const EnvironmentContext = createContext();
 
 export const EnvironmentProvider = ({ children }) => {
-  const [genres, setGenres] = useState([]);
+  const [category, setCategory] = useState([]);
   const [civilStatus, setCivilStatus] = useState([]);
   const [employment, setEmployment] = useState([]);
-  const [category, setCategory] = useState([]);
+  const [genres, setGenres] = useState([]);
   const [isKOScreenVisible, setKOScreenVisible] = useState(false);
 
   // Función reutilizable para cargar datos
@@ -17,7 +17,6 @@ export const EnvironmentProvider = ({ children }) => {
     try {
       const response = await apiFunction();
       if (response.success) {
-        console.log(response.data.message, "\n", response.data.data);
         setter(response.data.data);
       }
     } catch (error) {
@@ -38,7 +37,16 @@ export const EnvironmentProvider = ({ children }) => {
   }, []);
 
   return (
-    <EnvironmentContext.Provider value={{ genres, civilStatus, employment, category }}>
+    <EnvironmentContext.Provider
+      value={{
+        genres,
+        civilStatus,
+        employment,
+        category,
+        isKOScreenVisible,
+        setKOScreenVisible,
+      }}
+    >
       {isKOScreenVisible && <KOScreen />}
       {children}
     </EnvironmentContext.Provider>
