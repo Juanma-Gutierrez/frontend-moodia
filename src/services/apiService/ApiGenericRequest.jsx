@@ -18,10 +18,8 @@ export const apiGenericRequest = async (endpoint, body, method = HttpMethod.POST
     }
     const response = await fetch(`${API_URL}/${endpoint}`, options);
     if (!response.ok) {
-      console.error(`Error en la solicitud: ${response.status} ${response.statusText}`);
-      throw new Error(
-        `Error en ${endpoint}: ${response.status} ${response.statusText}. ${errorResponse.message || ""}`
-      );
+      console.error(`Error en la solicitud: ${response.status} ${response.statusText} ${token}`);
+      return { success: false, data };
     }
     const data = await response.json();
 
@@ -30,7 +28,7 @@ export const apiGenericRequest = async (endpoint, body, method = HttpMethod.POST
     }
   } catch (error) {
     console.error(`Error en la solicitud para obtener los datos desde ${endpoint}:`, error.message);
-    throw new Error(`Error en apiGenericRequest: ${error.message}`);
+    return { success: false, error: error.message };
   }
 };
 

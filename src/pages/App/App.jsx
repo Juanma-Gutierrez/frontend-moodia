@@ -12,16 +12,16 @@ import Register from "../Register/Register";
 import Report from "../Report/Report";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { IsLoading } from "../../components/isLoadingComponent/isLoadingComponent";
-import { useIsLoadingContext } from "../../services/context/IsLoadingContext";
 import { useEffect } from "react";
 import { apiGenericRequest } from "../../services/apiService/ApiGenericRequest";
 import { HttpMethod } from "../../services/apiService/HttpMethod";
 import { useAuthContext } from "../../services/context/AuthContext";
+import { useEnvironmentContext } from "../../services/context/EnvironmentContext";
 
 export default function App() {
-  const { isLoading, setIsLoading } = useIsLoadingContext();
+  const { isLoading, setIsLoading, isKOScreenVisible } = useEnvironmentContext();
   const navigate = useNavigate();
-  const { user, setUser, token, setToken, extendedUser, setExtendedUser } = useAuthContext();
+  const { setUser, setExtendedUser } = useAuthContext();
 
   useEffect(() => {
     init();
@@ -40,7 +40,6 @@ export default function App() {
         token
       );
       if (responseUser.data) {
-        // setToken(token);
         setUser(responseUser.data);
         setExtendedUser(responseExtendedUser.data);
         if (responseExtendedUser.data.idRole === 1) {
@@ -56,7 +55,8 @@ export default function App() {
   return (
     <>
       <Auth />
-      {isLoading && <IsLoading isLoading={isLoading}>Cargando</IsLoading>}
+      {isLoading && <IsLoading isLoading={isLoading} />}
+      {isKOScreenVisible && <KOScreen />}
       <div className="app-container">
         <NavigationBar />
         <div className="main-content">

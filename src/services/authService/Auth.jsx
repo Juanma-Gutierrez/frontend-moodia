@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useAuthContext } from "../../services/context/AuthContext";
-import { useIsLoadingContext } from "../context/IsLoadingContext";
+import { useEnvironmentContext } from "../context/EnvironmentContext";
 
 export default function Auth() {
   const { setUser, setExtendedUser, setToken } = useAuthContext();
-  const { setIsLoading } = useIsLoadingContext();
+  const { setIsLoading } = useEnvironmentContext();
 
   useEffect(() => {
     const token = localStorage.getItem("token");

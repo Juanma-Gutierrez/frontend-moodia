@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Post() {
+  const { setToken } = useAuthContext();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [posts, setPosts] = useState([]);
   const [shouldReloadPosts, setShouldReloadPosts] = useState(false);
@@ -37,6 +38,15 @@ export default function Post() {
           break;
       }
     }
+  };
+
+  // Modal
+  const handleConfirm = () => {
+    setIsModalVisible(false);
+    console.log(Date());
+    setToken(null);
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
   useEffect(() => {
@@ -77,7 +87,7 @@ export default function Post() {
             [posts]
           )}
       </div>
-      {isModalVisible && <ModalComponent modalModel={modalModel} onClose={() => setIsModalVisible(false)} />}
+      {isModalVisible && <ModalComponent modalModel={modalModel} onConfirm={handleConfirm} />}{" "}
     </div>
   );
 }

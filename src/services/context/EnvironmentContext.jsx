@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { useState, useEffect, useContext, createContext } from "react";
 import { apiGetGenres, apiGetCivilStatus, apiGetEmployment, apiGetCategory } from "../apiService/ApiGenericRequest";
-import { KOScreen } from "../../components/KOScreenComponent/KOScreenComponent";
 
 const EnvironmentContext = createContext();
 
@@ -11,6 +10,7 @@ export const EnvironmentProvider = ({ children }) => {
   const [employment, setEmployment] = useState([]);
   const [genres, setGenres] = useState([]);
   const [isKOScreenVisible, setKOScreenVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Función reutilizable para cargar datos
   const fetchData = async (apiFunction, setter, label) => {
@@ -45,9 +45,10 @@ export const EnvironmentProvider = ({ children }) => {
         category,
         isKOScreenVisible,
         setKOScreenVisible,
+        isLoading,
+        setIsLoading,
       }}
     >
-      {isKOScreenVisible && <KOScreen />}
       {children}
     </EnvironmentContext.Provider>
   );

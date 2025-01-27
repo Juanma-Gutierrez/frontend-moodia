@@ -32,7 +32,8 @@ export const NewPostCardComponent = ({ onPostCreated, category }) => {
     setMessage(event.target.value);
   };
 
-  const handleModalOnClick = () => {
+  // Modal
+  const handleConfirm = () => {
     setIsModalVisible(false);
     if (!error) {
       cleanPostCard();
@@ -90,7 +91,7 @@ export const NewPostCardComponent = ({ onPostCreated, category }) => {
         setModalModel(
           new ModalModel({
             title: "Error",
-            message: "Hubo un problema al crear el post. Por favor, inténtalo de nuevo.",
+            message: "Hubo un problema al crear el post. Por favor, inténtalo de nuevo pasados unos minutos.",
             button1: "Cerrar",
             type: "warning",
           })
@@ -150,7 +151,7 @@ export const NewPostCardComponent = ({ onPostCreated, category }) => {
           />
         </div>
       </div>
-      {isModalVisible && <ModalComponent modalModel={modalModel} onClose={() => handleModalOnClick()} />}
+      {isModalVisible && <ModalComponent modalModel={modalModel} onConfirm={handleConfirm} />}{" "}
     </div>
   );
 };

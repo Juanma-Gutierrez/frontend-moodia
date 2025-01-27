@@ -11,11 +11,11 @@ import { ModalComponent } from "../../components/ModalComponent/ModalComponent";
 import { apiGenericRequest } from "../../services/apiService/ApiGenericRequest";
 import { useAuthContext } from "../../services/context/AuthContext";
 import { useEffect, useState } from "react";
-import { useIsLoadingContext } from "../../services/context/IsLoadingContext";
+import { useEnvironmentContext } from "../../services/context/EnvironmentContext";
 
 export default function Login() {
   const { setToken, setUser, extendedUser, setExtendedUser } = useAuthContext();
-  const { setIsLoading } = useIsLoadingContext();
+  const { setIsLoading } = useEnvironmentContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -53,6 +53,11 @@ export default function Login() {
     const formValid = email && password;
     setIsFormValid(formValid);
   }, [email, password]);
+
+  // Modal
+  const handleConfirm = () => {
+    setIsModalVisible(false);
+  };
 
   const handleLogin = async (e) => {
     setIsLoading(true);
@@ -99,7 +104,7 @@ export default function Login() {
     <div className="login-container">
       <div className="login-title">
         <div className="logo">
-          <LogoIcon className="logo" size="64" stroke="#36332d"/>
+          <LogoIcon className="logo" size="64" stroke="#36332d" />
         </div>
         <h1>Moodia</h1>
       </div>
@@ -125,7 +130,7 @@ export default function Login() {
         ¿No tienes una cuenta? <Link to="/register">Regístrate aquí</Link>
       </p>
       <Lottie options={defaultOptions} height={CONSTANTS.LOTTIE.LARGE.HEIGHT} width={CONSTANTS.LOTTIE.LARGE.WIDTH} />
-      {isModalVisible && <ModalComponent modalModel={modalModel} onClose={() => setIsModalVisible(false)} />}
+      {isModalVisible && <ModalComponent modalModel={modalModel} onConfirm={handleConfirm} />}
     </div>
   );
 }

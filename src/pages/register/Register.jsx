@@ -7,7 +7,6 @@ import { apiGenericRequest } from "../../services/apiService/ApiGenericRequest";
 import { useAuthContext } from "../../services/context/AuthContext";
 import { useEffect, useState } from "react";
 import { useEnvironmentContext } from "../../services/context/EnvironmentContext";
-import { useIsLoadingContext } from "../../services/context/IsLoadingContext";
 
 export default function Register() {
   const [birthDate, setBirthDate] = useState("");
@@ -18,19 +17,12 @@ export default function Register() {
   const [idGenre, setIdGenre] = useState("");
   const [idRole] = useState(1);
   const [isFormValid, setIsFormValid] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalResult, setModalResult] = useState(null);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const {
-    genres = [],
-    civilStatus = [],
-    employment = [],
-    isKOScreenVisible,
-    setKOScreenVisible,
-  } = useEnvironmentContext();
-  const { setIsLoading } = useIsLoadingContext();
+  const { genres = [], civilStatus = [], employment = [], setKOScreenVisible, setIsLoading } = useEnvironmentContext();
   const { setUser, setExtendedUser, setToken } = useAuthContext();
 
   const modalModel = new ModalModel({
@@ -43,13 +35,7 @@ export default function Register() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-
-    if (password !== password_confirmation) {
-      console.error("Error: Las contraseñas no coinciden");
-      return;
-    }
-
-    setModalOpen(true);
+    setIsModalVisible(true);
   };
 
   useEffect(() => {
@@ -66,41 +52,38 @@ export default function Register() {
     setIsFormValid(formValid);
   }, [name, email, password, password_confirmation, birthDate, idCivilStatus, idEmployment, idGenre]);
 
-  const handleModalClose = async (result) => {
-    setModalOpen(false);
-    setModalResult(result);
-
-    if (result) {
-      setIsLoading(true);
-      const userData = {
-        name,
-        email,
-        password,
-        password_confirmation,
-        birthDate,
-        idCivilStatus,
-        idGenre,
-        idRole,
-        idEmployment,
-      };
-      console.log("Datos enviados para el registro:", userData);
-      const response = await apiGenericRequest("auth/register", userData);
-      if (response.success) {
-        setToken(response.data.token);
-        setUser(response.data.user);
-        setExtendedUser(response.data.extendedUser);
-        localStorage.setItem("token", response.data.token);
-        // TODO: MOSTRAR MODAL CON INFO REGISTRO CORRECTO
-        navigate("/post");
-      } else {
-        setKOScreenVisible(true);
-        console.error("Error en el registro:", registerResponse.error);
-      }
-      setIsLoading(false);
+  const handleConfirm = async () => {
+    setIsLoading(true);
+    const userData = {
+      name,
+      email,
+      password,
+      password_confirmation,
+      birthDate,
+      idCivilStatus,
+      idGenre,
+      idRole,
+      idEmployment,
+    };
+    console.log("Datos enviados para el registro:", userData);
+    const response = await apiGenericRequest("auth/register", userData);
+    if (response.success) {
+      setToken(response.data.token);
+      setUser(response.data.user);
+      setExtendedUser(response.data.extendedUser);
+      localStorage.setItem("token", response.data.token);
+      // TODO: MOSTRAR MENSAJE CON INFO REGISTRO CORRECTO
+      navigate("/post");
     } else {
-      // TODO: Añadir un snackbar informativo
-      console.log("El usuario canceló el registro. ");
+      setKOScreenVisible(true);
+      console.error("Error en el registro:", registerResponse.error);
     }
+    setIsLoading(false);
+  };
+
+  const handleCloseModal = () => {
+    console.log("Modal cerrada");
+    setIsModalVisible(false);
   };
 
   return (
@@ -175,7 +158,9 @@ export default function Register() {
       <p>
         ¿Ya tienes una cuenta? <Link to="/login">Inicia sesión</Link>
       </p>
-      {modalOpen && <ModalComponent modalModel={modalModel} onClose={handleModalClose} />}
+      {isModalVisible && (
+        <ModalComponent modalModel={modalModel} onConfirm={handleConfirm} onCancel={handleCloseModal} />
+      )}{" "}
     </div>
   );
 }
