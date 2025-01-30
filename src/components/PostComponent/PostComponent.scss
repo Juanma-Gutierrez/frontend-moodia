@@ -21,6 +21,11 @@
       justify-content: start;
       align-items: center;
       gap: var(--margin-small);
+
+      .date {
+        color: var(--secondary-dark);
+        font-size: var(--font-small);
+      }
     }
 
     .end {
@@ -33,12 +38,14 @@
       align-items: center;
       gap: var(--margin-large);
 
-      .date {
-        color: var(--secondary-dark);
-      }
-
       .icon-container {
         width: var(--icon-container);
+        transition: var(--transition-fast);
+        cursor: pointer;
+      }
+
+      .icon-container:hover {
+        transform: scale(1.3);
       }
 
       .icon {

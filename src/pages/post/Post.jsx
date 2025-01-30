@@ -11,11 +11,11 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Post() {
-  const { setToken } = useAuthContext();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [posts, setPosts] = useState([]);
   const [shouldReloadPosts, setShouldReloadPosts] = useState(false);
   const navigate = useNavigate();
+  const { setToken } = useAuthContext();
   const { token } = useAuthContext();
 
   const modalModel = new ModalModel({
@@ -73,16 +73,7 @@ export default function Post() {
         {Array.isArray(posts) &&
           posts.map(
             (post, index) => {
-              return (
-                <PostComponent
-                  key={index}
-                  title={post.title}
-                  entry={post.message}
-                  creationDate={formatDate(post.created_at, "dd/MM/yyyy")}
-                  score={post.score}
-                  categories={post.categories}
-                />
-              );
+              return <PostComponent key={index} post={post} />;
             },
             [posts]
           )}

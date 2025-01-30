@@ -5,8 +5,8 @@ import { format } from "date-fns";
  * @param format {string} formato de la fecha a devolver.
  * @returns {string} Fecha formateada.
  */
-export const getFormattedDate = (dateFormat = "yyyy/MM/dd") => {
-  return format(new Date(), dateFormat);
+export const getFormattedDate = (dateFormat = "yyyy/MM/dd", date = new Date()) => {
+  return format(date, dateFormat);
 };
 
 

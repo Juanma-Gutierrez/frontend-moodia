@@ -12,12 +12,29 @@ export const EnvironmentProvider = ({ children }) => {
   const [isKOScreenVisible, setKOScreenVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    console.log("Genres actualizado:", genres);
+  }, [genres]);
+
+  useEffect(() => {
+    console.log("Estados civiles actualizado:", civilStatus);
+  }, [civilStatus]);
+
+  useEffect(() => {
+    console.log("Empleos actualizado:", employment);
+  }, [employment]);
+
+  useEffect(() => {
+    console.log("Categorías actualizado:", category);
+  }, [category]);
+
   // Función reutilizable para cargar datos
   const fetchData = async (apiFunction, setter, label) => {
     try {
       const response = await apiFunction();
       if (response.success) {
-        setter(response.data.data);
+        console.log(response.data.data);
+        setter([...response.data.data]);
       }
     } catch (error) {
       setKOScreenVisible(true);
@@ -28,11 +45,24 @@ export const EnvironmentProvider = ({ children }) => {
   // Llamar a init cuando se cargue la aplicación inicializando datos (llamada a la API)
   useEffect(() => {
     const init = async () => {
-      await fetchData(apiGetGenres, setGenres, "Géneros");
-      await fetchData(apiGetCivilStatus, setCivilStatus, "Estados civiles");
-      await fetchData(apiGetEmployment, setEmployment, "Empleos");
-      await fetchData(apiGetCategory, setCategory, "Categorias");
+      try {
+        const [genresRes, civilStatusRes, employmentRes, categoryRes] = await Promise.all([
+          apiGetGenres(),
+          apiGetCivilStatus(),
+          apiGetEmployment(),
+          apiGetCategory(),
+        ]);
+
+        if (genresRes.success) setGenres([...genresRes.data.data]);
+        if (civilStatusRes.success) setCivilStatus([...civilStatusRes.data.data]);
+        if (employmentRes.success) setEmployment([...employmentRes.data.data]);
+        if (categoryRes.success) setCategory([...categoryRes.data.data]);
+      } catch (error) {
+        setKOScreenVisible(true);
+        console.error("Error al cargar los datos:", error);
+      }
     };
+
     init();
   }, []);
 

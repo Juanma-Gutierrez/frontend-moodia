@@ -32,7 +32,7 @@ export const apiGenericRequest = async (endpoint, body, method = HttpMethod.POST
   }
 };
 
-export const apiGetEmployment = () => apiGenericRequest("employment/get");
-export const apiGetGenres = () => apiGenericRequest("genre/get");
-export const apiGetCivilStatus = () => apiGenericRequest("civil_status/get");
-export const apiGetCategory = () => apiGenericRequest("category/get");
+export const apiGetGenres = () => apiGenericRequest("genre/get", null, HttpMethod.POST);
+export const apiGetCivilStatus = () => apiGenericRequest("civil_status/get", null, HttpMethod.POST);
+export const apiGetEmployment = () => apiGenericRequest("employment/get", null, HttpMethod.POST);
+export const apiGetCategory = () => apiGenericRequest("category/get", null, HttpMethod.POST);
