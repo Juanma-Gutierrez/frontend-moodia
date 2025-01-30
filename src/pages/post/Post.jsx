@@ -66,6 +66,10 @@ export default function Post() {
     }
   }, [shouldReloadPosts]);
 
+  const handleDelete = (idPost) => {
+    setPosts((prevPosts) => prevPosts.filter((post) => post.idPost !== idPost));
+  };
+
   return (
     <div className="post-container">
       <div className="post">
@@ -73,7 +77,7 @@ export default function Post() {
         {Array.isArray(posts) &&
           posts.map(
             (post, index) => {
-              return <PostComponent key={index} post={post} />;
+              return <PostComponent key={index} post={post} onDelete={handleDelete} />;
             },
             [posts]
           )}

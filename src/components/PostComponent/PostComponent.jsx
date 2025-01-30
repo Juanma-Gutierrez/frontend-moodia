@@ -1,25 +1,26 @@
 import "./PostComponent.scss";
-import PropTypes from "prop-types";
 import ModalModel from "@components/ModalComponent/ModalModel";
-import { emojis } from "@assets/Icons/EmojiIcons/EmojiList";
-import { EditIcon } from "@assets/Icons/ButtonIcons/EditIcon";
-import { DeleteIcon } from "@assets/Icons/ButtonIcons/DeleteIcon";
-import { useEnvironmentContext } from "@services/context/EnvironmentContext";
-import { useEffect, useState } from "react";
-import { useAuthContext } from "@services/context/AuthContext";
+import PropTypes from "prop-types";
 import { ChipComponent } from "@components/ChipComponent/ChipComponent";
-import { getFormattedDate } from "@services/utils/utils";
+import { DeleteIcon } from "@assets/Icons/ButtonIcons/DeleteIcon";
+import { EditIcon } from "@assets/Icons/ButtonIcons/EditIcon";
+import { HttpMethod } from "../../services/apiService/HttpMethod";
 import { ModalComponent } from "@components/ModalComponent/ModalComponent";
+import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
+import { emojis } from "@assets/Icons/EmojiIcons/EmojiList";
+import { getFormattedDate } from "@services/utils/utils";
+import { useAuthContext } from "@services/context/AuthContext";
+import { useEnvironmentContext } from "@services/context/EnvironmentContext";
+import { useState } from "react";
 
-export const PostComponent = ({ post }) => {
+export const PostComponent = ({ post, onDelete }) => {
   const { title, message, created_at, score, categories, idPost } = post;
 
   const emoji = emojis.find((e) => e.id === score)?.icon();
   const stroke = getComputedStyle(document.documentElement).getPropertyValue("--secondary-dark");
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const { category, employment, setKOScreenVisible } = useEnvironmentContext();
+  const { category, setKOScreenVisible } = useEnvironmentContext();
   const { token } = useAuthContext();
-  const [forceRender, setForceRender] = useState(false);
 
   const modalModel = new ModalModel({
     title: "Eliminar post",
@@ -34,30 +35,23 @@ export const PostComponent = ({ post }) => {
   };
 
   const handleClickDelete = () => {
-    console.log("Eliminar post:", title);
     setIsModalVisible(true);
   };
 
   const handleDeletePost = async () => {
-    console.log("Post eliminado:", title);
-    const response = await apiGenericRequest(`post/delete/${idPost}`, null, "DELETE", setKOScreenVisible, token);
+    const response = await apiGenericRequest(`post/delete/${idPost}`, null, HttpMethod.DELETE, token);
     if (response.success) {
-      console.log("Post eliminado exitosamente");
-      // Aquí podrías actualizar el estado o realizar cualquier otra acción necesaria
+      onDelete(idPost);
     } else {
       console.error("Error al eliminar el post");
+      setKOScreenVisible(true);
     }
     setIsModalVisible(false);
   };
 
   const handleCloseModal = () => {
-    console.log("Modal cerrada");
     setIsModalVisible(false);
   };
-
-  useEffect(() => {
-    setForceRender((prev) => !prev);
-  }, [categories, category]);
 
   return (
     <div className="post-card-component">
@@ -94,7 +88,7 @@ export const PostComponent = ({ post }) => {
         </div>
       </div>
       {isModalVisible && (
-        <ModalComponent modalModel={modalModel} onConfirm={handleConfirm} onCancel={handleCloseModal} />
+        <ModalComponent modalModel={modalModel} onConfirm={handleDeletePost} onCancel={handleCloseModal} />
       )}
     </div>
   );
