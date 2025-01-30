@@ -1,17 +1,17 @@
 import "./login.scss";
-import LoginLottie from "../../assets/lotties/LoginLottie.json";
+import LoginLottie from "@assets/lotties/LoginLottie.json";
 import Lottie from "react-lottie";
-import ModalModel from "../../components/ModalComponent/ModalModel";
-import { ButtonComponent } from "../../components/ButtonComponent/ButtonComponent";
-import { CONSTANTS } from "../../constants/Constants";
-import { HttpMethod } from "../../services/apiService/HttpMethod";
+import ModalModel from "@components/ModalComponent/ModalModel";
+import { ButtonComponent } from "@components/ButtonComponent/ButtonComponent";
+import { CONSTANTS } from "@constants/Constants";
+import { HttpMethod } from "@services/apiService/HttpMethod";
 import { Link, useNavigate } from "react-router-dom";
-import { LogoIcon } from "../../assets/Icons/NavigationBarIcons/LogoIcon";
-import { ModalComponent } from "../../components/ModalComponent/ModalComponent";
-import { apiGenericRequest } from "../../services/apiService/ApiGenericRequest";
-import { useAuthContext } from "../../services/context/AuthContext";
+import { LogoIcon } from "@assets/Icons/NavigationBarIcons/LogoIcon";
+import { ModalComponent } from "@components/ModalComponent/ModalComponent";
+import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
+import { useAuthContext } from "@services/context/AuthContext";
 import { useEffect, useState } from "react";
-import { useEnvironmentContext } from "../../services/context/EnvironmentContext";
+import { useEnvironmentContext } from "@services/context/EnvironmentContext";
 
 export default function Login() {
   const { setToken, setUser, extendedUser, setExtendedUser } = useAuthContext();

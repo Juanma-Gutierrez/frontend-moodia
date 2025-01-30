@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { createContext, useContext, useState, useEffect } from "react";
-// import { apiGetUserData } from "../../services/apiService/Api";
+// import { apiGetUserData } from "@services/apiService/Api";
 
 const AuthContext = createContext();
 

@@ -1,8 +1,8 @@
 import "./IsLoadingComponent.scss";
 import Lottie from "react-lottie";
 import PropTypes from "prop-types";
-import isLoadingLottie from "../../assets/lotties/isLoadingLottie.json";
-import { CONSTANTS } from "../../constants/Constants";
+import isLoadingLottie from "@assets/lotties/isLoadingLottie.json";
+import { CONSTANTS } from "@constants/Constants";
 
 export const IsLoading = ({ isLoading, children }) => {
   if (isLoading) {

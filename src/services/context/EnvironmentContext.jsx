@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useState, useEffect, useContext, createContext } from "react";
-import { apiGetGenres, apiGetCivilStatus, apiGetEmployment, apiGetCategory } from "../apiService/ApiGenericRequest";
+import { apiGetGenres, apiGetCivilStatus, apiGetEmployment, apiGetCategory } from "@services/apiService/ApiGenericRequest";
 
 const EnvironmentContext = createContext();
 
@@ -12,37 +12,6 @@ export const EnvironmentProvider = ({ children }) => {
   const [isKOScreenVisible, setKOScreenVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    console.log("Genres actualizado:", genres);
-  }, [genres]);
-
-  useEffect(() => {
-    console.log("Estados civiles actualizado:", civilStatus);
-  }, [civilStatus]);
-
-  useEffect(() => {
-    console.log("Empleos actualizado:", employment);
-  }, [employment]);
-
-  useEffect(() => {
-    console.log("Categorías actualizado:", category);
-  }, [category]);
-
-  // Función reutilizable para cargar datos
-  const fetchData = async (apiFunction, setter, label) => {
-    try {
-      const response = await apiFunction();
-      if (response.success) {
-        console.log(response.data.data);
-        setter([...response.data.data]);
-      }
-    } catch (error) {
-      setKOScreenVisible(true);
-      console.error(`Error al cargar ${label}`, error);
-    }
-  };
-
-  // Llamar a init cuando se cargue la aplicación inicializando datos (llamada a la API)
   useEffect(() => {
     const init = async () => {
       try {

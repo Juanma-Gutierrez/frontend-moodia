@@ -1,22 +1,22 @@
 import "./app.scss";
-import Admin from "../admin/Admin";
-import Auth from "../../services/authService/Auth";
-import Challenge from "../Challenge/Challenge";
-import Login from "../Login/Login";
-import Logout from "../logout/Logout";
-import NavigationBar from "../NavigationBar/NavigationBar";
-import NoPage from "../noPage/NoPage";
-import Post from "../Post/Post";
-import PrivateRoute from "../../services/privateRoute/privateRoute";
-import Register from "../Register/Register";
-import Report from "../Report/Report";
+import Admin from "@pages/admin/Admin";
+import Auth from "@services/authService/Auth";
+import Challenge from "@pages/Challenge/Challenge";
+import Login from "@pages/Login/Login";
+import Logout from "@pages/logout/Logout";
+import NavigationBar from "@pages/NavigationBar/NavigationBar";
+import NoPage from "@pages/noPage/NoPage";
+import Post from "@pages/Post/Post";
+import PrivateRoute from "@services/privateRoute/privateRoute";
+import Register from "@pages/Register/Register";
+import Report from "@pages/Report/Report";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { IsLoading } from "../../components/isLoadingComponent/isLoadingComponent";
+import { IsLoading } from "@components/isLoadingComponent/isLoadingComponent";
 import { useEffect } from "react";
-import { apiGenericRequest } from "../../services/apiService/ApiGenericRequest";
-import { HttpMethod } from "../../services/apiService/HttpMethod";
-import { useAuthContext } from "../../services/context/AuthContext";
-import { useEnvironmentContext } from "../../services/context/EnvironmentContext";
+import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
+import { HttpMethod } from "@services/apiService/HttpMethod";
+import { useAuthContext } from "@services/context/AuthContext";
+import { useEnvironmentContext } from "@services/context/EnvironmentContext";
 
 export default function App() {
   const { isLoading, setIsLoading, isKOScreenVisible } = useEnvironmentContext();

@@ -1,4 +1,4 @@
-import { ButtonComponent } from "../ButtonComponent/ButtonComponent";
+import { ButtonComponent } from "@components/ButtonComponent/ButtonComponent";
 import "./ModalComponent.scss";
 import PropTypes from "prop-types";
 

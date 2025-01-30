@@ -1,15 +1,15 @@
 import "./NewPostCardComponent.scss";
-import ModalModel from "../../components/ModalComponent/ModalModel";
+import ModalModel from "@components/ModalComponent/ModalModel";
 import PropTypes from "prop-types";
-import { ButtonComponent } from "../ButtonComponent/ButtonComponent";
-import { ChipComponent } from "../ChipComponent/ChipComponent";
-import { EditIcon } from "../../assets/Icons/ButtonIcons/EditIcon";
-import { HttpMethod } from "../../services/apiService/HttpMethod";
-import { InputComponent } from "../InputComponent/InputComponent";
-import { ModalComponent } from "../../components/ModalComponent/ModalComponent";
-import { apiGenericRequest } from "../../services/apiService/ApiGenericRequest";
-import { emojis } from "../../assets/Icons/EmojiIcons/EmojiList";
-import { useAuthContext } from "../../services/context/AuthContext";
+import { ButtonComponent } from "@components/ButtonComponent/ButtonComponent";
+import { ChipComponent } from "@components/ChipComponent/ChipComponent";
+import { EditIcon } from "@assets/Icons/ButtonIcons/EditIcon";
+import { HttpMethod } from "@services/apiService/HttpMethod";
+import { InputComponent } from "@components/InputComponent/InputComponent";
+import { ModalComponent } from "@components/ModalComponent/ModalComponent";
+import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
+import { emojis } from "@assets/Icons/EmojiIcons/EmojiList";
+import { useAuthContext } from "@services/context/AuthContext";
 import { useEffect } from "react";
 import { useState } from "react";
 

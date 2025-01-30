@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import "./ButtonComponent.scss";
-import { CONSTANTS } from "../../constants/Constants";
+import { CONSTANTS } from "@constants/Constants";
 
 export const ButtonComponent = ({ text, icon: Icon, onClick, disabled = false, type = "info", width = "normal" }) => {
   const stroke = getComputedStyle(document.documentElement).getPropertyValue("--button-icon-color");

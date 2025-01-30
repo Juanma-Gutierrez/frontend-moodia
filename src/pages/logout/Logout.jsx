@@ -1,9 +1,9 @@
 import "./logout.scss";
-import LogoutLottie from "../../assets/lotties/LogoutLottie.json";
+import LogoutLottie from "@assets/lotties/LogoutLottie.json";
 import Lottie from "react-lottie";
-import { ButtonComponent } from "../../components/ButtonComponent/ButtonComponent";
-import { CONSTANTS } from "../../constants/Constants";
-import { useAuthContext } from "../../services/context/AuthContext";
+import { ButtonComponent } from "@components/ButtonComponent/ButtonComponent";
+import { CONSTANTS } from "@constants/Constants";
+import { useAuthContext } from "@services/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Logout() {

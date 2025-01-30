@@ -8,7 +8,8 @@ import { useEnvironmentContext } from "@services/context/EnvironmentContext";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "@services/context/AuthContext";
 import { ChipComponent } from "@components/ChipComponent/ChipComponent";
-import { getFormattedDate } from "../../services/utils/utils";
+import { getFormattedDate } from "@services/utils/utils";
+import { ModalComponent } from "@components/ModalComponent/ModalComponent";
 
 export const PostComponent = ({ post }) => {
   const { title, message, created_at, score, categories, idPost } = post;
@@ -92,6 +93,9 @@ export const PostComponent = ({ post }) => {
           </div>
         </div>
       </div>
+      {isModalVisible && (
+        <ModalComponent modalModel={modalModel} onConfirm={handleConfirm} onCancel={handleCloseModal} />
+      )}
     </div>
   );
 };

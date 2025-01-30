@@ -1,12 +1,12 @@
 import "./register.scss";
-import ModalModel from "../../components/ModalComponent/ModalModel";
-import { ButtonComponent } from "../../components/ButtonComponent/ButtonComponent";
+import ModalModel from "@components/ModalComponent/ModalModel";
+import { ButtonComponent } from "@components/ButtonComponent/ButtonComponent";
 import { Link, useNavigate } from "react-router-dom";
-import { ModalComponent } from "../../components/ModalComponent/ModalComponent";
-import { apiGenericRequest } from "../../services/apiService/ApiGenericRequest";
-import { useAuthContext } from "../../services/context/AuthContext";
+import { ModalComponent } from "@components/ModalComponent/ModalComponent";
+import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
+import { useAuthContext } from "@services/context/AuthContext";
 import { useEffect, useState } from "react";
-import { useEnvironmentContext } from "../../services/context/EnvironmentContext";
+import { useEnvironmentContext } from "@services/context/EnvironmentContext";
 
 export default function Register() {
   const [birthDate, setBirthDate] = useState("");
@@ -160,7 +160,7 @@ export default function Register() {
       </p>
       {isModalVisible && (
         <ModalComponent modalModel={modalModel} onConfirm={handleConfirm} onCancel={handleCloseModal} />
-      )}{" "}
+      )}
     </div>
   );
 }

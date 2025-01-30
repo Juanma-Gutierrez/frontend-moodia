@@ -2,7 +2,7 @@ import "./NewPostComponent.scss";
 import PropTypes from "prop-types";
 import { NewPostCardComponent } from "./NewPostCardComponent";
 import { NewPostSkeletonComponent } from "./NewPostSkeletonComponent";
-import { useEnvironmentContext } from "../../services/context/EnvironmentContext";
+import { useEnvironmentContext } from "@services/context/EnvironmentContext";
 
 export const NewPostComponent = ({ onPostCreated }) => {
   const { category } = useEnvironmentContext();

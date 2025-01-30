@@ -1,12 +1,12 @@
 import "./Post.scss";
-import ModalModel from "../../components/ModalComponent/ModalModel";
-import { HttpMethod } from "../../services/apiService/HttpMethod";
-import { ModalComponent } from "../../components/ModalComponent/ModalComponent";
-import { NewPostComponent } from "../../components/NewPostComponent/NewPostComponent";
-import { PostComponent } from "../../components/PostComponent/PostComponent";
-import { apiGenericRequest } from "../../services/apiService/ApiGenericRequest";
-import { formatDate } from "../../services/extensions/Extensions";
-import { useAuthContext } from "../../services/context/AuthContext";
+import ModalModel from "@components/ModalComponent/ModalModel";
+import { HttpMethod } from "@services/apiService/HttpMethod";
+import { ModalComponent } from "@components/ModalComponent/ModalComponent";
+import { NewPostComponent } from "@components/NewPostComponent/NewPostComponent";
+import { PostComponent } from "@components/PostComponent/PostComponent";
+import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
+import { formatDate } from "@services/extensions/Extensions";
+import { useAuthContext } from "@services/context/AuthContext";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 

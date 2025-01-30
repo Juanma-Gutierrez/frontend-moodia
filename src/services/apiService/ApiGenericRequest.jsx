@@ -1,4 +1,4 @@
-import { API_URL } from "../../constants/Constants";
+import { API_URL } from "@constants/Constants";
 import { HttpMethod } from "./HttpMethod";
 
 export const apiGenericRequest = async (endpoint, body, method = HttpMethod.POST, token = null) => {
