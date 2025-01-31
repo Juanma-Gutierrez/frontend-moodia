@@ -11,14 +11,22 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Post() {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalKOVisible, setIsModalKOVisible] = useState(false);
+  const [isModalDeleteVisible, setIsModalDeleteVisible] = useState(false);
   const [posts, setPosts] = useState([]);
   const [shouldReloadPosts, setShouldReloadPosts] = useState(false);
   const navigate = useNavigate();
   const { setToken } = useAuthContext();
   const { token } = useAuthContext();
 
-  const modalModel = new ModalModel({
+  const modalModelDelete = new ModalModel({
+    title: "Borrado",
+    message: "Se ha eliminado correctamente el post.",
+    button1: "Aceptar",
+    type: "info",
+  });
+
+  const modalModelKO = new ModalModel({
     title: "Error",
     message: "Hay un error al descargar los post. Inténtalo más tarde.",
     button1: "Aceptar",
@@ -34,7 +42,7 @@ export default function Post() {
           break;
         case false:
           console.error(response.error);
-          setIsModalVisible(true);
+          setIsModalKOVisible(true);
           break;
       }
     }
@@ -42,7 +50,7 @@ export default function Post() {
 
   // Modal
   const handleConfirm = () => {
-    setIsModalVisible(false);
+    setIsModalKOVisible(false);
     console.log(Date());
     setToken(null);
     localStorage.removeItem("token");
@@ -68,6 +76,11 @@ export default function Post() {
 
   const handleDelete = (idPost) => {
     setPosts((prevPosts) => prevPosts.filter((post) => post.idPost !== idPost));
+    setIsModalDeleteVisible(true);
+  };
+
+  const handleCloseDelete = (idPost) => {
+    setIsModalDeleteVisible(false);
   };
 
   return (
@@ -82,7 +95,8 @@ export default function Post() {
             [posts]
           )}
       </div>
-      {isModalVisible && <ModalComponent modalModel={modalModel} onConfirm={handleConfirm} />}{" "}
+      {isModalKOVisible && <ModalComponent modalModel={modalModelKO} onConfirm={handleConfirm} />}
+      {isModalDeleteVisible && <ModalComponent modalModel={modalModelDelete} onConfirm={handleCloseDelete} />}
     </div>
   );
 }
