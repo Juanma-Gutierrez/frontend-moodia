@@ -16,13 +16,11 @@ export const EditPostComponent = ({ post, onConfirm, onCancel }) => {
   const [message, setMessage] = useState(initialMessage);
   const [categories, setCategories] = useState(initialCategories);
   const [score, setScore] = useState(initialScore);
-  const [emojiSelected, setEmojiSelected] = useState(null);
 
   if (!post) return null;
 
   const handleForm = (e) => {
     e.preventDefault();
-    console.log(score);
     const updatedPost = {
       ...post,
       title,
@@ -35,7 +33,6 @@ export const EditPostComponent = ({ post, onConfirm, onCancel }) => {
 
   const handleEmojiClick = (emojiIndex) => {
     console.log(emojiIndex);
-    setEmojiSelected(emojiIndex);
     setScore(emojiIndex);
   };
 

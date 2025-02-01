@@ -77,7 +77,8 @@ export default function Post() {
   // Edit post
   const handleEdit = () => {
     // Actualizar pantalla de post
-    setShouldReloadPosts(false);
+    console.log("entra en editar");
+    setShouldReloadPosts(true);
   };
 
   // Delete post

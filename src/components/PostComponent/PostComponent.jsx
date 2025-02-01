@@ -14,7 +14,7 @@ import { useAuthContext } from "@services/context/AuthContext";
 import { useEnvironmentContext } from "@services/context/EnvironmentContext";
 import { useState } from "react";
 
-export const PostComponent = ({ post, onDelete }) => {
+export const PostComponent = ({ post, onEdit, onDelete }) => {
   const { title, message, created_at, score, categories, idPost } = post;
 
   const { token } = useAuthContext();
@@ -35,18 +35,28 @@ export const PostComponent = ({ post, onDelete }) => {
 
   // Edit post
   const handleClickEdit = () => {
-    console.log("Editar post:", post);
     setPostToEdit(post);
     setIsModalEditVisible(true);
-    //onEdit(post);
   };
 
-  const handleConfirmEdit = (updatedPost) => {
+  const handleConfirmEdit = async (updatedPost) => {
     console.log("handleConfirmEdit", updatedPost);
+    const body = {
+      title: updatedPost.title,
+      message: updatedPost.message,
+      score: updatedPost.score,
+      idExtendedUser: updatedPost.idExtendedUser,
+      category: updatedPost.categories,
+    };
 
-    // TODO:
-    // Está llegando el nuevo post editado, hay que grabarlo
-    // En EditPostComponent, hay que registrar el cambio en los chips
+    const response = await apiGenericRequest(`post/update/${idPost}`, body, HttpMethod.PUT, token);
+    console.log(response);
+    if (response.success) {
+      setIsModalEditVisible(false);
+      onEdit();
+    } else {
+      console.error("Error al eliminar el post");
+    }
   };
 
   const handleCancelEdit = () => {
