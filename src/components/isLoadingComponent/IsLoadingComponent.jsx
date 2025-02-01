@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import isLoadingLottie from "@assets/lotties/isLoadingLottie.json";
 import { CONSTANTS } from "@constants/Constants";
 
-export const IsLoading = ({ isLoading, children }) => {
+export const IsLoading = ({ isLoading = false, children }) => {
   if (isLoading) {
     const defaultOptions = {
       loop: true,
@@ -32,5 +32,5 @@ export const IsLoading = ({ isLoading, children }) => {
 
 IsLoading.propTypes = {
   isLoading: PropTypes.bool.isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };

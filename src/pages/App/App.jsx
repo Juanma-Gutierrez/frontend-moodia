@@ -12,7 +12,7 @@ import Register from "@pages/Register/Register";
 import Report from "@pages/Report/Report";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { IsLoading } from "@components/isLoadingComponent/isLoadingComponent";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
 import { HttpMethod } from "@services/apiService/HttpMethod";
 import { useAuthContext } from "@services/context/AuthContext";
@@ -24,8 +24,15 @@ export default function App() {
   const { setUser, setExtendedUser } = useAuthContext();
 
   useEffect(() => {
-    init();
+    activateIsLoading();
   }, []);
+
+  const activateIsLoading = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      init();
+    }, 1000);
+  };
 
   const init = async () => {
     setIsLoading(true);

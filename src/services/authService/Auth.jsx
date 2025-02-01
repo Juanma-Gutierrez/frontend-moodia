@@ -7,7 +7,6 @@ export default function Auth() {
   const { setIsLoading } = useEnvironmentContext();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
     setIsLoading(false);
   }, [setUser, setExtendedUser, setToken]);
 

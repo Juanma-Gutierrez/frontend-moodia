@@ -115,6 +115,22 @@
   --transition-medium: 0.8s;
   --transition-slow: 2s;
   --skeleton-animation: skeleton-loading 0.7s infinite linear alternate;
+
+  // neumorphism
+  --neu-border-radius: 50px;
+  --neu-background: #e0e0e0;
+  --neu-box-shadow: 20px 20px 60px #bebebe,
+    -20px -20px 60px #ffffff;
+  --neu-padding: 30px 50px;
+  --neu-margin: 40px;
+  --neu-font-color: var(--primary-medium);
+  --neu-h1-font-size: 1.4rem;
+  --neu-h1-font-weight: bold;
+  --neu-h1-margin-bottom: 10px;
+  --neu-h3-font-size: 1.2rem;
+  --neu-h3-margin-bottom: 10px;
+  --neu-p-font-size: 1rem;
+  --neu-p-margin-bottom: 20px;
 }
 
 * {

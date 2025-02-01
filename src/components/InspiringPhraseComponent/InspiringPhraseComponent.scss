@@ -1,0 +1,46 @@
+.inspiring-phrase-card-component {
+  border-radius: var(--neu-border-radius);
+  background: var(--neu-background);
+  box-shadow: var(--neu-box-shadow);
+  padding: var(--neu-padding);
+  margin-bottom: var(--neu-margin);
+  color: var(--neu-font-color);
+  animation: fadeIn 2s forwards;
+
+  h1 {
+    font-size: var(--neu-h1-font-size);
+    font-weight: var(--neu-h1-font-weight);
+    margin-bottom: var(--neu-h1-margin-bottom);
+  }
+
+  h3 {
+    font-size: var(--neu-h3-font-size);
+    margin-bottom: var(--neu-h3-margin-bottom);
+  }
+
+  p {
+    font-size: var(--neu-p-font-size);
+    margin-bottom: var(--neu-p-margin-bottom);
+  }
+
+  // Footer container
+  .inspiring-phrase-footer-container {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-top: 20px;
+  }
+}
+
+/* Definir la animación fadeIn */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
