@@ -5,7 +5,6 @@ import { ModalComponent } from "@components/ModalComponent/ModalComponent";
 import { NewPostComponent } from "@components/NewPostComponent/NewPostComponent";
 import { PostComponent } from "@components/PostComponent/PostComponent";
 import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
-import { formatDate } from "@services/extensions/Extensions";
 import { useAuthContext } from "@services/context/AuthContext";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -48,15 +47,15 @@ export default function Post() {
     }
   };
 
-  // Modal
-  const handleConfirm = () => {
+  // Modal KO
+  const handleConfirmKO = () => {
     setIsModalKOVisible(false);
-    console.log(Date());
     setToken(null);
     localStorage.removeItem("token");
     navigate("/login");
   };
 
+  // Guard
   useEffect(() => {
     let token = localStorage.getItem("token");
     if (!token) {
@@ -66,20 +65,28 @@ export default function Post() {
     }
   }, [token, navigate]);
 
+  // Reload of posts
   useEffect(() => {
     let token = localStorage.getItem("token");
-    if (shouldReloadPosts) {
+    if (shouldReloadPosts && token) {
       getPostList(token);
       setShouldReloadPosts(false);
     }
   }, [shouldReloadPosts]);
 
+  // Edit post
+  const handleEdit = () => {
+    // Actualizar pantalla de post
+    setShouldReloadPosts(false);
+  };
+
+  // Delete post
   const handleDelete = (idPost) => {
     setPosts((prevPosts) => prevPosts.filter((post) => post.idPost !== idPost));
     setIsModalDeleteVisible(true);
   };
 
-  const handleCloseDelete = (idPost) => {
+  const handleCloseDelete = () => {
     setIsModalDeleteVisible(false);
   };
 
@@ -90,12 +97,12 @@ export default function Post() {
         {Array.isArray(posts) &&
           posts.map(
             (post, index) => {
-              return <PostComponent key={index} post={post} onDelete={handleDelete} />;
+              return <PostComponent key={index} post={post} onEdit={handleEdit} onDelete={handleDelete} />;
             },
             [posts]
           )}
       </div>
-      {isModalKOVisible && <ModalComponent modalModel={modalModelKO} onConfirm={handleConfirm} />}
+      {isModalKOVisible && <ModalComponent modalModel={modalModelKO} onConfirm={handleConfirmKO} />}
       {isModalDeleteVisible && <ModalComponent modalModel={modalModelDelete} onConfirm={handleCloseDelete} />}
     </div>
   );

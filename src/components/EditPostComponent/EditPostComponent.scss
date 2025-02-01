@@ -1,0 +1,108 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--modal-background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  position: relative;
+  margin-left: var(--modal-margin-left);
+  background-color: var(--white-light);
+  border-radius: var(--radius-large);
+  border: 1px solid var(--primary-light);
+  padding: var(--padding-post);
+  width: 100%;
+  max-width: var(--general-width);
+  box-shadow: 0 4px 8px var(--modal-background);
+  text-align: center;
+
+  h3 {
+    margin-bottom: var(--margin-large);
+    font-size: var(--font-large);
+    font-weight: bold;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--margin-large);
+    margin-bottom: var(--margin-large);
+
+    input,
+    select {
+      width: 100%;
+      padding: var(--padding-medium);
+      border-radius: var(--input-radius);
+      border: 1px solid var(--primary-light);
+      margin-bottom: var(--margin-large);
+
+      &:focus {
+        border-color: var(--primary-dark);
+        outline: none;
+      }
+    }
+
+    .categories {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: start;
+      align-items: center;
+    }
+
+
+    .emoji-container {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: var(--margin-medium);
+
+      .emoji {
+        cursor: pointer;
+        height: var(--icon-large);
+        width: var(--icon-large);
+        margin-right: var(--margin-medium);
+        transition: transform 0.3s ease-in-out;
+
+        &:hover {
+          transform: scale(1.2) translateY(-5px);
+          filter: drop-shadow(0px 5px 5px var(--primary-light));
+        }
+      }
+
+      .selected {
+        cursor: default;
+        filter: drop-shadow(0px 5px 5px var(--primary-light));
+        transform: scale(1.1) translateY(-5px);
+        animation: rotateEmoji var(--transition-medium) ease-in-out;
+      }
+    }
+
+    .buttonsContainer {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--margin-large);
+      margin-top: var(--margin-large);
+    }
+  }
+
+  p {
+    margin-top: var(--margin-large);
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

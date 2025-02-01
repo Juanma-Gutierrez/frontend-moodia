@@ -116,7 +116,7 @@ export const NewPostCardComponent = ({ onPostCreated, category }) => {
       </div>
       <div className="category-container">
         {category.map(
-          (cat, index) => {
+          (cat) => {
             return (
               <ChipComponent
                 key={cat.idCategory}
