@@ -39,6 +39,9 @@ export const apiGenericRequest = async (endpoint, body, method = HttpMethod.POST
     const response = await fetch(`${API_URL}/${endpoint}`, options);
     if (!response.ok) {
       console.error(`Error en la solicitud: ${response.status} ${response.statusText} ${token}`);
+      localStorage.removeItem("token");
+      localStorage.removeItem("lastVisitDate");
+      localStorage.removeItem("inspiringPhraseVisible");
       return { success: false, data };
     }
     const data = await response.json();

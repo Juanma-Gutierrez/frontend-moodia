@@ -8,21 +8,27 @@
     display: flex;
     flex-direction: column;
     padding-top: var(--padding-large);
-    gap:var(--margin-large);
+    gap: var(--margin-large);
   }
 
   .category-container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-start;
+    align-items: center;
     margin: var(--margin-medium) 0;
   }
 
   .publish-container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
+    gap: var(--padding-medium);
 
     .emoji-container {
       display: flex;
+      flex-wrap: wrap;
       justify-content: flex-start;
       align-items: center;
       gap: var(--margin-medium);

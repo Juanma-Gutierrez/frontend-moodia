@@ -1,6 +1,5 @@
 .inspiring-phrase-card-component {
   border-radius: var(--neu-border-radius);
-  background: var(--neu-background);
   box-shadow: var(--neu-box-shadow);
   padding: var(--neu-padding);
   margin-bottom: var(--neu-margin);
@@ -35,6 +34,11 @@
 /* Definir la animación fadeIn */
 @keyframes fadeIn {
   0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+
+  50% {
     opacity: 0;
     transform: translateY(-100px);
   }

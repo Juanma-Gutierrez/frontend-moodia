@@ -33,7 +33,18 @@ export const CONSTANTS = {
   BUTTON: {
     WIDTH: {
       NORMAL: "120px",
-      FULL: "100%"
-    }
+      FULL: "100%",
+    },
+  },
+  INSPIRING_PHRASE: {
+    BACKGROUND: {
+      1: "https://lh3.googleusercontent.com/d/1IJE6j6xLQNkJHDsioHd_9-hrm_i8lHkR=w1000",
+      2: "https://lh3.googleusercontent.com/d/1o7EtTCSZELBAb3Xsd0i4QlPqPrDbclD8=w1000",
+      3: "https://lh3.googleusercontent.com/d/1q1eUMUdNOGtQ5VNqoRiJwK0oGWdiAcSn=w1000",
+      4: "https://lh3.googleusercontent.com/d/1Bf2TTd6ifLCY5ylF84iB0nodYZTnsxTv=w1000",
+      5: "https://lh3.googleusercontent.com/d/1U2sJm8am7kUG8B3p7aVI1S5Gl_2-B1Qg=w1000",
+      6: "https://lh3.googleusercontent.com/d/1Xh3uGXhUngUqdniLV0u22Agk1Mm2VSOc=w1000",
+      7: "https://lh3.googleusercontent.com/d/1dUt-S7_qvmpWGc4FxLDcAzIeNO-6Idj9=w1000",
+    },
   },
 };

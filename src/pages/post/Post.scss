@@ -4,9 +4,11 @@
   justify-content: flex-start;
   align-items: center;
   padding: var(--padding-general);
+  transition: transform 1s ease-in-out;
 
   .post {
     width: 100%;
     max-width: var(--general-width);
   }
 }
+

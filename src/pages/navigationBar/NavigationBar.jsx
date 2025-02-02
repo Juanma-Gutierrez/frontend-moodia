@@ -33,7 +33,8 @@ export default function NavigationBar() {
 
   return (
     <div className="sidebar">
-      <nav className="nav">
+      {/* PC navbar */}
+      <nav className="nav-normal-width">
         <ul>
           <li>
             <NavigationButtonComponent title="Moodia" icon={LogoIcon} logo={true} />
@@ -87,6 +88,61 @@ export default function NavigationBar() {
             <li>
               <Link to="/logout">
                 <NavigationButtonComponent title="Cerrar sesión" icon={LogoutIcon} />
+              </Link>
+            </li>
+          )}
+        </ul>
+      </nav>
+      {/* Mobile navbar */}
+      <nav className="nav-mobile-width">
+        <ul>
+          {token !== null && (
+            <li>
+              <Link to="/">
+                <NavigationButtonComponent icon={PostIcon} />
+              </Link>
+            </li>
+          )}
+          {token !== null && (
+            <li>
+              <Link to="/challenge">
+                <NavigationButtonComponent icon={ChallengeIcon} />
+              </Link>
+            </li>
+          )}
+          {token !== null && (
+            <li>
+              <Link to="/report">
+                <NavigationButtonComponent icon={ReportIcon} />
+              </Link>
+            </li>
+          )}
+          {token === null && (
+            <>
+              <li>
+                <Link to="/login">
+                  <NavigationButtonComponent icon={LoginIcon} />
+                </Link>
+              </li>
+              <li>
+                <Link to="/register">
+                  <NavigationButtonComponent icon={RegisterIcon} />
+                </Link>
+              </li>
+            </>
+          )}
+          {/* {role === "Administrador" && ( */}
+          {admin && (
+            <li>
+              <Link to="/admin">
+                <NavigationButtonComponent icon={AdminIcon} />
+              </Link>
+            </li>
+          )}
+          {token !== null && (
+            <li>
+              <Link to="/logout">
+                <NavigationButtonComponent icon={LogoutIcon} />
               </Link>
             </li>
           )}

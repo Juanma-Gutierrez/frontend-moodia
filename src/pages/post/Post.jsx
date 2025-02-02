@@ -26,17 +26,16 @@ export default function Post() {
   }, []);
 
   const checkInpiringPhrase = () => {
-    const localInspiringPhraseDate = localStorage.getItem("inspiringPhraseDate");
+    const localLastVisitDate = localStorage.getItem("lastVisitDate");
     const today = new Date().toISOString().split("T")[0];
     const localInspiringPhraseVisible = localStorage.getItem("inspiringPhraseVisible");
 
-    if (!localInspiringPhraseDate || localInspiringPhraseDate < today || localInspiringPhraseVisible == "true") {
+    if (!localLastVisitDate || localLastVisitDate < today || localInspiringPhraseVisible == "true") {
       getInspiringPhrase();
-      localStorage.setItem("inspiringPhraseDate", today);
+      localStorage.setItem("lastVisitDate", today);
       localStorage.setItem("inspiringPhraseVisible", true);
-      //setIsInspiringPhraseVisible(true);
     } else {
-      console.log("Ya se ha mostrado hoy la frase", localInspiringPhraseDate, today);
+      console.log("Ya se ha mostrado hoy la frase", localLastVisitDate, today);
     }
   };
 
@@ -121,11 +120,12 @@ export default function Post() {
 
   const getInspiringPhrase = async () => {
     setIsInspiringPhraseVisible(false);
+    // TODO: CHEQUEAR SI EL USUARIO TIENE FRASE ASIGNADA PARA MOSTRARLA EN LUGAR DE LA RANDOM 
     const response = await apiGenericRequest("inspiring_phrase/get", null, HttpMethod.POST, null);
     if (response.success) {
       const phrases = response.data.data;
       if (phrases.length > 0) {
-        const randomIndex = Math.floor(Math.random() * phrases.length); 
+        const randomIndex = Math.floor(Math.random() * phrases.length);
         setInspiringPhraseModel(phrases[randomIndex]);
         setIsInspiringPhraseVisible(true);
       }
@@ -137,9 +137,9 @@ export default function Post() {
   return (
     <div className="post-container">
       <div className="post">
-        {isInspiringPhraseVisible && (
-          <InspiringPhraseComponent inspiringPhrase={inspiringPhraseModel} onClick={handleInpiringPhraseClick} />
-        )}
+          {isInspiringPhraseVisible && (
+            <InspiringPhraseComponent inspiringPhrase={inspiringPhraseModel} onClick={handleInpiringPhraseClick} />
+          )}
         <NewPostComponent onPostCreated={() => setShouldReloadPosts(true)} />
         {Array.isArray(posts) &&
           posts.map(

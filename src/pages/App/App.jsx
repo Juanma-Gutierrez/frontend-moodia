@@ -65,7 +65,7 @@ export default function App() {
       {isLoading && <IsLoading isLoading={isLoading} />}
       {isKOScreenVisible && <KOScreen />}
       <div className="app-container">
-        <NavigationBar />
+        <NavigationBar className="navigation-bar"/>
         <div className="main-content">
           <Routes>
             <Route path="/" element={<Post />} />

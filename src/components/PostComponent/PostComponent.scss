@@ -14,10 +14,11 @@
   .footer-container {
     .start {
       position: absolute;
-      bottom: var(--padding-large);
-      left: var(--padding-post);
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
+      bottom: var(--padding-large);
+      left: var(--padding-post);
       justify-content: start;
       align-items: center;
       gap: var(--margin-small);
@@ -53,6 +54,9 @@
       }
     }
   }
+}
 
+@media (max-width: 375px) {
 
+  
 }
