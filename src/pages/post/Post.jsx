@@ -8,7 +8,7 @@ import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
 import { useAuthContext } from "@services/context/AuthContext";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { InspiringPhraseComponent } from "../../components/InspiringPhraseComponent/InspiringPhraseComponent";
+import { InspiringPhraseComponent } from "@components/InspiringPhraseComponent/InspiringPhraseComponent";
 
 export default function Post() {
   const [isModalKOVisible, setIsModalKOVisible] = useState(false);
@@ -18,8 +18,7 @@ export default function Post() {
   const [posts, setPosts] = useState([]);
   const [shouldReloadPosts, setShouldReloadPosts] = useState(false);
   const navigate = useNavigate();
-  const { setToken } = useAuthContext();
-  const { token } = useAuthContext();
+  const { extendedUser, token, setToken } = useAuthContext();
 
   useEffect(() => {
     checkInpiringPhrase();
@@ -34,8 +33,6 @@ export default function Post() {
       getInspiringPhrase();
       localStorage.setItem("lastVisitDate", today);
       localStorage.setItem("inspiringPhraseVisible", true);
-    } else {
-      console.log("Ya se ha mostrado hoy la frase", localLastVisitDate, today);
     }
   };
 
@@ -116,17 +113,33 @@ export default function Post() {
   const handleInpiringPhraseClick = () => {
     localStorage.setItem("inspiringPhraseVisible", false);
     setIsInspiringPhraseVisible(false);
+    deleteCustomIdInspirationPhrase();
+  };
+
+  const deleteCustomIdInspirationPhrase = async () => {
+    let extendedUserWithoutInspiringPhrase = extendedUser;
+    extendedUserWithoutInspiringPhrase.idInspiringPhrase = null;
+    const response = await apiGenericRequest(
+      "extended_user/update",
+      extendedUserWithoutInspiringPhrase,
+      HttpMethod.POST,
+      token
+    );
+    if (response.error) {
+      console.error("Error al eliminar frase inspiradora de extended_user", response.error);
+    }
   };
 
   const getInspiringPhrase = async () => {
     setIsInspiringPhraseVisible(false);
-    // TODO: CHEQUEAR SI EL USUARIO TIENE FRASE ASIGNADA PARA MOSTRARLA EN LUGAR DE LA RANDOM 
     const response = await apiGenericRequest("inspiring_phrase/get", null, HttpMethod.POST, null);
     if (response.success) {
       const phrases = response.data.data;
       if (phrases.length > 0) {
-        const randomIndex = Math.floor(Math.random() * phrases.length);
-        setInspiringPhraseModel(phrases[randomIndex]);
+        let idInspiringPhraseToSearch = extendedUser.idInspiringPhrase
+          ? extendedUser.idInspiringPhrase - 1
+          : Math.floor(Math.random() * phrases.length);
+        setInspiringPhraseModel(phrases[idInspiringPhraseToSearch]);
         setIsInspiringPhraseVisible(true);
       }
     } else {
@@ -137,9 +150,9 @@ export default function Post() {
   return (
     <div className="post-container">
       <div className="post">
-          {isInspiringPhraseVisible && (
-            <InspiringPhraseComponent inspiringPhrase={inspiringPhraseModel} onClick={handleInpiringPhraseClick} />
-          )}
+        {isInspiringPhraseVisible && (
+          <InspiringPhraseComponent inspiringPhrase={inspiringPhraseModel} onClick={handleInpiringPhraseClick} />
+        )}
         <NewPostComponent onPostCreated={() => setShouldReloadPosts(true)} />
         {Array.isArray(posts) &&
           posts.map(

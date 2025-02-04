@@ -71,17 +71,22 @@ export const EditPostComponent = ({ post, onConfirm, onCancel }) => {
               );
             })}
           </div>
-          <div className="emoji-container">
-            {emojis.map(({ id, icon }) => (
-              <div key={id} className={`emoji ${score === id ? "selected" : ""}`} onClick={() => handleEmojiClick(id)}>
-                {icon()}
-              </div>
-            ))}
-          </div>
-
-          <div className="buttonsContainer">
-            <ButtonComponent type="info-accept" text="Aceptar" onClick={handleForm} />
-            <ButtonComponent type="confirm-cancel" onClick={onCancel} text="Cancelar" />
+          <div className="footer-container">
+            <div className="emoji-container">
+              {emojis.map(({ id, icon }) => (
+                <div
+                  key={id}
+                  className={`emoji ${score === id ? "selected" : ""}`}
+                  onClick={() => handleEmojiClick(id)}
+                >
+                  {icon()}
+                </div>
+              ))}
+            </div>
+            <div className="buttonsContainer">
+              <ButtonComponent type="info-accept" text="Aceptar" onClick={handleForm} />
+              <ButtonComponent type="confirm-cancel" text="Cancelar" onClick={onCancel} />
+            </div>
           </div>
         </form>
       </div>

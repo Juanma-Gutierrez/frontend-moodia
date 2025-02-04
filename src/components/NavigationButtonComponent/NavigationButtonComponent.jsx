@@ -15,7 +15,7 @@ export const NavigationButtonComponent = ({ title, icon: Icon, logo }) => {
 };
 
 NavigationButtonComponent.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   icon: PropTypes.elementType,
   logo: PropTypes.bool,
 };

@@ -89,7 +89,7 @@ export default function Register() {
   return (
     <div className="register-container">
       <h3>Crear Cuenta</h3>
-      <form onSubmit={handleRegister}>
+      <form >
         <input type="text" placeholder="Nombre" value={name} onChange={(e) => setName(e.target.value)} required />
         <input
           type="email"
@@ -153,7 +153,7 @@ export default function Register() {
           </select>
         </div>
         <input type="hidden" value={idRole} />
-        <ButtonComponent type="info" disabled={!isFormValid} text="Registrar" />
+        <ButtonComponent type="info" disabled={!isFormValid} text="Registrar" onClick={handleRegister}/>
       </form>
       <p>
         ¿Ya tienes una cuenta? <Link to="/login">Inicia sesión</Link>

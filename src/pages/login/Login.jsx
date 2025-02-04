@@ -109,7 +109,7 @@ export default function Login() {
         <h1>Moodia</h1>
       </div>
       <h3>Iniciar sesión</h3>
-      <form onSubmit={handleLogin}>
+      <form>
         <input
           type="email"
           placeholder="Correo electrónico"
@@ -124,7 +124,7 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <ButtonComponent type="info" disabled={!isFormValid} text="Iniciar sesión" />
+        <ButtonComponent type="info" disabled={!isFormValid} text="Iniciar sesión" onClick={handleLogin} />
       </form>
       <p>
         ¿No tienes una cuenta? <Link to="/register">Regístrate aquí</Link>

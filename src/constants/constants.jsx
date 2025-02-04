@@ -38,13 +38,13 @@ export const CONSTANTS = {
   },
   INSPIRING_PHRASE: {
     BACKGROUND: {
-      1: "https://lh3.googleusercontent.com/d/1IJE6j6xLQNkJHDsioHd_9-hrm_i8lHkR=w1000",
-      2: "https://lh3.googleusercontent.com/d/1o7EtTCSZELBAb3Xsd0i4QlPqPrDbclD8=w1000",
-      3: "https://lh3.googleusercontent.com/d/1q1eUMUdNOGtQ5VNqoRiJwK0oGWdiAcSn=w1000",
-      4: "https://lh3.googleusercontent.com/d/1Bf2TTd6ifLCY5ylF84iB0nodYZTnsxTv=w1000",
-      5: "https://lh3.googleusercontent.com/d/1U2sJm8am7kUG8B3p7aVI1S5Gl_2-B1Qg=w1000",
-      6: "https://lh3.googleusercontent.com/d/1Xh3uGXhUngUqdniLV0u22Agk1Mm2VSOc=w1000",
-      7: "https://lh3.googleusercontent.com/d/1dUt-S7_qvmpWGc4FxLDcAzIeNO-6Idj9=w1000",
+      1: "https://raw.githubusercontent.com/Juanma-Gutierrez/moodia-storage/refs/heads/main/images/inspiringPhrases/01_family.jpg",
+      2: "https://raw.githubusercontent.com/Juanma-Gutierrez/moodia-storage/refs/heads/main/images/inspiringPhrases/02_friends.jpg",
+      3: "https://raw.githubusercontent.com/Juanma-Gutierrez/moodia-storage/refs/heads/main/images/inspiringPhrases/03_sports.jpg",
+      4: "https://raw.githubusercontent.com/Juanma-Gutierrez/moodia-storage/refs/heads/main/images/inspiringPhrases/04_studies.jpg",
+      5: "https://raw.githubusercontent.com/Juanma-Gutierrez/moodia-storage/refs/heads/main/images/inspiringPhrases/05_work.jpg",
+      6: "https://raw.githubusercontent.com/Juanma-Gutierrez/moodia-storage/refs/heads/main/images/inspiringPhrases/06_hobbies.jpg",
+      7: "https://raw.githubusercontent.com/Juanma-Gutierrez/moodia-storage/refs/heads/main/images/inspiringPhrases/07_relax.jpg",
     },
   },
 };
