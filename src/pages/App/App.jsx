@@ -4,18 +4,19 @@ import Auth from "@services/authService/Auth";
 import Challenge from "@pages/Challenge/Challenge";
 import Login from "@pages/Login/Login";
 import Logout from "@pages/logout/Logout";
+import Moodia from "@pages/Moodia/Moodia";
 import NavigationBar from "@pages/NavigationBar/NavigationBar";
 import NoPage from "@pages/noPage/NoPage";
 import Post from "@pages/Post/Post";
 import PrivateRoute from "@services/privateRoute/privateRoute";
 import Register from "@pages/Register/Register";
 import Report from "@pages/Report/Report";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import { IsLoading } from "@components/isLoadingComponent/isLoadingComponent";
-import { useEffect, useState } from "react";
-import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
 import { HttpMethod } from "@services/apiService/HttpMethod";
+import { IsLoading } from "@components/isLoadingComponent/isLoadingComponent";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
 import { useAuthContext } from "@services/context/AuthContext";
+import { useEffect, useState } from "react";
 import { useEnvironmentContext } from "@services/context/EnvironmentContext";
 
 export default function App() {
@@ -65,10 +66,18 @@ export default function App() {
       {isLoading && <IsLoading isLoading={isLoading} />}
       {isKOScreenVisible && <KOScreen />}
       <div className="app-container">
-        <NavigationBar className="navigation-bar"/>
+        <NavigationBar className="navigation-bar" />
         <div className="main-content">
           <Routes>
             <Route path="/" element={<Post />} />
+            <Route
+              path="moodia"
+              element={
+                <PrivateRoute>
+                  <Moodia />
+                </PrivateRoute>
+              }
+            />
             <Route
               path="post"
               element={

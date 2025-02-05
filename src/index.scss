@@ -5,27 +5,28 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: var(--black-light);
+  color: var(--black-dark);
   background-color: var(--primary-light);
 
   // Colors
   --white: #fff;
   --white-light: #eee;
-  --skeleton-start: #ccc;
-  --skeleton-end: #d8d8d8;
+  --new-post-background: var(--white-light);
   --black: #000;
-  --black-light: #222;
-  --primary-dark: #36332d;
-  --primary-medium: #4e4c4f;
-  --primary-light: #9f8d8d;
-  --secondary-dark: #6a503c;
-  --secondary-medium: #d9ae8e;
-  --secondary-light: #ffddba;
+  --black-dark: #181818;
+  --black-medium: #4A4A4A;
+  --black-light: #C1C1C1;
+  --primary-dark: #301471;
+  --primary-medium: #4263EB;
+  --primary-light: #837BDE;
+  --secondary-dark: var(--black-dark);
+  --secondary-medium: var(--black-medium);
+  --secondary-light: var(--black-light);
   --logo-color: var(--white);
-  --icon-color: var(--secondary-light);
-  --button-general: #40659c;
-  --button-general-hover: #2c4974;
-  --button-general-disabled: #8ca5cd;
+  --icon-color: var(--white-light);
+  --button-general: var(--primary-medium);
+  --button-general-hover: var(--primary-dark);
+  --button-general-disabled: #8d92aa;
   --button-info-accept: var(--button-general);
   --button-info-accept-hover: var(--button-general-hover);
   --button-confirm-accept: #4caf50;
@@ -35,10 +36,15 @@
   --button-warning-accept: #f44336;
   --button-warning-accept-hover: #af271d;
   --button-icon-color: var(--white);
-  --app-background-color: #d8e0e8;
+  --post-background-score-1: #ffe0e0;
+  --post-background-score-2: #e9dbf8;
+  --post-background-score-3: #f8f0d9;
+  --post-background-score-4: #d2ddfd;
+  --post-background-score-5: #dbfdd7;
+  --app-background-color: #edeafb;
   --icon-shadow: rgba(0, 0, 0, 0.4);
   --modal-background: rgba(78, 76, 79, 0.4);
-  --link: #007bff;
+  --link: var(--primary-dark);
   --skeleton-start-color: #ccc;
   --skeleton-end-color: #bbb;
 
@@ -112,7 +118,7 @@
 
   // Transition
   --transition-fast: 0.2s;
-  --transition-medium: 0.8s;
+  --transition-medium: 0.5s;
   --transition-slow: 2s;
   --skeleton-animation: skeleton-loading 0.7s infinite linear alternate;
 

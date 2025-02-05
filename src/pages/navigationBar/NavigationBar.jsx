@@ -37,7 +37,9 @@ export default function NavigationBar() {
       <nav className="nav-normal-width">
         <ul>
           <li>
-            <NavigationButtonComponent title="Moodia" icon={LogoIcon} logo={true} />
+            <Link to="/moodia">
+              <NavigationButtonComponent title="Moodia" icon={LogoIcon} logo={true} />
+            </Link>
           </li>
           {token !== null && (
             <li>
@@ -125,25 +127,25 @@ export default function NavigationBar() {
                 </Link>
               </li>
               <li>
-                <Link to="/register">
+                <div to="/register">
                   <NavigationButtonComponent icon={RegisterIcon} />
-                </Link>
+                </div>
               </li>
             </>
           )}
           {/* {role === "Administrador" && ( */}
           {admin && (
             <li>
-              <Link to="/admin">
+              <div to="/admin">
                 <NavigationButtonComponent icon={AdminIcon} />
-              </Link>
+              </div>
             </li>
           )}
           {token !== null && (
             <li>
-              <Link to="/logout">
+              <div to="/logout">
                 <NavigationButtonComponent icon={LogoutIcon} />
-              </Link>
+              </div>
             </li>
           )}
         </ul>

@@ -8,13 +8,13 @@
   .InputComponent-label {
     font-size: var(--font-medium);
     font-weight: var(--font-weight-medium);
-    color: var(--primary-dark);
+    color: var(--black-dark);
   }
 
   .InputComponent-input, .InputComponent-textarea {
     padding: var(--padding-medium);
     font-size: var(--font-medium);
-    color: var(--black-light);
+    color: var(--black-medium);
     background-color: var(--white);
     border: 1px solid var(--primary-medium);
     border-radius: var(--radius-small);
@@ -30,7 +30,7 @@
     }
 
     &::placeholder {
-      color: var(--primary-light);
+      color: var(--black-light);
     }
   }
 }

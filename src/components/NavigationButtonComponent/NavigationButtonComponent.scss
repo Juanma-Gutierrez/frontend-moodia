@@ -1,16 +1,19 @@
 .navigation-button {
-  display: flex;
   align-items: center;
-  border: none;
   background-color: var(--primary-dark);
+  border: none;
   color: var(--secondary-light);
-  font-size: 16px;
   cursor: pointer;
+  display: flex;
+  font-size: 16px;
   padding-left: 10px;
-  transition: color var(--transition-medium) ease;
+  transition: var(--transition-medium) ease;
+  width: 0%;
 
   &:hover {
-    color: var(--secondary-medium);
+    background-color: var(--primary-light);
+    width: 100%;
+    color: var(--white);
   }
 
   &:disabled {

@@ -19,7 +19,7 @@ export const PostComponent = ({ post, onEdit, onDelete }) => {
 
   const { token } = useAuthContext();
   const { category, setKOScreenVisible } = useEnvironmentContext();
-  const stroke = getComputedStyle(document.documentElement).getPropertyValue("--secondary-dark");
+  const stroke = getComputedStyle(document.documentElement).getPropertyValue("--primary-dark");
   const emoji = emojis.find((e) => e.id === score)?.icon();
   const [postToEdit, setPostToEdit] = useState();
   const [isModalEditVisible, setIsModalEditVisible] = useState(false);
@@ -86,7 +86,7 @@ export const PostComponent = ({ post, onEdit, onDelete }) => {
   };
 
   return (
-    <div className="post-card-component">
+    <div className={`post-card-component score-${score}`}>
       <h3>{title}</h3>
       <p>{message}</p>
       <div className="footer-container">
@@ -99,7 +99,12 @@ export const PostComponent = ({ post, onEdit, onDelete }) => {
                   (cat) => Number(cat.idCategory) === Number(postCategory.idCategory)
                 );
                 return matchingCategory ? (
-                  <ChipComponent key={matchingCategory.idCategory} text={matchingCategory.name} isClickable={false} />
+                  <ChipComponent
+                    key={matchingCategory.idCategory}
+                    text={matchingCategory.name}
+                    isClickable={false}
+                    isSelected={true}
+                  />
                 ) : (
                   <span>No se encontró categoría para ID: {postCategory.idCategory}</span>
                 );
@@ -110,7 +115,7 @@ export const PostComponent = ({ post, onEdit, onDelete }) => {
           </div>
         </div>
         <div className="end">
-          <div className="icon">{emoji}</div>
+          <div className="emoji">{emoji}</div>
           <div className="icon-container" onClick={handleClickEdit}>
             <EditIcon stroke={stroke} />
           </div>

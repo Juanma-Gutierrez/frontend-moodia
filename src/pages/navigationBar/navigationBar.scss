@@ -10,15 +10,20 @@
   overflow: hidden;
   transition: .75s ease;
 
+  a {
+    text-decoration: none;
+  }
   &:hover {
     width: 200px;
   }
 
   ul,
   ol {
+    list-style: none;
     list-style-type: none;
     padding: 0;
     margin: 0;
+    width: 100%;
   }
 
   .nav-normal-width {
@@ -27,6 +32,7 @@
     justify-content: space-between;
     align-items: flex-start;
     height: 100%;
+    width: 100%;
   }
 
   .nav-mobile-width {
