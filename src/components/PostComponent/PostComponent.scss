@@ -7,14 +7,6 @@
   padding-bottom: 60px;
   margin: var(--margin-large)0;
 
-  h3 {
-    color: var(--primary-dark);
-  }
-
-  p {
-    color: var(--primary-dark);
-  }
-
   .footer-container {
     .start {
       position: absolute;
@@ -28,7 +20,6 @@
       gap: var(--margin-small);
 
       .date {
-        color: var(--primary-dark);
         font-size: var(--font-small);
       }
     }
@@ -65,20 +56,25 @@
 
 .score-5 {
   background-color: var(--post-background-score-5);
+  color: var(--post-color-score-5);
 }
 
 .score-4 {
   background-color: var(--post-background-score-4);
+  color: var(--post-color-score-4);
 }
 
 .score-3 {
   background-color: var(--post-background-score-3);
+  color: var(--post-color-score-3);
 }
 
 .score-2 {
   background-color: var(--post-background-score-2);
+  color: var(--post-color-score-2);
 }
 
 .score-1 {
   background-color: var(--post-background-score-1);
+  color: var(--post-color-score-1);
 }

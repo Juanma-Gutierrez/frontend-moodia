@@ -50,7 +50,6 @@ export const PostComponent = ({ post, onEdit, onDelete }) => {
     };
 
     const response = await apiGenericRequest(`post/update/${idPost}`, body, HttpMethod.PUT, token);
-    console.log(response);
     if (response.success) {
       setIsModalEditVisible(false);
       onEdit();
