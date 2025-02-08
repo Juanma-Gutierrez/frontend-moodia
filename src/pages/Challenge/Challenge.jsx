@@ -74,6 +74,7 @@ export default function Challenge() {
   // Modal
   const handleConfirmChallenge = () => {
     handleCloseModal();
+    setIsSnackbarVisible(true);
     setIsChallengeAcepted(true);
     setTimeout(() => {
       setIsChallengeAcepted(false);
@@ -82,7 +83,6 @@ export default function Challenge() {
 
   const handleCloseModal = () => {
     setIsModalVisible(false);
-    setIsSnackbarVisible(true);
   };
 
   // Snackbar

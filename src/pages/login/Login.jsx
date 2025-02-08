@@ -124,7 +124,7 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <ButtonComponent type="info" disabled={!isFormValid} text="Iniciar sesión" onClick={handleLogin} />
+        <ButtonComponent type="info-accept" disabled={!isFormValid} text="Iniciar sesión" onClick={handleLogin} />
       </form>
       <p>
         ¿No tienes una cuenta? <Link to="/register">Regístrate aquí</Link>

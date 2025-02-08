@@ -13,16 +13,19 @@ import Register from "@pages/Register/Register";
 import Report from "@pages/Report/Report";
 import { HttpMethod } from "@services/apiService/HttpMethod";
 import { IsLoadingComponent } from "@components/isLoadingComponent/isLoadingComponent";
+import { LogoIsLoadingComponent } from "@components/LogoIsLoadingComponent/LogoIsLoadingComponent";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import { SnackbarComponent } from "@components/SnackbarComponent/SnackbarComponent";
 import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
 import { useAuthContext } from "@services/context/AuthContext";
 import { useEffect, useState } from "react";
 import { useEnvironmentContext } from "@services/context/EnvironmentContext";
-import { LogoIsLoadingComponent } from "@components/LogoIsLoadingComponent/LogoIsLoadingComponent";
 
 export default function App() {
-  const { isLoading, setIsLoading, logoIsLoading, setLogoIsLoading, isKOScreenVisible } = useEnvironmentContext();
+  const [isSnackbarVisible, setIsSnackbarVisible] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
   const navigate = useNavigate();
+  const { isLoading, setIsLoading, logoIsLoading, setLogoIsLoading, isKOScreenVisible } = useEnvironmentContext();
   const { setUser, setExtendedUser } = useAuthContext();
 
   useEffect(() => {
@@ -60,10 +63,17 @@ export default function App() {
           }
         }
       } else {
-        console.log("FALLO AL ENTRAR AL AUT/ME");
+        console.log("FALLO AL ENTRAR AL AUT/ME" + responseUser.error);
+        setIsSnackbarVisible(true);
+        setSnackbarMessage(responseUser.error);
       }
     }
     setIsLoading(false);
+  };
+
+  // Snackbar
+  const handleClickSnackbar = () => {
+    setIsSnackbarVisible(false);
   };
 
   return (
@@ -71,6 +81,7 @@ export default function App() {
       <Auth />
       {isLoading && <IsLoadingComponent isLoading={isLoading} />}
       {!isLoading && logoIsLoading && <LogoIsLoadingComponent />}
+      {isSnackbarVisible && <SnackbarComponent message={snackbarMessage} type="error" onClick={handleClickSnackbar} />}
       {isKOScreenVisible && <KOScreen />}
       <div className="app-container">
         <NavigationBar className="navigation-bar" />

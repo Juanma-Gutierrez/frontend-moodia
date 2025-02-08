@@ -2,7 +2,7 @@ import "./SnackbarComponent.scss";
 import PropTypes from "prop-types";
 import { SnackbarCrossIcon } from "@assets/Icons/SnackbarIcons/SnackbarCrossIcon";
 import { useState, useEffect } from "react";
-import { CONSTANTS } from "../../constants/Constants";
+import { CONSTANTS } from "@constants/Constants";
 
 export const SnackbarComponent = ({ message, type, onClick }) => {
   const [isVisible, setIsVisible] = useState(true);

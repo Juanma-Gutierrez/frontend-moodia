@@ -1,7 +1,7 @@
 import "./InspiringPhraseComponent.scss";
 import PropTypes from "prop-types";
 import { ButtonComponent } from "@components/ButtonComponent/ButtonComponent";
-import { CONSTANTS } from "../../constants/Constants";
+import { CONSTANTS } from "@constants/Constants";
 
 export const InspiringPhraseComponent = ({ inspiringPhrase, onClick }) => {
   const { title, message, idCategory } = inspiringPhrase;

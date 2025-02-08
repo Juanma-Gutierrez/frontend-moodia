@@ -35,26 +35,6 @@
         outline: none;
       }
     }
-
-    button {
-      width: 100%;
-      padding: var(--padding-medium);
-      background-color: var(--button-general);
-      color: var(--white);
-      border: none;
-      border-radius: var(--button-radius);
-      cursor: pointer;
-      transition: background-color var(--transition-fast);
-
-      &:hover {
-        background-color: var(--button-general-hover);
-      }
-
-      &:disabled {
-        background-color: var(--button-general-disabled);
-        pointer-events: none;
-      }
-    }
   }
 
   p {

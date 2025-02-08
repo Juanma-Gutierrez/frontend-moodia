@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  width: var(--navigationBar-height);
+  width: var(--navigationBar-size);
   height: 100vh;
   background-color: var(--primary-dark);
   padding: 20px 5px;
@@ -13,6 +13,7 @@
   a {
     text-decoration: none;
   }
+
   &:hover {
     width: 200px;
   }
@@ -42,7 +43,8 @@
     align-items: flex-start;
     width: 100%;
 
-    ul, ol {
+    ul,
+    ol {
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -64,7 +66,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     width: 100vw;
-    height: var(--navigationBar-height);
+    height: var(--navigationBar-size);
     padding: 0px;
     overflow: hidden;
     transition: .75s ease;

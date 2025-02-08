@@ -9,9 +9,9 @@ import { SnackbarComponent } from "@components/SnackbarComponent/SnackbarCompone
 import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
 import { useAuthContext } from "@services/context/AuthContext";
 import { useEffect, useState } from "react";
-import { useEnvironmentContext } from "../../services/context/EnvironmentContext";
+import { useEnvironmentContext } from "@services/context/EnvironmentContext";
 import { useNavigate } from "react-router-dom";
-import { SnackbarComponentTypes } from "../../components/SnackbarComponent/SnackbarComponentTypes";
+import { SnackbarComponentTypes } from "@components/SnackbarComponent/SnackbarComponentTypes";
 
 export default function Post() {
   const { setLogoIsLoading } = useEnvironmentContext();
