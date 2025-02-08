@@ -16,7 +16,7 @@ export const ModalComponent = ({ modalModel, onConfirm, onCancel }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-container">
-        <h2 className="modal-title">{title}</h2>
+        <h1 className="modal-title">{title}</h1>
         <p className="modal-message">{message}</p>
         <div className="modal-buttons">
           {/* Botón único para el modal tipo 'info' */}

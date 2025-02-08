@@ -112,3 +112,18 @@
     }
   }
 }
+
+@media (max-width:480px) {
+  .modalContent {
+    margin-inline: var(--margin-large) !important;
+  }
+  .buttonsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: var(--margin-large);
+    margin-top: var(--margin-large);
+  }
+}

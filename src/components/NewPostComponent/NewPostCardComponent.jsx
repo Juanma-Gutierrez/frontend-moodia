@@ -104,7 +104,7 @@ export const NewPostCardComponent = ({ onPostCreated, category }) => {
 
   return (
     <div className="newPostCardComponent">
-      <h3>Cuéntame lo que quieras, {user.name}</h3>
+      <h1>Cuéntame lo que quieras, {user.name}</h1>
       <div className="input-container">
         <InputComponent value={title} placeholder="Introduce el título" onChange={handleTitleChange} />
         <InputComponent

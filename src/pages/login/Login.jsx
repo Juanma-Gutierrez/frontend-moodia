@@ -15,7 +15,7 @@ import { useEnvironmentContext } from "@services/context/EnvironmentContext";
 
 export default function Login() {
   const { setToken, setUser, extendedUser, setExtendedUser } = useAuthContext();
-  const { setIsLoading } = useEnvironmentContext();
+  const { setLogoIsLoading } = useEnvironmentContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ export default function Login() {
     type: "warning",
   });
 
-  const defaultOptions = {
+  const lottieOptions = {
     loop: true,
     autoplay: true,
     animationData: LoginLottie,
@@ -60,7 +60,7 @@ export default function Login() {
   };
 
   const handleLogin = async (e) => {
-    setIsLoading(true);
+    setLogoIsLoading(true);
     e.preventDefault();
     console.log("Email:", email);
     console.log("Password:", password);
@@ -97,14 +97,16 @@ export default function Login() {
         break;
       }
     }
-    setIsLoading(false);
+    setLogoIsLoading(false);
   };
+
+  const logoColor = getComputedStyle(document.documentElement).getPropertyValue("--primary-dark");
 
   return (
     <div className="login-container">
       <div className="login-title">
         <div className="logo">
-          <LogoIcon className="logo" size="64" stroke="#36332d" />
+          <LogoIcon className="logo" size="64" stroke={logoColor} />
         </div>
         <h1>Moodia</h1>
       </div>
@@ -129,7 +131,7 @@ export default function Login() {
       <p>
         ¿No tienes una cuenta? <Link to="/register">Regístrate aquí</Link>
       </p>
-      <Lottie options={defaultOptions} height={CONSTANTS.LOTTIE.LARGE.HEIGHT} width={CONSTANTS.LOTTIE.LARGE.WIDTH} />
+      <Lottie options={lottieOptions} height={CONSTANTS.LOTTIE.LARGE.HEIGHT} width={CONSTANTS.LOTTIE.LARGE.WIDTH} />
       {isModalVisible && <ModalComponent modalModel={modalModel} onConfirm={handleConfirm} />}
     </div>
   );

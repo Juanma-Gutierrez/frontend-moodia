@@ -1,24 +1,26 @@
 import "./Post.scss";
 import ModalModel from "@components/ModalComponent/ModalModel";
 import { HttpMethod } from "@services/apiService/HttpMethod";
+import { InspiringPhraseComponent } from "@components/InspiringPhraseComponent/InspiringPhraseComponent";
 import { ModalComponent } from "@components/ModalComponent/ModalComponent";
 import { NewPostComponent } from "@components/NewPostComponent/NewPostComponent";
 import { PostComponent } from "@components/PostComponent/PostComponent";
 import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
 import { useAuthContext } from "@services/context/AuthContext";
 import { useEffect, useState } from "react";
+import { useEnvironmentContext } from "../../services/context/EnvironmentContext";
 import { useNavigate } from "react-router-dom";
-import { InspiringPhraseComponent } from "@components/InspiringPhraseComponent/InspiringPhraseComponent";
 
 export default function Post() {
+  const { setLogoIsLoading } = useEnvironmentContext();
+  const { extendedUser, token, setToken } = useAuthContext();
+  const navigate = useNavigate();
+  const [shouldReloadPosts, setShouldReloadPosts] = useState(false);
+  const [posts, setPosts] = useState([]);
   const [isModalKOVisible, setIsModalKOVisible] = useState(false);
   const [isModalDeleteVisible, setIsModalDeleteVisible] = useState(false);
   const [isInspiringPhraseVisible, setIsInspiringPhraseVisible] = useState(false);
   const [inspiringPhraseModel, setInspiringPhraseModel] = useState(null);
-  const [posts, setPosts] = useState([]);
-  const [shouldReloadPosts, setShouldReloadPosts] = useState(false);
-  const navigate = useNavigate();
-  const { extendedUser, token, setToken } = useAuthContext();
 
   useEffect(() => {
     checkInpiringPhrase();
@@ -52,6 +54,7 @@ export default function Post() {
 
   const getPostList = async (token) => {
     if (token) {
+      setLogoIsLoading(true);
       const response = await apiGenericRequest("post/list", null, HttpMethod.GET, token);
       switch (response.success) {
         case true:
@@ -62,6 +65,7 @@ export default function Post() {
           setIsModalKOVisible(true);
           break;
       }
+      setLogoIsLoading(false);
     }
   };
 
@@ -132,6 +136,7 @@ export default function Post() {
 
   const getInspiringPhrase = async () => {
     setIsInspiringPhraseVisible(false);
+    setLogoIsLoading(true);
     const response = await apiGenericRequest("inspiring_phrase/get", null, HttpMethod.POST, null);
     if (response.success) {
       const phrases = response.data.data;
@@ -145,6 +150,7 @@ export default function Post() {
     } else {
       console.error("Error al obtener frases inspiradoras:", response.error);
     }
+    setLogoIsLoading(false);
   };
 
   return (

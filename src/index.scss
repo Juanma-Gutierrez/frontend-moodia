@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Itim&display=swap');
+
 :root {
   // Font
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Bai Jamjuree", serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -19,11 +21,12 @@
   --primary-dark: #301471;
   --primary-medium: #4263EB;
   --primary-light: #837BDE;
+  --primary-extra-light: #ada9de;
   --secondary-dark: var(--black-dark);
   --secondary-medium: var(--black-medium);
   --secondary-light: var(--black-light);
   --logo-color: var(--white);
-  --icon-color: var(--white-light);
+  --icon-color: var(--primary-extra-light);
   --button-general: var(--primary-medium);
   --button-general-hover: var(--primary-dark);
   --button-general-disabled: #8d92aa;
@@ -49,7 +52,7 @@
   --app-background-color: #edeafb;
   --icon-shadow: rgba(0, 0, 0, 0.4);
   --modal-background: rgba(78, 76, 79, 0.4);
-  --link: var(--primary-dark);
+  --link: var(--primary-medium);
   --skeleton-start-color: #ccc;
   --skeleton-end-color: #bbb;
 
@@ -70,6 +73,17 @@
   --font-weight-bold: 700;
 
   // Sizes
+  // General responsives sizes
+  --responsive-20vw: 20vw;
+  --responsive-40vw: 40vw;
+  --responsive-60vw: 60vw;
+  --responsive-80vw: 80vw;
+  --responsive-100vw: 100vw;
+  --responsive-20vh: 20vh;
+  --responsive-40vh: 40vh;
+  --responsive-60vh: 60vh;
+  --responsive-80vh: 80vh;
+  --responsive-100vh: 100vh;
   // Padding
   --padding-zero: 0px;
   --padding-small: 4px;
@@ -77,19 +91,24 @@
   --padding-large: 16px;
   --padding-post: 32px;
   --padding-general: 32px;
+  --padding-container: 64px;
   // Margin
   --margin-zero: 0px;
   --margin-small: 4px;
   --margin-medium: 8px;
   --margin-large: 16px;
+  --margin-general: 32px;
   --margin-container: 64px;
+  // Gap
+  --gap-general: 16px;
   // Icons
-  --icon-xmall: 8px;
+  --icon-xsmall: 8px;
   --icon-small: 16px;
   --icon-medium: 32px;
   --icon-large: 48px;
   --icon-container: 28px;
   // Lotties
+  --lottie-xsmall: 50px;
   --lottie-small: 100px;
   --lottie-medium: 200px;
   --lottie-large: 300px;
@@ -142,6 +161,17 @@
   --neu-h3-margin-bottom: 10px;
   --neu-p-font-size: 1rem;
   --neu-p-margin-bottom: 20px;
+
+  h1 {
+    font-family: "Itim", serif;
+  }
+
+  p,
+  button,
+  input,
+  textarea {
+    font-family: "Bai Jamjuree", serif;
+  }
 }
 
 * {

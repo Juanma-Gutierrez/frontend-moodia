@@ -1,6 +1,6 @@
 .button {
   align-items: center;
-  border-radius: var(--radius-medium);
+  border-radius: var(--radius-full);
   border: none;
   color: var(--white);
   cursor: pointer;
@@ -63,5 +63,11 @@
 
   &.button-warning-accept:hover {
     background-color: var(--button-warning-accept-hover);
+  }
+}
+
+@media (max-width:480px) {
+  .button {
+    width: 100% !important;
   }
 }

@@ -22,7 +22,6 @@
     margin-bottom: var(--neu-p-margin-bottom);
   }
 
-  // Footer container
   .inspiring-phrase-footer-container {
     display: flex;
     justify-content: end;
@@ -31,7 +30,7 @@
   }
 }
 
-/* Definir la animación fadeIn */
+
 @keyframes fadeIn {
   0% {
     opacity: 0;

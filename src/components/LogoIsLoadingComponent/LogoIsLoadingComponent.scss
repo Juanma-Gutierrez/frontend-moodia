@@ -1,0 +1,34 @@
+.logo-isLoading-overlay {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+
+  .logo-isLoading {
+    position: absolute;
+    bottom: var(--margin-general);
+    right: var(--margin-general);
+    animation: rotateLogo 2s linear infinite;
+
+    svg{
+      width: var(--lottie-xsmall);
+      height: var( --lottie-xsmall);
+    }
+  }
+}
+
+@keyframes rotateLogo {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

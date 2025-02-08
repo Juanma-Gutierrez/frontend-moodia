@@ -12,15 +12,16 @@ import PrivateRoute from "@services/privateRoute/privateRoute";
 import Register from "@pages/Register/Register";
 import Report from "@pages/Report/Report";
 import { HttpMethod } from "@services/apiService/HttpMethod";
-import { IsLoading } from "@components/isLoadingComponent/isLoadingComponent";
+import { IsLoadingComponent } from "@components/isLoadingComponent/isLoadingComponent";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
 import { useAuthContext } from "@services/context/AuthContext";
 import { useEffect, useState } from "react";
 import { useEnvironmentContext } from "@services/context/EnvironmentContext";
+import { LogoIsLoadingComponent } from "@components/LogoIsLoadingComponent/LogoIsLoadingComponent";
 
 export default function App() {
-  const { isLoading, setIsLoading, isKOScreenVisible } = useEnvironmentContext();
+  const { isLoading, setIsLoading, logoIsLoading, setLogoIsLoading, isKOScreenVisible } = useEnvironmentContext();
   const navigate = useNavigate();
   const { setUser, setExtendedUser } = useAuthContext();
 
@@ -41,20 +42,25 @@ export default function App() {
     const token = localStorage.getItem("token");
     if (token) {
       const responseUser = await apiGenericRequest("auth/me", null, HttpMethod.POST, token);
-      const responseExtendedUser = await apiGenericRequest(
-        `extended_user/${responseUser.data.id}`,
-        null,
-        HttpMethod.POST,
-        token
-      );
-      if (responseUser.data) {
-        setUser(responseUser.data);
-        setExtendedUser(responseExtendedUser.data);
-        if (responseExtendedUser.data.idRole === 1) {
-          navigate("/post");
-        } else if (responseExtendedUser.data.idRole === 2) {
-          navigate("/admin");
+      if (responseUser.success) {
+        console.log("PRIMERA PETICIÓN DEL AUTH/ME: " + responseUser);
+        const responseExtendedUser = await apiGenericRequest(
+          `extended_user/${responseUser.data.id}`,
+          null,
+          HttpMethod.POST,
+          token
+        );
+        if (responseUser.data) {
+          setUser(responseUser.data);
+          setExtendedUser(responseExtendedUser.data);
+          if (responseExtendedUser.data.idRole === 1) {
+            navigate("/post");
+          } else if (responseExtendedUser.data.idRole === 2) {
+            navigate("/admin");
+          }
         }
+      } else {
+        console.log("HA PETADO AL ENTRAR AL AUT/ME");
       }
     }
     setIsLoading(false);
@@ -63,7 +69,8 @@ export default function App() {
   return (
     <>
       <Auth />
-      {isLoading && <IsLoading isLoading={isLoading} />}
+      {isLoading && <IsLoadingComponent isLoading={isLoading} />}
+      {!isLoading && logoIsLoading && <LogoIsLoadingComponent />}
       {isKOScreenVisible && <KOScreen />}
       <div className="app-container">
         <NavigationBar className="navigation-bar" />

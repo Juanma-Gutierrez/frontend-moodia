@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 export default function Logout() {
   const { setToken, setUser, setExtendedUser } = useAuthContext();
   const navigate = useNavigate();
-  const defaultOptions = {
+  const lottieOptions = {
     loop: true,
     autoplay: true,
     animationData: LogoutLottie,
@@ -39,7 +39,7 @@ export default function Logout() {
           <ButtonComponent text="Salir" type="confirm-accept" onClick={handleLogout} />
           <ButtonComponent text="Cancelar" type="confirm-cancel" onClick={handleCancel} />
         </div>
-        <Lottie options={defaultOptions} height={CONSTANTS.LOTTIE.LARGE.HEIGHT} width={CONSTANTS.LOTTIE.LARGE.WIDTH} />
+        <Lottie options={lottieOptions} height={CONSTANTS.LOTTIE.LARGE.HEIGHT} width={CONSTANTS.LOTTIE.LARGE.WIDTH} />
       </div>
     </div>
   );

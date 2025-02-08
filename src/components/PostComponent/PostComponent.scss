@@ -4,8 +4,17 @@
   border-radius: var(--radius-large);
   border: 1px solid var(--primary-light);
   padding: var(--padding-post);
-  padding-bottom: 60px;
+  padding-bottom: var(--margin-container);
   margin: var(--margin-large)0;
+
+  .postComponent-title {
+    line-height: 2.5rem;
+    margin-bottom: var(--margin-general);
+  }
+
+  .postComponent-message {
+    margin-bottom: var(--margin-large);
+  }
 
   .footer-container {
     .start {
@@ -77,4 +86,45 @@
 .score-1 {
   background-color: var(--post-background-score-1);
   color: var(--post-color-score-1);
+}
+
+@media (max-width:480px) {
+
+  .post-card-component {
+    padding: var(--padding-general);
+  }
+
+  .footer-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    .start,
+    .end {
+      position: relative !important;
+      margin: 0px;
+      bottom: 0px;
+      right: 0px;
+      left: 0px !important;
+      top: 0px;
+    }
+
+    .start {
+      flex-direction: column !important;
+      justify-content: center;
+      align-items: center;
+      gap: var(--padding-medium) !important;
+      margin-bottom: var(--margin-large);
+    }
+
+    .chips-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }

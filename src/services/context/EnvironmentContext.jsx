@@ -11,6 +11,7 @@ export const EnvironmentProvider = ({ children }) => {
   const [genres, setGenres] = useState([]);
   const [isKOScreenVisible, setKOScreenVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [logoIsLoading, setLogoIsLoading] = useState(false);
 
   useEffect(() => {
     const init = async () => {
@@ -46,6 +47,8 @@ export const EnvironmentProvider = ({ children }) => {
         setKOScreenVisible,
         isLoading,
         setIsLoading,
+        logoIsLoading,
+        setLogoIsLoading,
       }}
     >
       {children}

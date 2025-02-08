@@ -5,7 +5,7 @@ import koScreenLottie from "@assets/lotties/koScreenLottie.json";
 import { CONSTANTS } from "@constants/Constants";
 
 export const KOScreen = () => {
-  const defaultOptions = {
+  const lottieOptions = {
     loop: true,
     autoplay: true,
     animationData: koScreenLottie,
@@ -17,7 +17,7 @@ export const KOScreen = () => {
   return (
     <div className="overlay">
       <Lottie
-        options={defaultOptions}
+        options={lottieOptions}
         className="lottie"
         height={CONSTANTS.LOTTIE.LARGE.HEIGHT}
         width={CONSTANTS.LOTTIE.LARGE.WIDTH}

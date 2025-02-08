@@ -86,12 +86,12 @@ export const PostComponent = ({ post, onEdit, onDelete }) => {
 
   return (
     <div className={`post-card-component score-${score}`}>
-      <h3>{title}</h3>
-      <p>{message}</p>
+      <h1 className="postComponent-title">{title}</h1>
+      <p className="postComponent-message">{message}</p>
       <div className="footer-container">
         <div className="start">
           <div className="date">{getFormattedDate("dd/MM/yyyy", created_at)}</div>
-          <div>
+          <div className="chips-container">
             {categories && Array.isArray(categories) && categories.length > 0 ? (
               categories.map((postCategory) => {
                 const matchingCategory = category.find(

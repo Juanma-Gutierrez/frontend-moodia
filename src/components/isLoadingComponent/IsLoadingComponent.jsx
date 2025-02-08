@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 import isLoadingLottie from "@assets/lotties/isLoadingLottie.json";
 import { CONSTANTS } from "@constants/Constants";
 
-export const IsLoading = ({ isLoading = false, children }) => {
+export const IsLoadingComponent = ({ isLoading = false, children }) => {
   if (isLoading) {
-    const defaultOptions = {
+    const lottieOptions = {
       loop: true,
       autoplay: true,
       animationData: isLoadingLottie,
@@ -18,7 +18,7 @@ export const IsLoading = ({ isLoading = false, children }) => {
     return (
       <div className="overlay">
         <Lottie
-          options={defaultOptions}
+          options={lottieOptions}
           className="lottie"
           height={CONSTANTS.LOTTIE.MEDIUM.HEIGHT}
           width={CONSTANTS.LOTTIE.MEDIUM.WIDTH}
@@ -30,7 +30,7 @@ export const IsLoading = ({ isLoading = false, children }) => {
   return <>{children}</>;
 };
 
-IsLoading.propTypes = {
+IsLoadingComponent.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   children: PropTypes.node,
 };

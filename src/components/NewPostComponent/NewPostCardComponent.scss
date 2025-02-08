@@ -4,6 +4,10 @@
   border: 1px solid var(--primary-light);
   padding: var(--padding-post);
 
+  h1 {
+    color: var(--primary-light);
+  }
+
   .input-container {
     display: flex;
     flex-direction: column;

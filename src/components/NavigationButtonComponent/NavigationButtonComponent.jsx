@@ -7,7 +7,7 @@ export const NavigationButtonComponent = ({ title, icon: Icon, logo }) => {
     : getComputedStyle(document.documentElement).getPropertyValue("--icon-color");
 
   return (
-    <button className="navigation-button" onClick={() => console.log({ title })} disabled={logo}>
+    <button className={`navigation-button ${logo ? "logo" : ""}`}>
       {Icon && <Icon className="button-icon" stroke={iconColor} />}
       <span className="button-text">{title}</span>
     </button>

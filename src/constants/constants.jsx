@@ -32,7 +32,7 @@ export const CONSTANTS = {
   },
   BUTTON: {
     WIDTH: {
-      NORMAL: "120px",
+      NORMAL: "160px",
       FULL: "100%",
     },
   },

@@ -19,22 +19,20 @@
     max-width: var(--general-width);
     text-align: center;
     background-color: var(--white);
-    padding: var(--padding-large);
+    padding: var(--padding-general);
     border-radius: var(--radius-medium);
     box-shadow: 0px 4px 6px var(--icon-shadow);
-    font-family: var(--font-family);
     line-height: var(--line-height);
 
     .modal-title {
-      margin-bottom: var(--margin-large);
-      font-size: var(--font-title-size);
+      margin-bottom: var(--margin-general);
       font-weight: bold;
-      color: var(--black-light);
+      color: var(--primary-dark);
     }
 
     .modal-message {
-      margin-bottom: var(--margin-large);
-      color: var(--primary-medium);
+      margin-bottom: var(--margin-general);
+      color: var(--primary-dark);
 
       a {
         color: var(--primary-dark);
@@ -52,7 +50,7 @@
       justify-content: space-evenly;
       align-items: center;
       gap: var(--padding-medium);
-      margin-top: var(--margin-large);
+      margin-top: var(--margin-general);
     }
   }
 }

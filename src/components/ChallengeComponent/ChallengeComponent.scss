@@ -9,21 +9,31 @@
   border-radius: var(--radius-large);
   border: 1px solid var(--primary-light);
   padding: var(--padding-post);
-  padding-bottom: 60px;
-  margin: var(--margin-large)0;
+  margin: var(--margin-large);
   max-width: var(--general-width);
-
-  .challenge-component-title{
-
-  }
+  width: var(--responsive-80vw);
 
   ul {
     margin: var(--margin-large);
-    padding: 20px;
+    padding: var(--padding-large);
 
     li {
       margin-left: var(--margin-large);
       margin-top: var(--margin-medium);
     }
+  }
+
+  .challenge-component-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap-general);
+  }
+}
+
+@media (max-width:480px) {
+  .challenge-component-container {
+    margin-top: -50px;
   }
 }
