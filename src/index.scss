@@ -49,8 +49,12 @@
   --post-color-score-3: #989d1c;
   --post-color-score-4: #0733b1;
   --post-color-score-5: #1ab208;
+  --snackbar-info: #d2ddfd;
+  --snackbar-warning: #f7f8d9;
+  --snackbar-error: #ff9f9f;
   --app-background-color: #edeafb;
   --icon-shadow: rgba(0, 0, 0, 0.4);
+  --general-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
   --modal-background: rgba(78, 76, 79, 0.4);
   --link: var(--primary-medium);
   --skeleton-start-color: #ccc;
@@ -114,6 +118,7 @@
   --lottie-large: 300px;
   // NavigationBar
   --navigationBar-height: 60px;
+  --navigationBar-offset: -60px;
   // Radius
   --radius-small: 4px;
   --radius-medium: 8px;
@@ -127,6 +132,10 @@
   --button-font-size: 1.1rem;
   // Skeleton
   --skeleton-line-medium: 24px;
+  // Snackbar
+  --snackbar-botton-margin-small: 30px;
+  --snackbar-botton-margin-large: 80px;
+  --snackbar-cross-size: 24px;
   // General (Modal, info columns, ...)
   --general-width: 800px;
   --form-width: 400px;

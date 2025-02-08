@@ -40,7 +40,6 @@ export const PostComponent = ({ post, onEdit, onDelete }) => {
   };
 
   const handleConfirmEdit = async (updatedPost) => {
-    console.log("handleConfirmEdit", updatedPost);
     const body = {
       title: updatedPost.title,
       message: updatedPost.message,
@@ -59,7 +58,6 @@ export const PostComponent = ({ post, onEdit, onDelete }) => {
   };
 
   const handleCancelEdit = () => {
-    console.log("handleCancelEdit");
     setIsModalEditVisible(false);
   };
 

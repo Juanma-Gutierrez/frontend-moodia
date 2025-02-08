@@ -60,7 +60,7 @@ export default function App() {
           }
         }
       } else {
-        console.log("HA PETADO AL ENTRAR AL AUT/ME");
+        console.log("FALLO AL ENTRAR AL AUT/ME");
       }
     }
     setIsLoading(false);

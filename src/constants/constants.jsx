@@ -47,4 +47,7 @@ export const CONSTANTS = {
       7: "https://raw.githubusercontent.com/Juanma-Gutierrez/moodia-storage/refs/heads/main/images/inspiringPhrases/07_relax.jpg",
     },
   },
+  SNACKBAR: {
+    DURATION: 3000,
+  },
 };

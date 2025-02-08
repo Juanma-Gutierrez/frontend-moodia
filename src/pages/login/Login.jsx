@@ -62,8 +62,6 @@ export default function Login() {
   const handleLogin = async (e) => {
     setLogoIsLoading(true);
     e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
 
     const body = {
       email,

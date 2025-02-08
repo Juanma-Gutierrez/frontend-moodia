@@ -5,11 +5,13 @@ import { InspiringPhraseComponent } from "@components/InspiringPhraseComponent/I
 import { ModalComponent } from "@components/ModalComponent/ModalComponent";
 import { NewPostComponent } from "@components/NewPostComponent/NewPostComponent";
 import { PostComponent } from "@components/PostComponent/PostComponent";
+import { SnackbarComponent } from "@components/SnackbarComponent/SnackbarComponent";
 import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
 import { useAuthContext } from "@services/context/AuthContext";
 import { useEffect, useState } from "react";
 import { useEnvironmentContext } from "../../services/context/EnvironmentContext";
 import { useNavigate } from "react-router-dom";
+import { SnackbarComponentTypes } from "../../components/SnackbarComponent/SnackbarComponentTypes";
 
 export default function Post() {
   const { setLogoIsLoading } = useEnvironmentContext();
@@ -17,6 +19,9 @@ export default function Post() {
   const navigate = useNavigate();
   const [shouldReloadPosts, setShouldReloadPosts] = useState(false);
   const [posts, setPosts] = useState([]);
+  const [isSnackbarVisible, setIsSnackbarVisible] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarType, setSnackbarType] = useState("");
   const [isModalKOVisible, setIsModalKOVisible] = useState(false);
   const [isModalDeleteVisible, setIsModalDeleteVisible] = useState(false);
   const [isInspiringPhraseVisible, setIsInspiringPhraseVisible] = useState(false);
@@ -61,8 +66,8 @@ export default function Post() {
           setPosts(response.data.data);
           break;
         case false:
-          console.error(response.error);
           setIsModalKOVisible(true);
+          setupSnackbar("Error: " + response.error, SnackbarComponentTypes.ERROR);
           break;
       }
       setLogoIsLoading(false);
@@ -99,7 +104,6 @@ export default function Post() {
   // Edit post
   const handleEdit = () => {
     // Actualizar pantalla de post
-    console.log("entra en editar");
     setShouldReloadPosts(true);
   };
 
@@ -130,7 +134,7 @@ export default function Post() {
       token
     );
     if (response.error) {
-      console.error("Error al eliminar frase inspiradora de extended_user", response.error);
+      setupSnackbar("Error: " + response.error, SnackbarComponentTypes.ERROR);
     }
   };
 
@@ -148,9 +152,20 @@ export default function Post() {
         setIsInspiringPhraseVisible(true);
       }
     } else {
-      console.error("Error al obtener frases inspiradoras:", response.error);
+      setupSnackbar("Error: " + response.error, SnackbarComponentTypes.ERROR);
     }
     setLogoIsLoading(false);
+  };
+
+  // Snackbar
+
+  const setupSnackbar = (message, type) => {
+    setSnackbarMessage(message);
+    setSnackbarType(type);
+    setIsSnackbarVisible(true);
+  };
+  const handleClickSnackbar = () => {
+    setIsSnackbarVisible(false);
   };
 
   return (
@@ -170,6 +185,9 @@ export default function Post() {
       </div>
       {isModalKOVisible && <ModalComponent modalModel={modalModelKO} onConfirm={handleConfirmKO} />}
       {isModalDeleteVisible && <ModalComponent modalModel={modalModelDelete} onConfirm={handleCloseDelete} />}
+      {isSnackbarVisible && (
+        <SnackbarComponent message={snackbarMessage} type={snackbarType} onClick={handleClickSnackbar} />
+      )}
     </div>
   );
 }

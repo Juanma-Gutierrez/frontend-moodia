@@ -32,7 +32,6 @@ export const EditPostComponent = ({ post, onConfirm, onCancel }) => {
   };
 
   const handleEmojiClick = (emojiIndex) => {
-    console.log(emojiIndex);
     setScore(emojiIndex);
   };
 

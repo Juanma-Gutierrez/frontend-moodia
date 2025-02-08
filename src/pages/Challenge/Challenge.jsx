@@ -4,6 +4,7 @@ import Lottie from "react-lottie";
 import ModalModel from "@components/ModalComponent/ModalModel";
 import { CONSTANTS } from "@constants/Constants";
 import { ChallengeComponent } from "@components/ChallengeComponent/ChallengeComponent";
+import { SnackbarComponent } from "@components/SnackbarComponent/SnackbarComponent";
 import { HttpMethod } from "@services/apiService/HttpMethod";
 import { ModalComponent } from "@components/ModalComponent/ModalComponent";
 import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
@@ -15,6 +16,7 @@ export default function Challenge() {
   const [challenges, setChallenges] = useState([]);
   const [changeChallenge, setChangeChallenge] = useState(false);
   const [isChallengeAccepted, setIsChallengeAcepted] = useState(false);
+  const [isSnackbarVisible, setIsSnackbarVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { setLogoIsLoading } = useEnvironmentContext();
 
@@ -71,7 +73,6 @@ export default function Challenge() {
 
   // Modal
   const handleConfirmChallenge = () => {
-    console.log("entra", isChallengeAccepted);
     handleCloseModal();
     setIsChallengeAcepted(true);
     setTimeout(() => {
@@ -81,6 +82,12 @@ export default function Challenge() {
 
   const handleCloseModal = () => {
     setIsModalVisible(false);
+    setIsSnackbarVisible(true);
+  };
+
+  // Snackbar
+  const handleClickSnackbar = () => {
+    setIsSnackbarVisible(false);
   };
 
   return (
@@ -99,7 +106,8 @@ export default function Challenge() {
       </div>
       {isModalVisible && (
         <ModalComponent modalModel={modalModel} onConfirm={handleConfirmChallenge} onCancel={handleCloseModal} />
-      )}{" "}
+      )}
+      {isSnackbarVisible && <SnackbarComponent message="¡¡Reto aceptado!!" type="info" onClick={handleClickSnackbar} />}
     </div>
   );
 }
