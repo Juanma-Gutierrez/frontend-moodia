@@ -158,7 +158,6 @@ export default function Post() {
   };
 
   // Snackbar
-
   const setupSnackbar = (message, type) => {
     setSnackbarMessage(message);
     setSnackbarType(type);
