@@ -5,7 +5,7 @@ import ReactEcharts from "echarts-for-react";
 export default function BarChart({ dataset, colorsSet }) {
   const barchar = {
     title: {
-      text: "Promedio de estados de ánimo",
+      text: "Promedio",
     },
     tooltip: {},
     xAxis: {

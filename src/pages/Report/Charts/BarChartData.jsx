@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { CONSTANTS } from "@constants/Constants";
 
 export default function BarChartData({ posts }) {
   const [barcharDataset, setBarcharDataset] = useState({ xAxisData: [], seriesData: [] });
@@ -17,11 +18,11 @@ export default function BarChartData({ posts }) {
     };
 
     const scoreLabels = {
-      1: "Muy mal",
-      2: "Mal",
-      3: "Normal",
-      4: "Bien",
-      5: "Muy bien",
+      1: CONSTANTS.SCORE.SCORE1,
+      2: CONSTANTS.SCORE.SCORE2,
+      3: CONSTANTS.SCORE.SCORE3,
+      4: CONSTANTS.SCORE.SCORE4,
+      5: CONSTANTS.SCORE.SCORE5,
     };
 
     posts.forEach((post) => {

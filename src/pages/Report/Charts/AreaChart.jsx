@@ -1,14 +1,13 @@
 // AreaChart.jsx
 import React, { useEffect, useState } from "react";
 import ReactEcharts from "echarts-for-react";
-import * as echarts from "echarts";
+import { CONSTANTS } from "@constants/Constants";
 
-const AreaChart = ({ posts, colors }) => {
+export default function AreaChart({ posts, colors }) {
   const [dataset, setDataset] = useState({ xAxisData: [], seriesData: [] });
 
-  const leyend = ["Muy mal", "Mal", "Normal", "Bien", "Muy bien"];
+  const leyend = CONSTANTS.SCORE_GLOBAL;
 
-  // Procesamos los posts al recibirlos como props
   useEffect(() => {
     const postsByDate = {};
 
@@ -64,6 +63,8 @@ const AreaChart = ({ posts, colors }) => {
     },
     legend: {
       data: leyend,
+      bottom: 10,
+      orient: "horizontal",
     },
     toolbox: {
       feature: {
@@ -73,7 +74,7 @@ const AreaChart = ({ posts, colors }) => {
     grid: {
       left: "3%",
       right: "4%",
-      bottom: "3%",
+      bottom: "18%",
       containLabel: true,
     },
     xAxis: [
@@ -108,7 +109,5 @@ const AreaChart = ({ posts, colors }) => {
     })),
   };
 
-  return <ReactEcharts option={option}  />;
-};
-
-export default AreaChart;
+  return <ReactEcharts option={option} />;
+}

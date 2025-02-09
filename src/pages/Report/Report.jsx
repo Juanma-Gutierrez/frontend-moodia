@@ -9,6 +9,9 @@ import { useNavigate } from "react-router-dom";
 import BarChart from "./Charts/BarChart.jsx";
 import BarChartData from "./Charts/BarChartData.jsx";
 import AreaChart from "./Charts/AreaChart.jsx";
+import CalendarHeatmap from "./Charts/CalendarHeatmapChart.jsx";
+import BarRaceChart from "./Charts/BarRaceChart.jsx";
+import { CONSTANTS } from "@constants/Constants.jsx";
 
 export default function Report() {
   const [posts, setPosts] = useState([]);
@@ -17,12 +20,7 @@ export default function Report() {
   const { token } = useAuthContext();
   const { setLogoIsLoading } = useEnvironmentContext();
 
-  const color1 = getComputedStyle(document.documentElement).getPropertyValue("--post-color-score-1");
-  const color2 = getComputedStyle(document.documentElement).getPropertyValue("--post-color-score-2");
-  const color3 = getComputedStyle(document.documentElement).getPropertyValue("--post-color-score-3");
-  const color4 = getComputedStyle(document.documentElement).getPropertyValue("--post-color-score-4");
-  const color5 = getComputedStyle(document.documentElement).getPropertyValue("--post-color-score-5");
-  const colorsSet = [color1, color2, color3, color4, color5];
+  const colorsSet = CONSTANTS.COLORS_GLOBAL;
 
   const getPostList = async (token) => {
     if (token) {
@@ -53,8 +51,10 @@ export default function Report() {
 
   return (
     <div className="report-container">
-      <h1>Informes</h1>
+      <h1>Informes de estados de ánimo</h1>
       <div className="report-charts-container">
+        <BarRaceChart posts={posts} />
+        <CalendarHeatmap posts={posts} />
         <BarChart dataset={BarChartData({ posts })} colorsSet={colorsSet} />
         <AreaChart posts={posts} colors={colorsSet} />
       </div>
