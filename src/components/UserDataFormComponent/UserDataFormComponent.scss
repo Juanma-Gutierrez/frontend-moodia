@@ -1,0 +1,55 @@
+.user-data-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;
+  width: 100%;
+  padding-inline: var(--padding-small);
+  padding-block: var(--padding-small);
+  align-items: center;
+  text-align: center;
+  background-color: var(--white-light);
+
+  div {
+    padding: var(--padding-small);
+    background-color: var(--white);
+    border: 1px solid var(--primary-light);
+  }
+
+  .user-data-header {
+    padding: var(--padding-medium);
+    background-color: var(--primary-dark);
+    color: var(--white-light)
+  }
+}
+
+@media (max-width: 768px) {
+
+  .user-data-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+  }
+
+  .user-data-username {
+    grid-column: span 2 / span 2;
+  }
+
+  .user-data-employment {
+    grid-column: span 2 / span 2;
+    grid-row-start: 2;
+  }
+
+  .user-data-civilStatus {
+    grid-column: span 2 / span 2;
+    grid-row-start: 3;
+  }
+
+  .user-data-age {
+    grid-row-start: 4;
+  }
+
+  .user-data-score {
+    grid-row-start: 4;
+  }
+
+
+}

@@ -1,0 +1,33 @@
+.admin-page-container {
+  padding: var(--padding-general);
+
+  .admin-page-table-filter {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: var(--padding-large);
+    margin-block: var(--margin-large);
+
+    select{
+      padding-inline: var(--padding-small);
+    }
+  }
+
+  .admin-page-user-table {
+    padding: var(--padding-large);
+    background-color: var(--white-light);
+    border: 1px solid var(--primary-light);
+
+  }
+}
+
+@media (max-width: 768px) {
+
+  .admin-page-user-table-header {
+    display: none;
+  }
+
+  .user-data-row {
+    margin-bottom: 30px;
+  }
+}

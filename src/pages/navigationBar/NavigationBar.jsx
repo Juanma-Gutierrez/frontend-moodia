@@ -95,6 +95,7 @@ export default function NavigationBar() {
           )}
         </ul>
       </nav>
+
       {/* Mobile navbar */}
       <nav className="nav-mobile-width">
         <ul>
@@ -136,16 +137,16 @@ export default function NavigationBar() {
           {/* {role === "Administrador" && ( */}
           {admin && (
             <li>
-              <div to="/admin">
+              <Link to="/admin">
                 <NavigationButtonComponent icon={AdminIcon} />
-              </div>
+              </Link>
             </li>
           )}
           {token !== null && (
             <li>
-              <div to="/logout">
+              <Link to="/logout">
                 <NavigationButtonComponent icon={LogoutIcon} />
-              </div>
+              </Link>
             </li>
           )}
         </ul>
