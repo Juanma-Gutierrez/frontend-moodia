@@ -84,7 +84,7 @@ export const PostComponent = ({ post, onEdit, onDelete }) => {
 
   return (
     <div className={`post-card-component score-${score}`}>
-      <h1 className="postComponent-title">{title}</h1>
+      <h3 className="postComponent-title">{title}</h3>
       <p className="postComponent-message">{message}</p>
       <div className="footer-container">
         <div className="start">

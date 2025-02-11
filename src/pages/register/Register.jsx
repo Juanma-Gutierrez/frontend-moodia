@@ -17,15 +17,15 @@ export default function Register() {
   const [idGenre, setIdGenre] = useState("");
   const [idRole] = useState(1);
   const [isFormValid, setIsFormValid] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [modalResult, setModalResult] = useState(null);
+  const [isModalConfirmVisible, setIsModalConfirmVisible] = useState(false);
+  const [isModalSuccessVisible, setIsModalSuccessVisible] = useState(false);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { genres = [], civilStatus = [], employment = [], setKOScreenVisible, setIsLoading } = useEnvironmentContext();
   const { setUser, setExtendedUser, setToken } = useAuthContext();
 
-  const modalModel = new ModalModel({
+  const modalRegisterConfirmModel = new ModalModel({
     title: "Registro de usuario",
     message: "¿Seguro que los datos son correctos y quieres continuar?",
     button1: "Registrar",
@@ -33,9 +33,16 @@ export default function Register() {
     type: "confirm",
   });
 
+  const modalRegisterSuccessModel = new ModalModel({
+    title: "Registro de usuario",
+    message: "Registro realizado con éxito",
+    button1: "Aceptar",
+    type: "info",
+  });
+
   const handleRegister = async (e) => {
     e.preventDefault();
-    setIsModalVisible(true);
+    setIsModalConfirmVisible(true);
   };
 
   useEffect(() => {
@@ -65,31 +72,31 @@ export default function Register() {
       idRole,
       idEmployment,
     };
-    console.log("Datos enviados para el registro:", userData);
     const response = await apiGenericRequest("auth/register", userData);
     if (response.success) {
-      setToken(response.data.token);
+      console.log("User registered successfully");
       setUser(response.data.user);
       setExtendedUser(response.data.extendedUser);
-      localStorage.setItem("token", response.data.token);
-      // TODO: MOSTRAR MENSAJE CON INFO REGISTRO CORRECTO
-      navigate("/post");
+      setIsModalConfirmVisible(false);
+      setIsModalSuccessVisible(true);
     } else {
       setKOScreenVisible(true);
-      console.error("Error en el registro:", registerResponse.error);
+      console.error("Error:", response.error);
     }
     setIsLoading(false);
   };
 
+  const handleAccept = () => {
+    navigate("/login");
+  };
   const handleCloseModal = () => {
-    console.log("Modal cerrada");
-    setIsModalVisible(false);
+    setIsModalConfirmVisible(false);
   };
 
   return (
     <div className="register-container">
       <h3>Crear Cuenta</h3>
-      <form >
+      <form>
         <input type="text" placeholder="Nombre" value={name} onChange={(e) => setName(e.target.value)} required />
         <input
           type="email"
@@ -153,14 +160,15 @@ export default function Register() {
           </select>
         </div>
         <input type="hidden" value={idRole} />
-        <ButtonComponent type="info" disabled={!isFormValid} text="Registrar" onClick={handleRegister}/>
+        <ButtonComponent type="info" disabled={!isFormValid} text="Registrar" onClick={handleRegister} />
       </form>
       <p>
         ¿Ya tienes una cuenta? <Link to="/login">Inicia sesión</Link>
       </p>
-      {isModalVisible && (
-        <ModalComponent modalModel={modalModel} onConfirm={handleConfirm} onCancel={handleCloseModal} />
+      {isModalConfirmVisible && (
+        <ModalComponent modalModel={modalRegisterConfirmModel} onConfirm={handleConfirm} onCancel={handleCloseModal} />
       )}
+      {isModalSuccessVisible && <ModalComponent modalModel={modalRegisterSuccessModel} onConfirm={handleAccept} />}
     </div>
   );
 }

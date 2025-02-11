@@ -46,7 +46,6 @@ export default function App() {
     if (token) {
       const responseUser = await apiGenericRequest("auth/me", null, HttpMethod.POST, token);
       if (responseUser.success) {
-        console.log("PRIMERA PETICIÓN DEL AUTH/ME: " + responseUser);
         const responseExtendedUser = await apiGenericRequest(
           `extended_user/${responseUser.data.id}`,
           null,
@@ -63,7 +62,6 @@ export default function App() {
           }
         }
       } else {
-        console.log("FALLO AL ENTRAR AL AUT/ME" + responseUser.error);
         setIsSnackbarVisible(true);
         setSnackbarMessage(responseUser.error);
       }

@@ -38,11 +38,19 @@ export const apiGenericRequest = async (endpoint, body, method = HttpMethod.POST
     }
     const response = await fetch(`${API_URL}/${endpoint}`, options);
     if (!response.ok) {
-      console.error(`Error en la solicitud: ${response.status} ${response.statusText} ${token}`);
-      localStorage.removeItem("token");
-      localStorage.removeItem("lastVisitDate");
-      localStorage.removeItem("inspiringPhraseVisible");
-      return { success: false, data };
+      console.error(`Error in request: ${response.status} ${response.statusText} ${token}`);
+      if (response.status === 401 || response.status === 403) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("lastVisitDate");
+        localStorage.removeItem("inspiringPhraseVisible");
+      }
+      let errorData;
+      try {
+        errorData = await response.json();
+      } catch (e) {
+        errorData = { message: "Unknown error from server" };
+      }
+      return { success: false, error: errorData };
     }
     const data = await response.json();
 
@@ -50,7 +58,7 @@ export const apiGenericRequest = async (endpoint, body, method = HttpMethod.POST
       return { success: true, data };
     }
   } catch (error) {
-    console.error(`Error en la solicitud para obtener los datos desde ${endpoint}:`, error.message);
+    console.error(`Error fetching data from ${endpoint}:`, error.message);
     return { success: false, error: error.message };
   }
 };

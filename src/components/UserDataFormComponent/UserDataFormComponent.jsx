@@ -1,30 +1,38 @@
 import "./UserDataFormComponent.scss";
 import PropTypes from "prop-types";
+import { calculateAge } from "@services/utils/utils";
 
-// Función para calcular la edad a partir de la fecha de nacimiento
-const calculateAge = (birthDate) => {
-  if (!birthDate) return null;
-  const birth = new Date(birthDate);
-  const today = new Date();
-  let age = today.getFullYear() - birth.getFullYear();
-  const monthDiff = today.getMonth() - birth.getMonth();
-  const dayDiff = today.getDate() - birth.getDate();
-  if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
-    age--;
-  }
-  return age;
-};
+export const UserDataFormComponent = ({ userRaw, isHeader, onSort, onUserClicked }) => {
+  const handleUser = () => {
+    console.log("handleUser");
+    if (onUserClicked) onUserClicked(userRaw);
+  };
 
-export const UserDataFormComponent = ({ userRaw, isHeader }) => {
+  const handleSort = (sort) => {
+    if (onSort) onSort(sort);
+  };
+
   if (isHeader) {
     return (
       <div className="user-data-row">
-        <div className="user-data-username user-data-header">Nombre</div>
-        <div className="user-data-employment user-data-header">Empleo</div>
-        <div className="user-data-civilStatus user-data-header">Estado Civil</div>
-        <div className="user-data-age-data user-data-header">Edad</div>
-        <div className="user-data-genre-data user-data-header">Género</div>
-        <div className="user-data-score user-data-header">Estado</div>
+        <div className="user-data-username user-data-header" onClick={() => handleSort("username")}>
+          Nombre
+        </div>
+        <div className="user-data-employment user-data-header" onClick={() => handleSort("employment")}>
+          Empleo
+        </div>
+        <div className="user-data-civilStatus user-data-header" onClick={() => handleSort("civilStatus")}>
+          Estado Civil
+        </div>
+        <div className="user-data-age-data user-data-header" onClick={() => handleSort("age")}>
+          Edad
+        </div>
+        <div className="user-data-genre-data user-data-header" onClick={() => handleSort("genre")}>
+          Género
+        </div>
+        <div className="user-data-score user-data-header" onClick={() => handleSort("score")}>
+          Estado
+        </div>
       </div>
     );
   }
@@ -37,7 +45,7 @@ export const UserDataFormComponent = ({ userRaw, isHeader }) => {
   const score = userRaw.averageScore;
 
   return (
-    <div className="user-data-row">
+    <div className={`user-data-row ${score < 2 && score != 0 ? "user-danger" : ""}`} onClick={() => handleUser()}>
       <div className="user-data-username">{username}</div>
       <div className="user-data-employment">{employment}</div>
       <div className="user-data-civilStatus">{civilStatus}</div>

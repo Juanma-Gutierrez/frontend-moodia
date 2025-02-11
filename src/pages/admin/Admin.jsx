@@ -6,6 +6,7 @@ import { SnackbarComponent } from "@components/SnackbarComponent/SnackbarCompone
 import { SnackbarComponentTypes } from "@components/SnackbarComponent/SnackbarComponentTypes";
 import { UserDataFormComponent } from "@components/UserDataFormComponent/UserDataFormComponent";
 import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
+import { calculateAge } from "@services/utils/utils";
 import { useAuthContext } from "@services/context/AuthContext";
 import { useEffect, useState } from "react";
 import { useEnvironmentContext } from "@services/context/EnvironmentContext";
@@ -26,6 +27,8 @@ export default function Admin() {
   const [maxAge, setMaxAge] = useState("");
   const [minStatus, setMinStatus] = useState("");
   const [maxStatus, setMaxStatus] = useState("");
+  const [orderColumn, setOrderColum] = useState("");
+  const [sortDirection, setSortDirection] = useState("asc");
   const { genres = [], civilStatus = [], employment = [], setKOScreenVisible, setIsLoading } = useEnvironmentContext();
 
   useEffect(() => {
@@ -64,7 +67,7 @@ export default function Admin() {
 
   useEffect(() => {
     applyFilter();
-  }, [employmentValue, civilStatusValue]);
+  }, [employmentValue, civilStatusValue, minAge, maxAge, minStatus, maxStatus]);
 
   const applyFilter = () => {
     let newFilteredList = userList.filter((user) => {
@@ -75,53 +78,91 @@ export default function Admin() {
       if (!isShowByCivilStatus(user)) {
         showUser = false;
       }
+      if (!isShowByMinAge(user)) {
+        showUser = false;
+      }
+      if (!isShowByMaxAge(user)) {
+        showUser = false;
+      }
+      if (!isShowByMinStatus(user)) {
+        showUser = false;
+      }
+      if (!isShowByMaxStatus(user)) {
+        showUser = false;
+      }
       return showUser;
     });
     setFilteredUserList(newFilteredList);
   };
 
   const isShowByEmployment = (userToFilter) => {
-    return (
-      userToFilter.extendedUser.employment.employment.toLowerCase() === employmentValue.toLowerCase() ||
-      employmentValue === ""
-    );
+    let employment = userToFilter.extendedUser.employment.employment.toLowerCase();
+    return employment === employmentValue.toLowerCase() || employmentValue === "";
   };
 
   const isShowByCivilStatus = (userToFilter) => {
-    console.log(userToFilter.extendedUser.civil_status.status.toLowerCase());
-    console.log(civilStatusValue.toLowerCase());
-    return (
-      userToFilter.extendedUser.civil_status.status.toLowerCase() === civilStatusValue.toLowerCase() ||
-      civilStatusValue === ""
-    );
+    let civilStatus = userToFilter.extendedUser.civil_status.status.toLowerCase();
+    return civilStatus === civilStatusValue.toLowerCase() || civilStatusValue === "";
   };
 
-  //   if (civilStatusValue) {
-  //     filteredUsers = filteredUsers.filter((user) =>
-  //       user.extendedUser.civil_status.status.toLowerCase().includes(civilStatusValue.toLowerCase())
-  //     );
-  //   }
+  const isShowByMinAge = (userToFilter) => {
+    let userAge = calculateAge(userToFilter.extendedUser.birthDate);
+    return userAge >= minAge || minAge === "";
+  };
 
-  //   if (minAge) {
-  //     filteredUsers = filteredUsers.filter((user) => user.age >= parseInt(minAge));
-  //   }
+  const isShowByMaxAge = (userToFilter) => {
+    let userAge = calculateAge(userToFilter.extendedUser.birthDate);
+    return userAge <= maxAge || maxAge === "";
+  };
 
-  //   if (maxAge) {
-  //     filteredUsers = filteredUsers.filter((user) => user.age <= parseInt(maxAge));
-  //   }
+  const isShowByMinStatus = (userToFilter) => {
+    let userStatus = userToFilter.averageScore;
+    return userStatus >= minStatus || minStatus === "";
+  };
 
-  //   // Filtrar por estado mínimo
-  //   if (minStatus) {
-  //     filteredUsers = filteredUsers.filter((user) => user.extendedUser.status >= parseInt(minStatus));
-  //   }
+  const isShowByMaxStatus = (userToFilter) => {
+    let userStatus = userToFilter.averageScore;
+    return userStatus <= maxStatus || maxStatus === "";
+  };
 
-  //   // Filtrar por estado máximo
-  //   if (maxStatus) {
-  //     filteredUsers = filteredUsers.filter((user) => user.extendedUser.status <= parseInt(maxStatus));
-  //   }
+  const handleSort = (column) => {
+    const newDirection = orderColumn === column && sortDirection === "asc" ? "desc" : "asc";
+    setOrderColum(column);
+    setSortDirection(newDirection);
+    const sortedList = [...filteredUserList].sort((a, b) => {
+      const aValue = getSortableValue(a, column);
+      const bValue = getSortableValue(b, column);
+      if (typeof aValue === "string" && typeof bValue === "string") {
+        return newDirection === "asc" ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+      } else {
+        return newDirection === "asc" ? aValue - bValue : bValue - aValue;
+      }
+    });
+    setFilteredUserList(sortedList);
+  };
 
-  //   setFilteredUserList(filteredUsers);
-  // };
+  const getSortableValue = (user, column) => {
+    switch (column) {
+      case "username":
+        return user.user.name;
+      case "employment":
+        return user.extendedUser.employment.employment;
+      case "civilStatus":
+        return user.extendedUser.civil_status.status;
+      case "age":
+        return calculateAge(user.extendedUser.birthDate);
+      case "genre":
+        return user.extendedUser.genre.genre;
+      case "score":
+        return user.averageScore;
+      default:
+        return "";
+    }
+  };
+
+  const handleUserClicked = (userClicked) => {
+    console.log(userClicked);
+  };
 
   // Remove Filters
   const removeFilters = () => {
@@ -204,12 +245,18 @@ export default function Admin() {
       </div>
       <div className="admin-page-user-table">
         <div className="admin-page-user-table-header">
-          <UserDataFormComponent isHeader={true} />
+          <UserDataFormComponent isHeader={true} onSort={handleSort} />
         </div>
         {filteredUserList.length > 0 ? (
-          filteredUserList.map((user) => <UserDataFormComponent key={user.id} userRaw={user} />)
+          filteredUserList.map((user) => (
+            <UserDataFormComponent
+              key={user.id}
+              userRaw={user}
+              onUserClicked={(userClicked) => handleUserClicked(userClicked)}
+            />
+          ))
         ) : (
-          <p>No users found.</p>
+          <p>No se ha encotrado ningún usuario</p>
         )}
       </div>
       {isSnackbarVisible && (
