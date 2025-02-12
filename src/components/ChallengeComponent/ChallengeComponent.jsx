@@ -36,8 +36,8 @@ export const ChallengeComponent = ({ challenge, onAccept, onChangeChallenge }) =
       <h1 className="challenge-component-title">{title}</h1>
       <div dangerouslySetInnerHTML={{ __html: formatMessage(message) }} />
       <div className="challenge-component-buttons">
-        <ButtonComponent type="confirm-accept" text="Aceptar reto" onClick={handleAcceptChallenge} />
-        <ButtonComponent type="confirm-cancel" text="Cambiar reto" onClick={handleChangeChallenge} />
+        <ButtonComponent type="confirm-accept" text="Aceptar reto" onClick={handleAcceptChallenge} width="full"/>
+        <ButtonComponent type="confirm-cancel" text="Cambiar reto" onClick={handleChangeChallenge} width="full"/>
       </div>
     </div>
   );

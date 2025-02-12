@@ -88,7 +88,6 @@ export const PostComponent = ({ post, onEdit, onDelete }) => {
       <p className="postComponent-message">{message}</p>
       <div className="footer-container">
         <div className="start">
-          <div className="date">{getFormattedDate("dd/MM/yyyy", created_at)}</div>
           <div className="chips-container">
             {categories && Array.isArray(categories) && categories.length > 0 ? (
               categories.map((postCategory) => {
@@ -97,10 +96,10 @@ export const PostComponent = ({ post, onEdit, onDelete }) => {
                 );
                 return matchingCategory ? (
                   <ChipComponent
-                    key={matchingCategory.idCategory}
-                    text={matchingCategory.name}
-                    isClickable={false}
-                    isSelected={true}
+                  key={matchingCategory.idCategory}
+                  text={matchingCategory.name}
+                  isClickable={false}
+                  isSelected={true}
                   />
                 ) : (
                   <span>No se encontró categoría para ID: {postCategory.idCategory}</span>
@@ -112,6 +111,7 @@ export const PostComponent = ({ post, onEdit, onDelete }) => {
           </div>
         </div>
         <div className="end">
+            <div className="date">{getFormattedDate("dd/MM/yyyy", created_at)}</div>
           <div className="emoji">{emoji}</div>
           <div className="icon-container" onClick={handleClickEdit}>
             <EditIcon stroke={stroke} />

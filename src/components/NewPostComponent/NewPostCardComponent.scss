@@ -60,6 +60,25 @@
       }
     }
   }
+
+  .button-container {
+    width: var(--button-min-width);
+  }
+}
+
+@media (max-width: 768px) {
+  .newPostCardComponent {
+    padding: var(--padding-large);
+
+    h1 {
+      font-size: 1.3rem;
+    }
+
+    .button-container {
+      width: 100%;
+      margin-block: var(--margin-large);
+    }
+  }
 }
 
 @keyframes rotateEmoji {

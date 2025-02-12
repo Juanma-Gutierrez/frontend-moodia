@@ -1,9 +1,7 @@
-/* InputComponent.scss */
 .InputComponent {
   display: flex;
   flex-direction: column;
-  gap: var(--margin-small);
-  width: 100%;
+  min-width: 100%;
 
   .InputComponent-label {
     font-size: var(--font-medium);

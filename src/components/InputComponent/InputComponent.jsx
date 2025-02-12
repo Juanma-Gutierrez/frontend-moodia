@@ -1,17 +1,14 @@
 import "./InputComponent.scss";
 import PropTypes from "prop-types";
 
-export const InputComponent = ({
-  label,
-  type = "text",
-  placeholder,
-  value,
-  onChange,
-  name,
-}) => {
+export const InputComponent = ({ className="", label, type = "text", placeholder, value, onChange, name }) => {
   return (
-    <div className="InputComponent">
-      {label && <label className="InputComponent-label" htmlFor={name}>{label}</label>}
+    <div className={`InputComponent ${className}`}>
+      {label && (
+        <label className="InputComponent-label" htmlFor={name}>
+          {label}
+        </label>
+      )}
       {type === "message" ? (
         <textarea
           id={name}

@@ -23,6 +23,7 @@ export default function Admin() {
   const [filteredUserList, setFilteredUserList] = useState([]);
   const [employmentValue, setEmploymentValue] = useState("");
   const [civilStatusValue, setCivilStatusValue] = useState("");
+  const [genreValue, setGenreValue] = useState("");
   const [minAge, setMinAge] = useState("");
   const [maxAge, setMaxAge] = useState("");
   const [minStatus, setMinStatus] = useState("");
@@ -67,7 +68,7 @@ export default function Admin() {
 
   useEffect(() => {
     applyFilter();
-  }, [employmentValue, civilStatusValue, minAge, maxAge, minStatus, maxStatus]);
+  }, [employmentValue, civilStatusValue, genreValue, minAge, maxAge, minStatus, maxStatus]);
 
   const applyFilter = () => {
     let newFilteredList = userList.filter((user) => {
@@ -76,6 +77,9 @@ export default function Admin() {
         showUser = false;
       }
       if (!isShowByCivilStatus(user)) {
+        showUser = false;
+      }
+      if (!isShowByGenre(user)) {
         showUser = false;
       }
       if (!isShowByMinAge(user)) {
@@ -103,6 +107,12 @@ export default function Admin() {
   const isShowByCivilStatus = (userToFilter) => {
     let civilStatus = userToFilter.extendedUser.civil_status.status.toLowerCase();
     return civilStatus === civilStatusValue.toLowerCase() || civilStatusValue === "";
+  };
+
+  const isShowByGenre = (userToFilter) => {
+    console.log(userToFilter);
+    let genre = userToFilter.extendedUser.genre.genre.toLowerCase();
+    return genre === genreValue.toLowerCase() || genreValue === "";
   };
 
   const isShowByMinAge = (userToFilter) => {
@@ -149,6 +159,8 @@ export default function Admin() {
         return user.extendedUser.employment.employment;
       case "civilStatus":
         return user.extendedUser.civil_status.status;
+      case "genre":
+        return user.extendedUser.genre.genre;
       case "age":
         return calculateAge(user.extendedUser.birthDate);
       case "genre":
@@ -180,6 +192,7 @@ export default function Admin() {
       <h1>Administración</h1>
       <div className="admin-page-table-filter">
         <select
+          className="admin-page-filter-employment"
           id="employment"
           value={employmentValue}
           onChange={(e) => {
@@ -195,6 +208,7 @@ export default function Admin() {
             ))}
         </select>
         <select
+          className="admin-page-filter-civilStatus"
           id="civilStatus"
           value={civilStatusValue}
           onChange={(e) => {
@@ -209,7 +223,24 @@ export default function Admin() {
               </option>
             ))}
         </select>
+        <select
+          className="admin-page-filter-genre"
+          id="genre"
+          value={genreValue}
+          onChange={(e) => {
+            setGenreValue(e.target.value);
+          }}
+        >
+          <option value="">Por género</option>
+          {Array.isArray(genres) &&
+            genres.map((genre) => (
+              <option key={genre.idGenre} value={genre.genre}>
+                {genre.genre}
+              </option>
+            ))}
+        </select>
         <InputComponent
+          className="admin-page-filter-minAge"
           name="minAge"
           placeholder="Edad mínima"
           value={minAge}
@@ -218,6 +249,7 @@ export default function Admin() {
           }}
         />
         <InputComponent
+          className="admin-page-filter-maxAge"
           name="maxAge"
           placeholder="Edad máxima"
           value={maxAge}
@@ -226,6 +258,7 @@ export default function Admin() {
           }}
         />
         <InputComponent
+          className="admin-page-filter-minStatus"
           name="minStatus"
           placeholder="Estado mínimo"
           value={minStatus}
@@ -234,6 +267,7 @@ export default function Admin() {
           }}
         />
         <InputComponent
+          className="admin-page-filter-maxStatus"
           name="maxStatus"
           placeholder="Estado máximo"
           value={maxStatus}
@@ -241,7 +275,7 @@ export default function Admin() {
             setMaxStatus(e.target.value);
           }}
         />
-        <ButtonComponent type="info-accept" text="Borrar filtros" onClick={removeFilters} />
+        <ButtonComponent type="info-accept" text="Borrar filtros" onClick={removeFilters} width="full"/>
       </div>
       <div className="admin-page-user-table">
         <div className="admin-page-user-table-header">

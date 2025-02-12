@@ -35,11 +35,11 @@ export default function Logout() {
     <div className="logout-container">
       <div className="logout-prompt">
         <h3>¿Quieres cerrar sesión?</h3>
-        <div className="button-container">
-          <ButtonComponent text="Salir" type="confirm-accept" onClick={handleLogout} />
-          <ButtonComponent text="Cancelar" type="confirm-cancel" onClick={handleCancel} />
-        </div>
-        <Lottie options={lottieOptions} height={CONSTANTS.LOTTIE.LARGE.HEIGHT} width={CONSTANTS.LOTTIE.LARGE.WIDTH} />
+      </div>
+      <Lottie options={lottieOptions} height={CONSTANTS.LOTTIE.LARGE.HEIGHT} width={CONSTANTS.LOTTIE.LARGE.WIDTH} />
+      <div className="button-container">
+        <ButtonComponent text="Salir" type="confirm-accept" onClick={handleLogout} />
+        <ButtonComponent text="Cancelar" type="confirm-cancel" onClick={handleCancel} />
       </div>
     </div>
   );

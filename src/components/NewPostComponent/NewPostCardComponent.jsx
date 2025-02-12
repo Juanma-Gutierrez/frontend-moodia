@@ -148,6 +148,7 @@ export const NewPostCardComponent = ({ onPostCreated, category }) => {
             onClick={handleClickPublishButton}
             disabled={isButtonDisabled}
             type="info-accept"
+            width="full"
           />
         </div>
       </div>

@@ -17,19 +17,38 @@
       font-size: 24px;
       font-weight: bold;
     }
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: var(--padding-large);
+  }
+
+  .lottie {
+    height: var(--lotie-medium);
+    width: var(--lotie-medium);
+  }
+}
+
+@media (max-width:480px) {
+  .logout-container {
+    padding: var(--padding-general);
 
     .button-container {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: space-evenly;
       align-items: center;
       width: 100%;
-      gap: var(--padding-l);
-    }
+      gap: var(--padding-large);
 
-    .lottie {
-      height: var(--lotie-medium);
-      width: var(--lotie-medium);
+      .button{
+        width: 100% !important;
+      }
     }
   }
 }

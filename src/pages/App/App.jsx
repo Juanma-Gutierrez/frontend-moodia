@@ -13,6 +13,7 @@ import Register from "@pages/Register/Register";
 import Report from "@pages/Report/Report";
 import { HttpMethod } from "@services/apiService/HttpMethod";
 import { IsLoadingComponent } from "@components/isLoadingComponent/isLoadingComponent";
+import { KOScreen } from "@components/KOScreenComponent/KOScreenComponent";
 import { LogoIsLoadingComponent } from "@components/LogoIsLoadingComponent/LogoIsLoadingComponent";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { SnackbarComponent } from "@components/SnackbarComponent/SnackbarComponent";

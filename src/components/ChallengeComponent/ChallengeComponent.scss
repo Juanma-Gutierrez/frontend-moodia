@@ -34,6 +34,17 @@
 
 @media (max-width:480px) {
   .challenge-component-container {
-    margin-top: -50px;
+    margin-top: var(--margin-medium);
+    padding: var(--padding-large);
+
+    .challenge-component-buttons {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      button {
+        width: 100%;
+      }
+    }
   }
 }

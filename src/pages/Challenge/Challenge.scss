@@ -13,3 +13,10 @@
     transform: translate(-50%, -50%);
   }
 }
+
+@media (max-width:480px) {
+  .challenge-container {
+    padding-top: var(--padding-large);
+    justify-content: flex-start;
+  }
+}

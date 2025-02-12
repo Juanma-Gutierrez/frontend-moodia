@@ -21,7 +21,6 @@
   }
 
   form {
-    margin-bottom: var(--margin-large);
 
     input {
       width: 100%;
@@ -38,8 +37,6 @@
   }
 
   p {
-    margin-top: var(--margin-large);
-
     a {
       color: var(--link);
       text-decoration: none;
@@ -48,5 +45,15 @@
         text-decoration: underline;
       }
     }
+  }
+
+  .button {
+    margin: var(--margin-large);
+  }
+}
+
+@media (max-width:480px) {
+  .login-container {
+    padding-inline: var(--padding-general);
   }
 }
