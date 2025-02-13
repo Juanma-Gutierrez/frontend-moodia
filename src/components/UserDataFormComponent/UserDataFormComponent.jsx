@@ -4,7 +4,6 @@ import { calculateAge } from "@services/utils/utils";
 
 export const UserDataFormComponent = ({ userRaw, isHeader, onSort, onUserClicked }) => {
   const handleUser = () => {
-    console.log("handleUser");
     if (onUserClicked) onUserClicked(userRaw);
   };
 

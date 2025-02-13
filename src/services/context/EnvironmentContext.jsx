@@ -1,6 +1,12 @@
 import PropTypes from "prop-types";
 import { useState, useEffect, useContext, createContext } from "react";
-import { apiGetGenres, apiGetCivilStatus, apiGetEmployment, apiGetCategory } from "@services/apiService/ApiGenericRequest";
+import {
+  apiGetGenres,
+  apiGetCivilStatus,
+  apiGetEmployment,
+  apiGetCategory,
+  apiGetInspiringPhrases,
+} from "@services/apiService/ApiGenericRequest";
 
 const EnvironmentContext = createContext();
 
@@ -9,6 +15,7 @@ export const EnvironmentProvider = ({ children }) => {
   const [civilStatus, setCivilStatus] = useState([]);
   const [employment, setEmployment] = useState([]);
   const [genres, setGenres] = useState([]);
+  const [inspiringPhrases, setInspiringPhrases] = useState([]);
   const [isKOScreenVisible, setKOScreenVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [logoIsLoading, setLogoIsLoading] = useState(false);
@@ -16,17 +23,19 @@ export const EnvironmentProvider = ({ children }) => {
   useEffect(() => {
     const init = async () => {
       try {
-        const [genresRes, civilStatusRes, employmentRes, categoryRes] = await Promise.all([
+        const [genresRes, civilStatusRes, employmentRes, categoryRes, inspiringPhrasesRes] = await Promise.all([
           apiGetGenres(),
           apiGetCivilStatus(),
           apiGetEmployment(),
           apiGetCategory(),
+          apiGetInspiringPhrases(),
         ]);
 
         if (genresRes.success) setGenres([...genresRes.data.data]);
         if (civilStatusRes.success) setCivilStatus([...civilStatusRes.data.data]);
         if (employmentRes.success) setEmployment([...employmentRes.data.data]);
         if (categoryRes.success) setCategory([...categoryRes.data.data]);
+        if (inspiringPhrasesRes.success) setInspiringPhrases([...inspiringPhrasesRes.data.data]);
       } catch (error) {
         setKOScreenVisible(true);
         console.error("Error al cargar los datos:", error);
@@ -43,6 +52,7 @@ export const EnvironmentProvider = ({ children }) => {
         civilStatus,
         employment,
         category,
+        inspiringPhrases,
         isKOScreenVisible,
         setKOScreenVisible,
         isLoading,

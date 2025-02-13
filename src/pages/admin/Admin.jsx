@@ -11,26 +11,38 @@ import { useAuthContext } from "@services/context/AuthContext";
 import { useEffect, useState } from "react";
 import { useEnvironmentContext } from "@services/context/EnvironmentContext";
 import { useNavigate } from "react-router-dom";
+import { ModalAssignPhraseComponent } from "@components/ModalAssignPhraseComponent/ModalAssignPhraseComponent";
 
 export default function Admin() {
-  const { setLogoIsLoading } = useEnvironmentContext();
-  const { token } = useAuthContext();
+  const [civilStatusValue, setCivilStatusValue] = useState("");
+  const [employmentValue, setEmploymentValue] = useState("");
+  const [filteredUserList, setFilteredUserList] = useState([]);
+  const [genreValue, setGenreValue] = useState("");
+  const [isModalAssignPhraseVisible, setIsModalAssignPhraseVisible] = useState(false);
   const [isSnackbarVisible, setIsSnackbarVisible] = useState(false);
+  const [isSnackbarVisibleInspiringPhrase, setIsSnackbarInspiringPhraseVisible] = useState(false);
+  const [maxAge, setMaxAge] = useState("");
+  const [maxStatus, setMaxStatus] = useState("");
+  const [minAge, setMinAge] = useState("");
+  const [minStatus, setMinStatus] = useState("");
+  const [orderColumn, setOrderColum] = useState("");
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedInspiringPhraseId, setSelectedInspiringPhraseId] = useState(null);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarType, setSnackbarType] = useState("");
+  const [sortDirection, setSortDirection] = useState("asc");
   const [userList, setUserList] = useState([]);
   const navigate = useNavigate();
-  const [filteredUserList, setFilteredUserList] = useState([]);
-  const [employmentValue, setEmploymentValue] = useState("");
-  const [civilStatusValue, setCivilStatusValue] = useState("");
-  const [genreValue, setGenreValue] = useState("");
-  const [minAge, setMinAge] = useState("");
-  const [maxAge, setMaxAge] = useState("");
-  const [minStatus, setMinStatus] = useState("");
-  const [maxStatus, setMaxStatus] = useState("");
-  const [orderColumn, setOrderColum] = useState("");
-  const [sortDirection, setSortDirection] = useState("asc");
-  const { genres = [], civilStatus = [], employment = [], setKOScreenVisible, setIsLoading } = useEnvironmentContext();
+  const { token } = useAuthContext();
+  const { setLogoIsLoading } = useEnvironmentContext();
+  const {
+    genres = [],
+    civilStatus = [],
+    employment = [],
+    inspiringPhrases = [],
+    setKOScreenVisible,
+    setIsLoading,
+  } = useEnvironmentContext();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -62,6 +74,7 @@ export default function Admin() {
     setSnackbarType(type);
     setIsSnackbarVisible(true);
   };
+
   const handleClickSnackbar = () => {
     setIsSnackbarVisible(false);
   };
@@ -110,7 +123,6 @@ export default function Admin() {
   };
 
   const isShowByGenre = (userToFilter) => {
-    console.log(userToFilter);
     let genre = userToFilter.extendedUser.genre.genre.toLowerCase();
     return genre === genreValue.toLowerCase() || genreValue === "";
   };
@@ -173,13 +185,44 @@ export default function Admin() {
   };
 
   const handleUserClicked = (userClicked) => {
-    console.log(userClicked);
+    setSelectedUser(userClicked);
+    setIsModalAssignPhraseVisible(true);
+  };
+
+  const handleConfirmAssignPhrase = async (idPhrase) => {
+    setSelectedInspiringPhraseId(idPhrase);
+  };
+
+  useEffect(() => {
+    const updateExtendedUser = async () => {
+      if (selectedUser && selectedInspiringPhraseId) {
+        selectedUser.extendedUser.idInspiringPhrase = selectedInspiringPhraseId;
+        const response = await apiGenericRequest(
+          "extended_user/update",
+          selectedUser.extendedUser,
+          HttpMethod.POST,
+          token
+        );
+        if (response.success) {
+          setupSnackbar("Frase inspiradora asignada al usuario indicado", SnackbarComponentTypes.INFO);
+        } else {
+          setupSnackbar("Error: " + response.error, SnackbarComponentTypes.ERROR);
+        }
+        setIsModalAssignPhraseVisible(false);
+      }
+    };
+    updateExtendedUser();
+  }, [selectedInspiringPhraseId]);
+
+  const handleCancelAssignPhrase = () => {
+    setIsModalAssignPhraseVisible(false);
   };
 
   // Remove Filters
   const removeFilters = () => {
     setEmploymentValue("");
     setCivilStatusValue("");
+    setGenreValue("");
     setMinAge("");
     setMaxAge("");
     setMinStatus("");
@@ -275,7 +318,7 @@ export default function Admin() {
             setMaxStatus(e.target.value);
           }}
         />
-        <ButtonComponent type="info-accept" text="Borrar filtros" onClick={removeFilters} width="full"/>
+        <ButtonComponent type="info-accept" text="Borrar filtros" onClick={removeFilters} width="full" />
       </div>
       <div className="admin-page-user-table">
         <div className="admin-page-user-table-header">
@@ -295,6 +338,13 @@ export default function Admin() {
       </div>
       {isSnackbarVisible && (
         <SnackbarComponent message={snackbarMessage} type={snackbarType} onClick={handleClickSnackbar} />
+      )}
+      {isModalAssignPhraseVisible && (
+        <ModalAssignPhraseComponent
+          inspiringPhrases={inspiringPhrases}
+          onConfirm={(idPhrase) => handleConfirmAssignPhrase(idPhrase)}
+          onCancel={handleCancelAssignPhrase}
+        />
       )}
     </div>
   );

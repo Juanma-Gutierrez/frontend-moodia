@@ -67,3 +67,4 @@ export const apiGetGenres = () => apiGenericRequest("genre/get", null, HttpMetho
 export const apiGetCivilStatus = () => apiGenericRequest("civil_status/get", null, HttpMethod.POST);
 export const apiGetEmployment = () => apiGenericRequest("employment/get", null, HttpMethod.POST);
 export const apiGetCategory = () => apiGenericRequest("category/get", null, HttpMethod.POST);
+export const apiGetInspiringPhrases = () => apiGenericRequest("inspiring_phrase/get", null, HttpMethod.POST);
