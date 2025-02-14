@@ -204,7 +204,10 @@ export default function Admin() {
           token
         );
         if (response.success) {
-          setupSnackbar("Frase inspiradora asignada al usuario indicado", SnackbarComponentTypes.INFO);
+          setupSnackbar(
+            `Frase inspiradora asignada al usuario ${selectedUser.user.name} correctamente`,
+            SnackbarComponentTypes.INFO
+          );
         } else {
           setupSnackbar("Error: " + response.error, SnackbarComponentTypes.ERROR);
         }
