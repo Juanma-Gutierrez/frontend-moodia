@@ -62,8 +62,8 @@ export const CONSTANTS = {
       HEIGHT: "100px",
     },
     LARGE: {
-      WIDTH: "250px",
-      HEIGHT: "250px",
+      WIDTH: "200px",
+      HEIGHT: "200px",
     },
   },
   BUTTON: {

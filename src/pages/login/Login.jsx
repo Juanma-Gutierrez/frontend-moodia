@@ -125,10 +125,10 @@ export default function Login() {
           required
         />
         <Lottie options={lottieOptions} height={CONSTANTS.LOTTIE.LARGE.HEIGHT} width={CONSTANTS.LOTTIE.LARGE.WIDTH} />
+        <ButtonComponent type="info-accept" disabled={!isFormValid} text="Iniciar sesión" onClick={handleLogin} />
         <p>
           ¿No tienes una cuenta? <Link to="/register">Regístrate aquí</Link>
         </p>
-        <ButtonComponent type="info-accept" disabled={!isFormValid} text="Iniciar sesión" onClick={handleLogin} />
       </form>
       {isModalVisible && <ModalComponent modalModel={modalModel} onConfirm={handleConfirm} />}
     </div>

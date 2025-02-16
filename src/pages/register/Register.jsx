@@ -117,7 +117,7 @@ export default function Register() {
   return (
     <div className="register-page">
       <div className="register-container">
-        <h3>Crear Cuenta</h3>
+        <h3>Crear cuenta</h3>
         <form>
           <InputComponent
             type="text"
@@ -150,7 +150,7 @@ export default function Register() {
           <InputComponent
             className={`${isPasswordConfirmationValid ? "" : "password-not-match"}`}
             type="password"
-            placeholder="Confirmar Contraseña"
+            placeholder="Confirmar contraseña"
             value={password_confirmation}
             onChange={(e) => setPasswordConfirmation(e.target.value)}
             required

@@ -90,9 +90,7 @@ export default function App() {
             <Route
               path="moodia"
               element={
-                <PrivateRoute>
                   <Moodia />
-                </PrivateRoute>
               }
             />
             <Route

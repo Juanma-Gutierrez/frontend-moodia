@@ -22,6 +22,7 @@ import { HttpMethod } from "./HttpMethod";
  * @throws {Error} - Throws an error if there is an issue making the request (e.g., network failure).
  */
 export const apiGenericRequest = async (endpoint, body, method = HttpMethod.POST, token = null) => {
+
   try {
     const headers = {
       "Content-Type": "application/json",

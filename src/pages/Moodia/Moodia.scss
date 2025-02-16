@@ -1,0 +1,91 @@
+.moodia-page-container {
+  max-width: var(--general-width);
+  margin: auto;
+  margin-bottom: var(--margin-large);
+  text-align: center;
+  color: var(--primary-dark);
+
+  a {
+    color: var(--primary-light);
+    text-decoration: none;
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin-top: var(--margin-general);
+    margin-bottom: var(--margin-large);
+  }
+
+  p {
+    margin-block: var(--margin-large);
+  }
+
+  .moodia-block-container {
+    h3 {
+      margin-top: var(--margin-small);
+    }
+  }
+
+  img {
+    width: var(--logo-small);
+  }
+
+  .moodia-repository-link {
+    margin-bottom: var(--margin-large);
+
+    .moodia-image-icon-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      img {
+        width: 50px;
+      }
+    }
+
+
+  }
+
+  .moodia-double-block-container {
+    display: flex;
+    flex-direction: row;
+    gap: var(--margin-general);
+
+    .moodia-image-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+  }
+
+  li {
+    text-align: start;
+    margin-left: var(--margin-large);
+  }
+}
+
+@media (max-width:920px) {
+  .moodia-page-container {
+    padding-inline: var(--padding-post);
+
+    .moodia-double-block-container {
+      display: flex;
+      flex-direction: column;
+      gap: var(--margin-general);
+    }
+  }
+}
+
+@media (max-width:480px) {
+  .moodia-page-container {
+    padding-inline: var(--padding-post);
+    text-align: start;
+
+  }
+}

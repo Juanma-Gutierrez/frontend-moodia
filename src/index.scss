@@ -111,6 +111,8 @@
   --icon-medium: 32px;
   --icon-large: 48px;
   --icon-container: 28px;
+  // Logo
+  --logo-small: 128px;
   // Lotties
   --lottie-xsmall: 50px;
   --lottie-small: 100px;
@@ -180,6 +182,10 @@
   input,
   textarea {
     font-family: "Bai Jamjuree", serif;
+  }
+
+  select {
+    color: var(--primary-dark);
   }
 }
 
