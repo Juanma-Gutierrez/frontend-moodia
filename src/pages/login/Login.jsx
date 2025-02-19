@@ -1,5 +1,5 @@
 import "./login.scss";
-import LoginLottie from "@assets/lotties/LoginLottie.json";
+import LoginLottie from "@assets/Lotties/LoginLottie.json";
 import Lottie from "react-lottie";
 import ModalModel from "@components/ModalComponent/ModalModel";
 import { ButtonComponent } from "@components/ButtonComponent/ButtonComponent";
@@ -13,6 +13,10 @@ import { useAuthContext } from "@services/context/AuthContext";
 import { useEffect, useState } from "react";
 import { useEnvironmentContext } from "@services/context/EnvironmentContext";
 
+/**
+ * Login Component
+ * @returns {JSX.Element} - Returns the Login component with login functionality, form validation, and error handling.
+ */
 export default function Login() {
   const { setToken, setUser, extendedUser, setExtendedUser } = useAuthContext();
   const { setLogoIsLoading } = useEnvironmentContext();
@@ -23,6 +27,10 @@ export default function Login() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [extendedUserLocal, setExtendedUserLocal] = useState({});
 
+  /**
+   * Modal Model for error display
+   * @returns {Object} - Configuration object for the modal shown when login fails.
+   */
   const modalModel = new ModalModel({
     title: "Iniciar sesión",
     message: "Hay un error en el correo electrónico o en la contraseña. Revisa los datos.",
@@ -30,6 +38,10 @@ export default function Login() {
     type: "warning",
   });
 
+  /**
+   * Lottie Animation Options
+   * @returns {Object} - Configuration for the Lottie animation used on the login screen.
+   */
   const lottieOptions = {
     loop: true,
     autoplay: true,
@@ -39,26 +51,46 @@ export default function Login() {
     },
   };
 
+  /**
+   * Effect to set token from localStorage if it exists
+   * @returns {void} - Sets the token from localStorage when the component mounts.
+   */
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setToken(localStorage.getItem("token"));
     }
   }, []);
 
+  /**
+   * Effect to update extended user information in local state
+   * @returns {void} - Updates the extended user state when `extendedUser` changes.
+   */
   useEffect(() => {
     setExtendedUserLocal(extendedUser);
   }, [extendedUser]);
 
+  /**
+   * Effect to validate the login form
+   * @returns {void} - Sets form validity based on whether the email and password fields are filled.
+   */
   useEffect(() => {
     const formValid = email && password;
     setIsFormValid(formValid);
   }, [email, password]);
 
-  // Modal
+  /**
+   * Handles the confirmation action for the error modal
+   * @returns {void} - Closes the modal when the user confirms.
+   */
   const handleConfirm = () => {
     setIsModalVisible(false);
   };
 
+  /**
+   * Handles the login process
+   * @param {Event} e - The form submission event.
+   * @returns {void} - Sends login request, processes response, and redirects based on user role.
+   */
   const handleLogin = async (e) => {
     setLogoIsLoading(true);
     e.preventDefault();

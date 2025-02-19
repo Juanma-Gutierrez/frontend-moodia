@@ -3,6 +3,17 @@ import PropTypes from "prop-types";
 import { ButtonComponent } from "@components/ButtonComponent/ButtonComponent";
 import { CONSTANTS } from "@constants/Constants";
 
+/**
+ * InspiringPhraseComponent
+ *
+ * A card component that displays an inspiring phrase with a title and message.
+ * It includes a background image based on the category and a close button.
+ *
+ * @param {Object} props - The component props.
+ * @param {Object} props.inspiringPhrase - The phrase object containing title, message, and category ID.
+ * @param {Function} props.onClick - Callback function triggered when the close button is clicked.
+ * @returns {JSX.Element} - Returns a styled card displaying the inspiring phrase.
+ */
 export const InspiringPhraseComponent = ({ inspiringPhrase, onClick }) => {
   const { title, message, idCategory } = inspiringPhrase;
 

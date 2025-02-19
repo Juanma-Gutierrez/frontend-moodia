@@ -2,10 +2,17 @@ import "./Moodia.scss";
 import { SnackbarComponent } from "@components/SnackbarComponent/SnackbarComponent";
 import { useState } from "react";
 
+/**
+ * Moodia Component
+ * @returns {JSX.Element} - Returns the Moodia page with information about the project, technologies used, key features, and more.
+ */
 export default function Moodia() {
   const [isSnackbarVisible, setIsSnackbarVisible] = useState(false);
 
-  // Snackbar
+  /**
+   * Handles the snackbar visibility
+   * @returns {void} - Sets the snackbar visibility to false when clicked.
+   */
   const handleClickSnackbar = () => {
     setIsSnackbarVisible(false);
   };

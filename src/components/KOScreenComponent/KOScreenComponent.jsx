@@ -1,9 +1,17 @@
 import "./KOScreenComponent.scss";
 import Lottie from "react-lottie";
 import PropTypes from "prop-types";
-import koScreenLottie from "@assets/lotties/koScreenLottie.json";
+import koScreenLottie from "@assets/Lotties/koScreenLottie.json";
 import { CONSTANTS } from "@constants/Constants";
 
+/**
+ * KOScreen
+ *
+ * A full-screen overlay component that displays an error animation when an issue occurs.
+ * It uses a Lottie animation to visually indicate a problem.
+ *
+ * @returns {JSX.Element} - Returns an overlay with an error animation and message.
+ */
 export const KOScreen = () => {
   const lottieOptions = {
     loop: true,

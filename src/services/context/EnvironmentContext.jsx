@@ -10,6 +10,38 @@ import {
 
 const EnvironmentContext = createContext();
 
+/**
+ * EnvironmentProvider component that provides environmental-related state and methods.
+ *
+ * This component fetches various environmental data (such as genres, civil status, employment,
+ * categories, and inspiring phrases) upon initialization using the provided API methods.
+ * It manages the loading state, the visibility of a "KO" (error) screen, and other environmental
+ * variables. The data is stored in the corresponding state variables and made available to
+ * the rest of the app through `EnvironmentContext`.
+ *
+ * It provides the following values through the `EnvironmentContext`:
+ * - `genres`: List of genres fetched from the API.
+ * - `civilStatus`: List of civil statuses fetched from the API.
+ * - `employment`: List of employment statuses fetched from the API.
+ * - `category`: List of categories fetched from the API.
+ * - `inspiringPhrases`: List of inspiring phrases fetched from the API.
+ * - `isKOScreenVisible`: Boolean indicating if the "KO" screen (error screen) should be visible.
+ * - `setKOScreenVisible`: Method to update the visibility of the "KO" screen.
+ * - `isLoading`: Boolean indicating if data is still loading.
+ * - `setIsLoading`: Method to update the loading state.
+ * - `logoIsLoading`: Boolean indicating if the logo is still loading.
+ * - `setLogoIsLoading`: Method to update the logo loading state.
+ *
+ * It also has the following side effects:
+ * - On mount, it fetches data from various API endpoints in parallel and updates the state
+ *   variables with the fetched data.
+ * - If an error occurs during data fetching, it sets `isKOScreenVisible` to true to show an error screen.
+ *
+ * @param {Object} props - The props for this component.
+ * @param {React.ReactNode} props.children - The child components to be rendered within the provider.
+ *
+ * @returns {JSX.Element} - The `EnvironmentContext.Provider` that wraps the children components.
+ */
 export const EnvironmentProvider = ({ children }) => {
   const [category, setCategory] = useState([]);
   const [civilStatus, setCivilStatus] = useState([]);
@@ -70,6 +102,19 @@ EnvironmentProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+/**
+ * Custom hook to access the environment context.
+ *
+ * This hook provides access to the `EnvironmentContext` and throws an error if
+ * used outside of the `EnvironmentProvider`.
+ *
+ * @returns {Object} - The context values from `EnvironmentContext`, including
+ * `genres`, `civilStatus`, `employment`, `category`, `inspiringPhrases`,
+ * `isKOScreenVisible`, `setKOScreenVisible`, `isLoading`, `setIsLoading`,
+ * `logoIsLoading`, and `setLogoIsLoading`.
+ *
+ * @throws {Error} - Throws an error if called outside of an `EnvironmentProvider`.
+ */
 export const useEnvironmentContext = () => {
   const context = useContext(EnvironmentContext);
   if (!context) {

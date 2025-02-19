@@ -1,5 +1,10 @@
 import PropTypes from "prop-types";
 
+/**
+ * EmojiIcon2 Component
+ * @param {Object} props - The component props. Additional SVG properties can be passed here.
+ * @returns {JSX.Element} - Returns an SVG element representing a custom emoji icon.
+ */
 export const EmojiIcon2 = (props) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" {...props}>
     <defs>

@@ -2,15 +2,41 @@ import "./UserDataFormComponent.scss";
 import PropTypes from "prop-types";
 import { calculateAge } from "@services/utils/utils";
 
+/**
+ * UserDataFormComponent
+ *
+ * A component that displays a row of user data. It is used to either render a header row with column titles
+ * or a data row with individual user information. The component also provides sorting functionality
+ * when the header elements are clicked, and a click action for user rows.
+ *
+ * @param {Object} userRaw - The raw user data, including personal and employment details.
+ * @param {boolean} isHeader - Indicates if the component should render the header row (true) or user data row (false).
+ * @param {Function} onSort - A callback function that is triggered when a header is clicked for sorting.
+ * @param {Function} onUserClicked - A callback function that is triggered when a user row is clicked.
+ *
+ * @returns {JSX.Element} - The JSX representation of either a header row or a user data row.
+ */
 export const UserDataFormComponent = ({ userRaw, isHeader, onSort, onUserClicked }) => {
   const handleUser = () => {
     if (onUserClicked) onUserClicked(userRaw);
   };
 
+  /**
+   * handleSort
+   *
+   * Triggered when a column header is clicked. It calls the `onSort` function passed as a prop,
+   * passing the sorting criteria (column name) as an argument.
+   *
+   * @param {string} sort - The criteria by which the data should be sorted.
+   */
   const handleSort = (sort) => {
     if (onSort) onSort(sort);
   };
 
+  /**
+   * If `isHeader` is true, the component will render the table header, allowing sorting.
+   * Otherwise, it will render a data row with user information.
+   */
   if (isHeader) {
     return (
       <div className="user-data-row">
@@ -36,6 +62,9 @@ export const UserDataFormComponent = ({ userRaw, isHeader, onSort, onUserClicked
     );
   }
 
+  /**
+   * Extract values from `userRaw` for display in the data row.
+   */
   const username = userRaw.user.name;
   const employment = userRaw.extendedUser.employment.employment;
   const civilStatus = userRaw.extendedUser.civil_status.status;

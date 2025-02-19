@@ -1,5 +1,11 @@
 import PropTypes from "prop-types";
 
+/**
+ * LogoIcon Component
+ * @param {Object} props - The component props.
+ * @param {string} props.stroke - The stroke color of the SVG icon.
+ * @returns {JSX.Element} - Returns an SVG element representing an admin icon.
+ */
 export const LogoIcon = ({ stroke, size }) => (
   <svg
     version="1.0"

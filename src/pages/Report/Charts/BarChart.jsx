@@ -1,7 +1,12 @@
-// BarChart.jsx
 import React from "react";
 import ReactEcharts from "echarts-for-react";
 
+/**
+ * BarChart component for displaying a bar chart with post states data
+ * @param {Object} dataset - Object containing xAxisData (categories) and seriesData (values).
+ * @param {Array} colorsSet - Array of colors to be used for the bar chart.
+ * @returns {JSX.Element} - Returns a ReactEcharts component rendering the bar chart.
+ */
 export default function BarChart({ dataset, colorsSet }) {
   const barchar = {
     title: {

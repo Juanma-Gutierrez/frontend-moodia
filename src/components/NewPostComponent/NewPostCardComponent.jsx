@@ -13,6 +13,19 @@ import { useAuthContext } from "@services/context/AuthContext";
 import { useEffect } from "react";
 import { useState } from "react";
 
+/**
+ * NewPostCardComponent
+ *
+ * A component that provides a form for creating new posts. It includes input fields for the title and message,
+ * a category selection via chips, and emoji selection. The component also handles the logic for enabling/disabling
+ * the publish button, and displays a modal with a success or error message after a post is created.
+ *
+ * @param {Object} props - The component props.
+ * @param {function} props.onPostCreated - A callback function that is triggered after a post is created.
+ * @param {Array} props.category - An array of category objects to be used for category selection.
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
 export const NewPostCardComponent = ({ onPostCreated, category }) => {
   const [categorySelected, setCategorySelected] = useState([]);
   const [emojiSelected, setEmojiSelected] = useState(null);
@@ -24,15 +37,40 @@ export const NewPostCardComponent = ({ onPostCreated, category }) => {
   const [title, setTitle] = useState("");
   const { token, user, extendedUser } = useAuthContext();
 
+  /**
+   * handleTitleChange
+   *
+   * A function that updates the state of the post title whenever the input field value changes.
+   * This function is triggered by the onChange event of the title input field.
+   *
+   * @param {Event} event - The event triggered by the title input change.
+   * @returns {void} - This function does not return any value.
+   */
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
 
+  /**
+   * handleMessageChange
+   *
+   * A function that updates the state of the post message whenever the input field value changes.
+   * This function is triggered by the onChange event of the message input field.
+   *
+   * @param {Event} event - The event triggered by the message input change.
+   * @returns {void} - This function does not return any value.
+   */
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
   };
 
-  // Modal
+  /**
+   * handleConfirm
+   *
+   * A function that handles the confirmation action after the modal is displayed.
+   * It hides the modal and triggers the post creation callback if no error occurred.
+   *
+   * @returns {void} - This function does not return any value.
+   */
   const handleConfirm = () => {
     setIsModalVisible(false);
     if (!error) {
@@ -41,6 +79,14 @@ export const NewPostCardComponent = ({ onPostCreated, category }) => {
     }
   };
 
+  /**
+   * cleanPostCard
+   *
+   * A function that resets the state variables related to the post creation form.
+   * This is called after successfully creating a post or when the modal is confirmed.
+   *
+   * @returns {void} - This function does not return any value.
+   */
   const cleanPostCard = () => {
     setTitle("");
     setMessage("");
@@ -52,6 +98,15 @@ export const NewPostCardComponent = ({ onPostCreated, category }) => {
     setIsButtonDisabled(!title.trim() || !message.trim() || !emojiSelected);
   }, [title, message, emojiSelected]);
 
+  /**
+   * handleClickChip
+   *
+   * A function that updates the state of the selected categories when a category chip is clicked.
+   * It toggles the selected state of a category.
+   *
+   * @param {number} idCategory - The ID of the category that was clicked.
+   * @returns {void} - This function does not return any value.
+   */
   const handleClickChip = (idCategory) => {
     setCategorySelected((prevSelected) => {
       if (prevSelected.includes(idCategory)) {
@@ -64,10 +119,26 @@ export const NewPostCardComponent = ({ onPostCreated, category }) => {
     });
   };
 
+  /**
+   * handleEmojiClick
+   *
+   * A function that updates the state of the selected emoji when an emoji is clicked.
+   *
+   * @param {number} emojiIndex - The index of the emoji that was clicked.
+   * @returns {void} - This function does not return any value.
+   */
   const handleEmojiClick = (emojiIndex) => {
     setEmojiSelected(emojiIndex);
   };
 
+  /**
+   * handleClickPublishButton
+   *
+   * A function that handles the post creation when the publish button is clicked.
+   * It sends a POST request to create the post, and based on the response, it displays a success or error modal.
+   *
+   * @returns {void} - This function does not return any value.
+   */
   const handleClickPublishButton = async () => {
     const body = {
       title,

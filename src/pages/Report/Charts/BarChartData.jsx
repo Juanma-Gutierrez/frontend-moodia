@@ -1,13 +1,26 @@
 import { useEffect, useState } from "react";
 import { CONSTANTS } from "@constants/Constants";
 
+/**
+ * BarChartData component for calculating dataset from posts to be used in a bar chart
+ * @param {Array} posts - Array of posts containing score data to be processed.
+ * @returns {Object} - Returns an object with xAxisData (score labels) and seriesData (score counts).
+ */
 export default function BarChartData({ posts }) {
   const [barcharDataset, setBarcharDataset] = useState({ xAxisData: [], seriesData: [] });
 
+  /**
+   * Effect hook to calculate and set the bar chart dataset based on posts data
+   * @returns {void} - Triggers calculation of the dataset when posts data changes.
+   */
   useEffect(() => {
     calculateBarcharDataset();
   }, [posts]);
 
+  /**
+   * Function to calculate the bar chart dataset from posts' scores
+   * @returns {void} - Updates the barcharDataset state with xAxisData and seriesData.
+   */
   const calculateBarcharDataset = () => {
     const scoreCount = {
       1: 0,

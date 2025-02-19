@@ -22,6 +22,10 @@ import { useAuthContext } from "@services/context/AuthContext";
 import { useEffect, useState } from "react";
 import { useEnvironmentContext } from "@services/context/EnvironmentContext";
 
+/**
+ * App Component
+ * @returns {JSX.Element} - Returns the main App component with routing and loading state handling.
+ */
 export default function App() {
   const [isSnackbarVisible, setIsSnackbarVisible] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -29,10 +33,18 @@ export default function App() {
   const { isLoading, setIsLoading, logoIsLoading, setLogoIsLoading, isKOScreenVisible } = useEnvironmentContext();
   const { setUser, setExtendedUser } = useAuthContext();
 
+  /**
+   * useEffect Hook
+   * @returns {void} - Calls the `activateIsLoading` function on component mount.
+   */
   useEffect(() => {
     activateIsLoading();
   }, []);
 
+  /**
+   * activateIsLoading function
+   * @returns {void} - Activates the loading state and starts the initialization after a timeout.
+   */
   const activateIsLoading = () => {
     setIsLoading(true);
     setTimeout(() => {
@@ -40,6 +52,10 @@ export default function App() {
     }, 1000);
   };
 
+  /**
+   * init function
+   * @returns {void} - Initializes the app by checking the token and loading user data.
+   */
   const init = async () => {
     setIsLoading(true);
 
@@ -70,7 +86,10 @@ export default function App() {
     setIsLoading(false);
   };
 
-  // Snackbar
+  /**
+   * handleClickSnackbar function
+   * @returns {void} - Handles closing the snackbar when clicked.
+   */
   const handleClickSnackbar = () => {
     setIsSnackbarVisible(false);
   };
@@ -87,12 +106,7 @@ export default function App() {
         <div className="main-content">
           <Routes>
             <Route path="/" element={<Post />} />
-            <Route
-              path="moodia"
-              element={
-                  <Moodia />
-              }
-            />
+            <Route path="moodia" element={<Moodia />} />
             <Route
               path="post"
               element={
@@ -142,14 +156,7 @@ export default function App() {
                 </PrivateRoute>
               }
             />
-            <Route
-              path="*"
-              element={
-                <PrivateRoute>
-                  <NoPage />
-                </PrivateRoute>
-              }
-            />
+            <Route path="*" element={<NoPage />} />
           </Routes>
         </div>
       </div>

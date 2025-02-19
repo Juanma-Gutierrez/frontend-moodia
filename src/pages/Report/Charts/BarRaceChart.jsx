@@ -1,14 +1,22 @@
-import React, { useEffect, useRef } from "react";
 import * as echarts from "echarts";
+import React, { useEffect, useRef } from "react";
 import { CONSTANTS } from "@constants/Constants";
 
+/**
+ * BarRaceChart component for rendering a bar race chart based on posts data
+ * @param {Array} posts - Array of posts containing categories and score data to be processed.
+ * @returns {JSX.Element} - Returns a div element with the bar race chart rendered using ECharts.
+ */
 export default function BarRaceChart({ posts }) {
   const chartRef = useRef(null);
 
+  /**
+   * Effect hook for initializing the ECharts bar race chart and updating it when posts data changes
+   * @returns {void} - Initializes and disposes of the ECharts chart on post data change.
+   */
   useEffect(() => {
     if (!chartRef.current || !posts.length) return;
     const chart = echarts.init(chartRef.current);
-
     const categoryScores = {};
     const categoryCounts = {};
 

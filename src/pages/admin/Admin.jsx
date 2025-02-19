@@ -2,6 +2,7 @@ import "./Admin.scss";
 import { ButtonComponent } from "@components/ButtonComponent/ButtonComponent";
 import { HttpMethod } from "@services/apiService/HttpMethod";
 import { InputComponent } from "@components/InputComponent/InputComponent";
+import { ModalAssignPhraseComponent } from "@components/ModalAssignPhraseComponent/ModalAssignPhraseComponent";
 import { SnackbarComponent } from "@components/SnackbarComponent/SnackbarComponent";
 import { SnackbarComponentTypes } from "@components/SnackbarComponent/SnackbarComponentTypes";
 import { UserDataFormComponent } from "@components/UserDataFormComponent/UserDataFormComponent";
@@ -11,8 +12,11 @@ import { useAuthContext } from "@services/context/AuthContext";
 import { useEffect, useState } from "react";
 import { useEnvironmentContext } from "@services/context/EnvironmentContext";
 import { useNavigate } from "react-router-dom";
-import { ModalAssignPhraseComponent } from "@components/ModalAssignPhraseComponent/ModalAssignPhraseComponent";
 
+/**
+ * Main component function for Admin panel
+ * @returns {JSX.Element} - Returns the Admin component with user management functionality.
+ */
 export default function Admin() {
   const [civilStatusValue, setCivilStatusValue] = useState("");
   const [employmentValue, setEmploymentValue] = useState("");
@@ -44,6 +48,10 @@ export default function Admin() {
     setIsLoading,
   } = useEnvironmentContext();
 
+  /**
+   * Fetches users from the API and sets them in the state
+   * @returns {void} - Fetches the user data and updates the state.
+   */
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -68,21 +76,38 @@ export default function Admin() {
     fetchUsers();
   }, [token, navigate, setLogoIsLoading]);
 
-  // Snackbar
+  /**
+   * Sets up a snackbar message with a specific type
+   * @param {string} message - The message to display in the snackbar.
+   * @param {string} type - The type of message (e.g., "success", "error").
+   * @returns {void} - Displays the snackbar with the message.
+   */
   const setupSnackbar = (message, type) => {
     setSnackbarMessage(message);
     setSnackbarType(type);
     setIsSnackbarVisible(true);
   };
 
+  /**
+   * Handles the snackbar click to hide it
+   * @returns {void} - Closes the snackbar when clicked.
+   */
   const handleClickSnackbar = () => {
     setIsSnackbarVisible(false);
   };
 
+  /**
+   * Applies the selected filters to the user list
+   * @returns {void} - Filters the users based on selected criteria.
+   */
   useEffect(() => {
     applyFilter();
   }, [employmentValue, civilStatusValue, genreValue, minAge, maxAge, minStatus, maxStatus]);
 
+  /**
+   * Filters users based on the applied filters
+   * @returns {void} - Updates the user list based on the filter conditions.
+   */
   const applyFilter = () => {
     let newFilteredList = userList.filter((user) => {
       let showUser = true;
@@ -112,41 +137,81 @@ export default function Admin() {
     setFilteredUserList(newFilteredList);
   };
 
+  /**
+   * Checks if the user's employment matches the selected filter
+   * @param {Object} userToFilter - The user object to check.
+   * @returns {boolean} - Returns true if the user matches the employment filter.
+   */
   const isShowByEmployment = (userToFilter) => {
     let employment = userToFilter.extendedUser.employment.employment.toLowerCase();
     return employment === employmentValue.toLowerCase() || employmentValue === "";
   };
 
+  /**
+   * Checks if the user's civil status matches the selected filter
+   * @param {Object} userToFilter - The user object to check.
+   * @returns {boolean} - Returns true if the user matches the civil status filter.
+   */
   const isShowByCivilStatus = (userToFilter) => {
     let civilStatus = userToFilter.extendedUser.civil_status.status.toLowerCase();
     return civilStatus === civilStatusValue.toLowerCase() || civilStatusValue === "";
   };
 
+  /**
+   * Checks if the user's genre matches the selected filter
+   * @param {Object} userToFilter - The user object to check.
+   * @returns {boolean} - Returns true if the user matches the genre filter.
+   */
   const isShowByGenre = (userToFilter) => {
     let genre = userToFilter.extendedUser.genre.genre.toLowerCase();
     return genre === genreValue.toLowerCase() || genreValue === "";
   };
 
+  /**
+   * Checks if the user's age is greater than or equal to the minimum age
+   * @param {Object} userToFilter - The user object to check.
+   * @returns {boolean} - Returns true if the user matches the minimum age filter.
+   */
   const isShowByMinAge = (userToFilter) => {
     let userAge = calculateAge(userToFilter.extendedUser.birthDate);
     return userAge >= minAge || minAge === "";
   };
 
+  /**
+   * Checks if the user's age is less than or equal to the maximum age
+   * @param {Object} userToFilter - The user object to check.
+   * @returns {boolean} - Returns true if the user matches the maximum age filter.
+   */
   const isShowByMaxAge = (userToFilter) => {
     let userAge = calculateAge(userToFilter.extendedUser.birthDate);
     return userAge <= maxAge || maxAge === "";
   };
 
+  /**
+   * Checks if the user's status is greater than or equal to the minimum status
+   * @param {Object} userToFilter - The user object to check.
+   * @returns {boolean} - Returns true if the user matches the minimum status filter.
+   */
   const isShowByMinStatus = (userToFilter) => {
     let userStatus = userToFilter.averageScore;
     return userStatus >= minStatus || minStatus === "";
   };
 
+  /**
+   * Checks if the user's status is less than or equal to the maximum status
+   * @param {Object} userToFilter - The user object to check.
+   * @returns {boolean} - Returns true if the user matches the maximum status filter.
+   */
   const isShowByMaxStatus = (userToFilter) => {
     let userStatus = userToFilter.averageScore;
     return userStatus <= maxStatus || maxStatus === "";
   };
 
+  /**
+   * Handles sorting of users by the selected column
+   * @param {string} column - The column by which to sort the users.
+   * @returns {void} - Sorts the users based on the selected column.
+   */
   const handleSort = (column) => {
     const newDirection = orderColumn === column && sortDirection === "asc" ? "desc" : "asc";
     setOrderColum(column);
@@ -163,6 +228,12 @@ export default function Admin() {
     setFilteredUserList(sortedList);
   };
 
+  /**
+   * Gets the value of a specific column to be used for sorting
+   * @param {Object} user - The user object to get the value from.
+   * @param {string} column - The column to get the value for.
+   * @returns {string|number} - Returns the value of the column to use for sorting.
+   */
   const getSortableValue = (user, column) => {
     switch (column) {
       case "username":
@@ -184,15 +255,29 @@ export default function Admin() {
     }
   };
 
+  /**
+   * Handles when a user is clicked to show the phrase assignment modal
+   * @param {Object} userClicked - The user object that was clicked.
+   * @returns {void} - Opens the phrase assignment modal for the selected user.
+   */
   const handleUserClicked = (userClicked) => {
     setSelectedUser(userClicked);
     setIsModalAssignPhraseVisible(true);
   };
 
+  /**
+   * Confirms assignment of an inspiring phrase to a user
+   * @param {string} idPhrase - The ID of the phrase to assign.
+   * @returns {void} - Assigns the selected phrase to the user.
+   */
   const handleConfirmAssignPhrase = async (idPhrase) => {
     setSelectedInspiringPhraseId(idPhrase);
   };
 
+  /**
+   * Updates the extended user data with the selected inspiring phrase
+   * @returns {void} - Updates the user data with the selected phrase.
+   */
   useEffect(() => {
     const updateExtendedUser = async () => {
       if (selectedUser && selectedInspiringPhraseId) {
@@ -217,11 +302,18 @@ export default function Admin() {
     updateExtendedUser();
   }, [selectedInspiringPhraseId]);
 
+  /**
+   * Handles cancelation of the phrase assignment
+   * @returns {void} - Closes the phrase assignment modal without saving changes.
+   */
   const handleCancelAssignPhrase = () => {
     setIsModalAssignPhraseVisible(false);
   };
 
-  // Remove Filters
+  /**
+   * Removes all applied filters and resets the user list
+   * @returns {void} - Resets all filters and updates the user list.
+   */
   const removeFilters = () => {
     setEmploymentValue("");
     setCivilStatusValue("");

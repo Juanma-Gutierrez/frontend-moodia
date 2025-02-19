@@ -1,14 +1,25 @@
 import { format } from "date-fns";
 
 /**
- * Devuelve la fecha actual en formato pasado por parámetro, por defecto será "yyyy/MM/dd".
- * @param format {string} formato de la fecha a devolver.
- * @returns {string} Fecha formateada.
+ * Returns the current date formatted according to the specified format.
+ * If no format is provided, the default format is "yyyy/MM/dd".
+ *
+ * @param {string} [dateFormat="yyyy/MM/dd"] - The format in which the date should be returned.
+ * @param {Date} [date=new Date()] - The date to format. Defaults to the current date if not provided.
+ * @returns {string} - The formatted date as a string.
  */
 export const getFormattedDate = (dateFormat = "yyyy/MM/dd", date = new Date()) => {
   return format(date, dateFormat);
 };
 
+/**
+ * Calculates the age based on the provided birth date.
+ * The age is calculated by subtracting the birth year from the current year,
+ * and then adjusting for the month and day difference to account for incomplete birthdays.
+ *
+ * @param {string|Date} birthDate - The birth date in a string or Date object format.
+ * @returns {number|null} - The calculated age in years, or null if the birth date is not provided or invalid.
+ */
 export const calculateAge = (birthDate) => {
   if (!birthDate) return null;
   const birth = new Date(birthDate);

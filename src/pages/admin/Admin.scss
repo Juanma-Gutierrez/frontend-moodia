@@ -1,6 +1,10 @@
 .admin-page-container {
   padding: var(--padding-general);
 
+  h1 {
+    color: var(--primary-dark);
+  }
+
   .admin-page-table-filter {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -45,6 +49,7 @@
       grid-column: 4/5;
       grid-row-start: 2;
     }
+
     .button-info-accept {
       grid-column: 5/7;
       grid-row-start: 2;
@@ -97,6 +102,7 @@
         grid-column: 2/3;
         grid-row-start: 3;
       }
+
       .button-info-accept {
         grid-column: 3/3;
         grid-row-start: 3;

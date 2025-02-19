@@ -1,5 +1,11 @@
 import PropTypes from "prop-types";
 
+/**
+ * DeleteIcon Component
+ * @param {Object} props - The component props.
+ * @param {string} props.stroke - The stroke color of the SVG icon. Defaults to the inherited color if not provided.
+ * @returns {JSX.Element} - Returns an SVG element representing a delete icon.
+ */
 export const DeleteIcon = ({ stroke }) => (
   <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24">
     <g fill="none" strokeLinecap="round" strokeLinejoin="round">

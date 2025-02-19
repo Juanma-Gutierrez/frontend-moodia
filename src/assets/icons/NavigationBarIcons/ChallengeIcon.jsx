@@ -1,5 +1,11 @@
 import PropTypes from "prop-types";
 
+/**
+ * ChallengeIcon Component
+ * @param {Object} props - The component props.
+ * @param {string} props.stroke - The stroke color of the SVG icon.
+ * @returns {JSX.Element} - Returns an SVG element representing an admin icon.
+ */
 export const ChallengeIcon = ({ stroke }) => (
   <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24">
     <g fill="none" strokeLinecap="round" strokeLinejoin="round">

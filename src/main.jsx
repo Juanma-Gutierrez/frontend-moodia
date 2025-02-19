@@ -10,9 +10,9 @@ createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <EnvironmentProvider>
       <BrowserRouter>
-      <AuthProvider>
+        <AuthProvider>
           <App />
-      </AuthProvider>
+        </AuthProvider>
       </BrowserRouter>
     </EnvironmentProvider>
   </React.StrictMode>

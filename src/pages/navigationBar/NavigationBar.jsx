@@ -12,11 +12,20 @@ import { ReportIcon } from "@assets/Icons/NavigationBarIcons/ReportIcon";
 import { useAuthContext } from "@services/context/AuthContext";
 import { useEffect, useState } from "react";
 
+/**
+ * Main component function for the navigation bar.
+ * It renders the sidebar navigation for both PC and mobile views.
+ * @returns {JSX.Element} - Returns the navigation bar component with different links based on authentication and role.
+ */
 export default function NavigationBar() {
   const [admin, setAdmin] = useState();
   const navigate = useNavigate();
   const { token, user, extendedUser } = useAuthContext();
 
+  /**
+   * Checks if a token is present and navigates to the post page if the user is logged in and tries to access the login page.
+   * @returns {void} - Navigates to the post page if the conditions are met.
+   */
   useEffect(() => {
     if (token) {
       const storedToken = localStorage.getItem("token");
@@ -26,6 +35,11 @@ export default function NavigationBar() {
     }
   }, [token, navigate]);
 
+  /**
+   * Sets the admin state based on the user's role.
+   * Admins are users with idRole === 2.
+   * @returns {void} - Updates the admin state based on the user's role.
+   */
   useEffect(() => {
     // 1: Usuario // 2: Administrador
     setAdmin(extendedUser && extendedUser.idRole === 2);

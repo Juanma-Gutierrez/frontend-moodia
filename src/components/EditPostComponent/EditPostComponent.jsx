@@ -1,17 +1,26 @@
 import "./EditPostComponent.scss";
-
-import { emojis } from "@assets/Icons/EmojiIcons/EmojiList";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { ButtonComponent } from "@components/ButtonComponent/ButtonComponent";
 import { ChipComponent } from "@components/ChipComponent/ChipComponent";
 import { InputComponent } from "@components/InputComponent/InputComponent";
+import { emojis } from "@assets/Icons/EmojiIcons/EmojiList";
 import { useEnvironmentContext } from "@services/context/EnvironmentContext";
 
+/**
+ * EditPostComponent
+ *
+ * A modal component that allows users to edit a post, including its title, message, score, and categories.
+ *
+ * @param {Object} props - The component props.
+ * @param {Object} props.post - The post data to be edited.
+ * @param {Function} props.onConfirm - Callback function triggered when the post is updated.
+ * @param {Function} props.onCancel - Callback function triggered when the editing is canceled.
+ * @returns {JSX.Element|null} - Returns the modal component or null if no post is provided.
+ */
 export const EditPostComponent = ({ post, onConfirm, onCancel }) => {
   const { title: initialTitle, message: initialMessage, score: initialScore, categories: initialCategories } = post;
   const { category } = useEnvironmentContext();
-
   const [title, setTitle] = useState(initialTitle);
   const [message, setMessage] = useState(initialMessage);
   const [categories, setCategories] = useState(initialCategories);
@@ -19,6 +28,14 @@ export const EditPostComponent = ({ post, onConfirm, onCancel }) => {
 
   if (!post) return null;
 
+  /**
+   * handleForm
+   *
+   * Handles the form submission, updating the post with the new values and triggering the onConfirm callback.
+   *
+   * @param {Event} e - The form submit event.
+   * @returns {void}
+   */
   const handleForm = (e) => {
     e.preventDefault();
     const updatedPost = {
@@ -31,6 +48,14 @@ export const EditPostComponent = ({ post, onConfirm, onCancel }) => {
     onConfirm(updatedPost);
   };
 
+  /**
+   * handleEmojiClick
+   *
+   * Updates the score state when an emoji is clicked.
+   *
+   * @param {number} emojiIndex - The index of the selected emoji.
+   * @returns {void}
+   */
   const handleEmojiClick = (emojiIndex) => {
     setScore(emojiIndex);
   };

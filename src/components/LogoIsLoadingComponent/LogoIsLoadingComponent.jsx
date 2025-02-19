@@ -1,8 +1,15 @@
 import "./LogoIsLoadingComponent.scss";
 import PropTypes from "prop-types";
-
 import { LogoIcon } from "@assets/Icons/NavigationBarIcons/LogoIcon";
 
+/**
+ * LogoIsLoadingComponent
+ *
+ * A component that displays a loading overlay with a logo icon while content is loading.
+ * The icon's stroke color is dynamically set from a CSS variable.
+ *
+ * @returns {JSX.Element} - Returns a loading overlay with the logo icon.
+ */
 export const LogoIsLoadingComponent = () => {
   const stroke = getComputedStyle(document.documentElement).getPropertyValue("--primary-dark");
   return (

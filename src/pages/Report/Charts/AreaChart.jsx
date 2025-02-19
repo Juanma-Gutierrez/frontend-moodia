@@ -1,13 +1,21 @@
-// AreaChart.jsx
 import React, { useEffect, useState } from "react";
 import ReactEcharts from "echarts-for-react";
 import { CONSTANTS } from "@constants/Constants";
 
+/**
+ * AreaChart component for displaying a line area chart based on posts data
+ * @param {Array} posts - Array of posts with score and creation date.
+ * @param {Array} colors - Array of colors to use for the chart's series.
+ * @returns {JSX.Element} - Returns a ReactEcharts component rendering the area chart.
+ */
 export default function AreaChart({ posts, colors }) {
   const [dataset, setDataset] = useState({ xAxisData: [], seriesData: [] });
-
   const leyend = CONSTANTS.SCORE_GLOBAL;
 
+  /**
+   * Effect hook to process posts data and prepare it for chart rendering
+   * @returns {void} - Updates the dataset state with the formatted dates and series data.
+   */
   useEffect(() => {
     const postsByDate = {};
 
@@ -47,6 +55,10 @@ export default function AreaChart({ posts, colors }) {
     setDataset({ xAxisData: formattedDates, seriesData });
   }, [posts]);
 
+    /**
+   * Configuration object for the ECharts area chart
+   * @returns {Object} - The option object used to configure the chart.
+   */
   const option = {
     color: colors,
     title: {

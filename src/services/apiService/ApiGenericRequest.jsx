@@ -22,7 +22,6 @@ import { HttpMethod } from "./HttpMethod";
  * @throws {Error} - Throws an error if there is an issue making the request (e.g., network failure).
  */
 export const apiGenericRequest = async (endpoint, body, method = HttpMethod.POST, token = null) => {
-
   try {
     const headers = {
       "Content-Type": "application/json",
@@ -64,8 +63,37 @@ export const apiGenericRequest = async (endpoint, body, method = HttpMethod.POST
   }
 };
 
+/**
+ * Fetches the list of genres from the API.
+ *
+ * @returns {Promise<Object>} - A promise that resolves to the genres data or an error object.
+ */
 export const apiGetGenres = () => apiGenericRequest("genre/get", null, HttpMethod.POST);
+
+/**
+ * Fetches the list of civil statuses from the API.
+ *
+ * @returns {Promise<Object>} - A promise that resolves to the civil statuses data or an error object.
+ */
 export const apiGetCivilStatus = () => apiGenericRequest("civil_status/get", null, HttpMethod.POST);
+
+/**
+ * Fetches the list of employment statuses from the API.
+ *
+ * @returns {Promise<Object>} - A promise that resolves to the employment statuses data or an error object.
+ */
 export const apiGetEmployment = () => apiGenericRequest("employment/get", null, HttpMethod.POST);
+
+/**
+ * Fetches the list of categories from the API.
+ *
+ * @returns {Promise<Object>} - A promise that resolves to the categories data or an error object.
+ */
 export const apiGetCategory = () => apiGenericRequest("category/get", null, HttpMethod.POST);
+
+/**
+ * Fetches the list of inspiring phrases from the API.
+ *
+ * @returns {Promise<Object>} - A promise that resolves to the inspiring phrases data or an error object.
+ */
 export const apiGetInspiringPhrases = () => apiGenericRequest("inspiring_phrase/get", null, HttpMethod.POST);
