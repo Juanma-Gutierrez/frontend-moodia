@@ -31,12 +31,15 @@
     }
 
     .modal-assign-phrase-phrase {
-      margin-bottom: var(--margin-general);
       color: var(--primary-dark);
 
       select {
-        padding: var(--padding-medium);
         width: 100%;
+
+        option{
+          padding-block: var(--padding-medium);
+          padding-inline: var(--padding-large);
+        }
       }
     }
 

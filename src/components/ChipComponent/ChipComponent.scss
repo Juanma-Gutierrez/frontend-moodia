@@ -1,0 +1,30 @@
+.chip {
+  display: inline-block;
+  padding: var(--padding-small) var(--padding-large);
+  background-color: var(--button-general-disabled);
+  color: var(--white);
+  border-radius: var(--radius-full);
+  font-size: var(--font-small);
+  margin: var(--margin-small);
+  transition: var(--transition-fast);
+
+  &.clickable {
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--primary-dark);
+      color: var(--white);
+      transform: translateY(var(--translation-small-neg));
+    }
+  }
+
+  &.active {
+    background-color: var(--primary-dark);
+    color: var(--secondary-light);
+  }
+
+  &.selected {
+    background-color: var(--primary-light);
+    color: var(--white);
+  }
+}

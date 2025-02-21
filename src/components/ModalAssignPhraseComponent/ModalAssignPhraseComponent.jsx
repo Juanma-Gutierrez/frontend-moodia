@@ -52,6 +52,7 @@ export const ModalAssignPhraseComponent = ({ inspiringPhrases, onConfirm, onCanc
             onChange={(e) => {
               setPhraseValue(e.target.value);
             }}
+            size="8"
           >
             <option value="">Selecciona una frase</option>
             {Array.isArray(inspiringPhrases) &&
