@@ -18,7 +18,7 @@ import { LogoIsLoadingComponent } from "@components/LogoIsLoadingComponent/LogoI
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { SnackbarComponent } from "@components/SnackbarComponent/SnackbarComponent";
 import { apiGenericRequest } from "@services/ApiService/ApiGenericRequest";
-import { useAuthContext } from "@services/context/AuthContext";
+import { useAuthContext } from "@services/Context/AuthContext";
 import { useEffect, useState } from "react";
 import { useEnvironmentContext } from "@services/Context/EnvironmentContext";
 
