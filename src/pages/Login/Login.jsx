@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { LogoIcon } from "@assets/icons/NavigationBarIcons/LogoIcon";
 import { ModalComponent } from "@components/ModalComponent/ModalComponent";
 import { apiGenericRequest } from "@services/ApiService/ApiGenericRequest";
-import { useAuthContext } from "@services/context/AuthContext";
+import { useAuthContext } from "@services/Context/AuthContext";
 import { useEffect, useState } from "react";
 import { useEnvironmentContext } from "@services/Context/EnvironmentContext";
 
