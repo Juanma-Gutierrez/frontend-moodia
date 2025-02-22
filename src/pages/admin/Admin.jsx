@@ -246,8 +246,6 @@ export default function Admin() {
         return user.extendedUser.genre.genre;
       case "age":
         return calculateAge(user.extendedUser.birthDate);
-      case "genre":
-        return user.extendedUser.genre.genre;
       case "score":
         return user.averageScore;
       default:
