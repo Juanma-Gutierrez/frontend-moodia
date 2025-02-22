@@ -25,6 +25,8 @@
     input {
       width: 100%;
       padding: var(--padding-medium);
+      background-color: var(--white);
+      color: var(--primary-dark);
       border-radius: var(--input-radius);
       border: 1px solid var(--primary-light);
       margin-bottom: var(--margin-large);

@@ -40,22 +40,22 @@ export const UserDataFormComponent = ({ userRaw, isHeader, onSort, onUserClicked
   if (isHeader) {
     return (
       <div className="user-data-row">
-        <div className="user-data-username user-data-header" onClick={() => handleSort("username")}>
+        <div className="user-data-username user-data-header" onClick={() => handleSort("username")} title="Ordenar por nombre de usuario">
           Nombre
         </div>
-        <div className="user-data-employment user-data-header" onClick={() => handleSort("employment")}>
+        <div className="user-data-employment user-data-header" onClick={() => handleSort("employment")} title="Ordenar por empleo">
           Empleo
         </div>
-        <div className="user-data-civilStatus user-data-header" onClick={() => handleSort("civilStatus")}>
+        <div className="user-data-civilStatus user-data-header" onClick={() => handleSort("civilStatus")}title="Ordenar por estado civil">
           Estado Civil
         </div>
-        <div className="user-data-age-data user-data-header" onClick={() => handleSort("age")}>
+        <div className="user-data-age-data user-data-header" onClick={() => handleSort("age")} title="Ordenar por edad">
           Edad
         </div>
-        <div className="user-data-genre-data user-data-header" onClick={() => handleSort("genre")}>
+        <div className="user-data-genre-data user-data-header" onClick={() => handleSort("genre")} title="Ordenar por género">
           Género
         </div>
-        <div className="user-data-score user-data-header" onClick={() => handleSort("score")}>
+        <div className="user-data-score user-data-header" onClick={() => handleSort("score")} title="Ordenar por estado de ánimo">
           Estado
         </div>
       </div>

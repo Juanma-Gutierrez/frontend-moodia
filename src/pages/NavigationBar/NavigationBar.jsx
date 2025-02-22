@@ -142,9 +142,9 @@ export default function NavigationBar() {
                 </Link>
               </li>
               <li>
-                <div to="/register">
+                <Link to="/register">
                   <NavigationButtonComponent icon={RegisterIcon} />
-                </div>
+                </Link>
               </li>
             </>
           )}

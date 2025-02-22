@@ -26,6 +26,8 @@
         padding: var(--padding-medium);
         border-radius: var(--input-radius);
         border: 1px solid var(--primary-light);
+        background-color: var(--white);
+        color: var(--primary-dark);
         margin-top: var(--margin-large);
 
         &:focus {

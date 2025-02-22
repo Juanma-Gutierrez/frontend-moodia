@@ -57,15 +57,20 @@
     grid-row-start: 3;
   }
 
+  .user-data-score {
+    grid-column-start: 1;
+    grid-row-start: 4;
+  }
+
   .user-data-age {
+    grid-column-start: 2;
     grid-row-start: 4;
   }
 
   .user-data-genre {
+    grid-column-start: 3;
     grid-row-start: 4;
   }
 
-  .user-data-score {
-    grid-row-start: 4;
-  }
+
 }

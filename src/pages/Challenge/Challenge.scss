@@ -11,12 +11,14 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    filter:drop-shadow(0 5px 5px var(--icon-shadow));
   }
 }
 
 @media (max-width:480px) {
   .challenge-container {
-    padding-top: var(--padding-large);
+    padding-block: var(--padding-large);
     justify-content: flex-start;
+    margin-bottom: 80px;
   }
 }

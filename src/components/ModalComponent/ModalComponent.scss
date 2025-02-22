@@ -54,3 +54,17 @@
     }
   }
 }
+
+@media (max-width:480px) {
+  .modal-overlay {
+    padding-left: 0px;
+
+    .modal-container {
+      max-width: var(--modal-responsive-width);
+
+      .modal-buttons {
+        flex-direction: column;
+      }
+    }
+  }
+}

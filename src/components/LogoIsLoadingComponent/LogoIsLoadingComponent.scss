@@ -16,9 +16,18 @@
     right: var(--margin-general);
     animation: rotateLogo 2s linear infinite;
 
-    svg{
+    svg {
       width: var(--lottie-xsmall);
-      height: var( --lottie-xsmall);
+      height: var(--lottie-xsmall);
+      filter: drop-shadow(var(--bright-shadow)); 
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-isLoading-overlay {
+    .logo-isLoading {
+      bottom: var(--margin-container);
     }
   }
 }

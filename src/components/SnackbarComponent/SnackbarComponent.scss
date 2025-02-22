@@ -39,3 +39,9 @@
     background-color: var(--snackbar-error);
   }
 }
+
+@media (max-width:480px) {
+  .snackbar-component {
+    bottom: var(--snackbar-botton-margin-large);
+  }
+}
