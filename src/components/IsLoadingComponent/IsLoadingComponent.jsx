@@ -1,7 +1,7 @@
 import "./IsLoadingComponent.scss";
 import Lottie from "react-lottie";
 import PropTypes from "prop-types";
-import isLoadingLottie from "@assets/Lotties/isLoadingLottie.json";
+import isLoadingLottie from "@assets/lotties/IsLoadingLottie.json";
 import { CONSTANTS } from "@constants/Constants";
 
 /**

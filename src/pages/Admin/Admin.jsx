@@ -1,16 +1,16 @@
 import "./Admin.scss";
 import { ButtonComponent } from "@components/ButtonComponent/ButtonComponent";
-import { HttpMethod } from "@services/apiService/HttpMethod";
+import { HttpMethod } from "@services/ApiService/HttpMethod";
 import { InputComponent } from "@components/InputComponent/InputComponent";
 import { ModalAssignPhraseComponent } from "@components/ModalAssignPhraseComponent/ModalAssignPhraseComponent";
 import { SnackbarComponent } from "@components/SnackbarComponent/SnackbarComponent";
 import { SnackbarComponentTypes } from "@components/SnackbarComponent/SnackbarComponentTypes";
 import { UserDataFormComponent } from "@components/UserDataFormComponent/UserDataFormComponent";
-import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
-import { calculateAge } from "@services/utils/utils";
-import { useAuthContext } from "@services/context/AuthContext";
+import { apiGenericRequest } from "@services/ApiService/ApiGenericRequest";
+import { calculateAge } from "@services/Utils/Utils";
+import { useAuthContext } from "@services/Context/AuthContext";
 import { useEffect, useState } from "react";
-import { useEnvironmentContext } from "@services/context/EnvironmentContext";
+import { useEnvironmentContext } from "@services/Context/EnvironmentContext";
 import { useNavigate } from "react-router-dom";
 
 /**

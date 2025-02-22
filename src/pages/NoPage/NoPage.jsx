@@ -1,6 +1,6 @@
 import "./NoPage.scss";
 import Lottie from "react-lottie";
-import SearchLottie from "@assets/Lotties/SearchLottie.json";
+import SearchLottie from "@assets/lotties/SearchLottie.json";
 import { CONSTANTS } from "@constants/Constants";
 
 /**

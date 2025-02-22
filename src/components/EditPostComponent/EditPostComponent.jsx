@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import { ButtonComponent } from "@components/ButtonComponent/ButtonComponent";
 import { ChipComponent } from "@components/ChipComponent/ChipComponent";
 import { InputComponent } from "@components/InputComponent/InputComponent";
-import { emojis } from "@assets/Icons/EmojiIcons/EmojiList";
-import { useEnvironmentContext } from "@services/context/EnvironmentContext";
+import { emojis } from "@assets/icons/EmojiIcons/EmojiList";
+import { useEnvironmentContext } from "@services/Context/EnvironmentContext";
 
 /**
  * EditPostComponent

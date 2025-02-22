@@ -1,6 +1,6 @@
 import "./LogoIsLoadingComponent.scss";
 import PropTypes from "prop-types";
-import { LogoIcon } from "@assets/Icons/NavigationBarIcons/LogoIcon";
+import { LogoIcon } from "@assets/icons/NavigationBarIcons/LogoIcon";
 
 /**
  * LogoIsLoadingComponent

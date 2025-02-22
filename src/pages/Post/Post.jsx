@@ -1,16 +1,16 @@
 import "./Post.scss";
 import ModalModel from "@components/ModalComponent/ModalModel";
-import { HttpMethod } from "@services/apiService/HttpMethod";
+import { HttpMethod } from "@services/ApiService/HttpMethod";
 import { InspiringPhraseComponent } from "@components/InspiringPhraseComponent/InspiringPhraseComponent";
 import { ModalComponent } from "@components/ModalComponent/ModalComponent";
 import { NewPostComponent } from "@components/NewPostComponent/NewPostComponent";
 import { PostComponent } from "@components/PostComponent/PostComponent";
 import { SnackbarComponent } from "@components/SnackbarComponent/SnackbarComponent";
 import { SnackbarComponentTypes } from "@components/SnackbarComponent/SnackbarComponentTypes";
-import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
-import { useAuthContext } from "@services/context/AuthContext";
+import { apiGenericRequest } from "@services/ApiService/ApiGenericRequest";
+import { useAuthContext } from "@services/Context/AuthContext";
 import { useEffect, useState } from "react";
-import { useEnvironmentContext } from "@services/context/EnvironmentContext";
+import { useEnvironmentContext } from "@services/Context/EnvironmentContext";
 import { useNavigate } from "react-router-dom";
 
 /**

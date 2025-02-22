@@ -1,7 +1,7 @@
 import "./SnackbarComponent.scss";
 import PropTypes from "prop-types";
 import { CONSTANTS } from "@constants/Constants";
-import { SnackbarCrossIcon } from "@assets/Icons/SnackbarIcons/SnackbarCrossIcon";
+import { SnackbarCrossIcon } from "@assets/icons/SnackbarIcons/SnackbarCrossIcon";
 import { useState, useEffect } from "react";
 
 /**

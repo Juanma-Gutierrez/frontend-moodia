@@ -1,6 +1,6 @@
-import { useAuthContext } from "@services/context/AuthContext";
+import { useAuthContext } from "@services/Context/AuthContext";
 import { useEffect } from "react";
-import { useEnvironmentContext } from "@services/context/EnvironmentContext";
+import { useEnvironmentContext } from "@services/Context/EnvironmentContext";
 
 /**
  * Auth component that handles user authentication logic.

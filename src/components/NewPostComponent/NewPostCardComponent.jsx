@@ -3,13 +3,13 @@ import ModalModel from "@components/ModalComponent/ModalModel";
 import PropTypes from "prop-types";
 import { ButtonComponent } from "@components/ButtonComponent/ButtonComponent";
 import { ChipComponent } from "@components/ChipComponent/ChipComponent";
-import { EditIcon } from "@assets/Icons/ButtonIcons/EditIcon";
-import { HttpMethod } from "@services/apiService/HttpMethod";
+import { EditIcon } from "@assets/icons/ButtonIcons/EditIcon";
+import { HttpMethod } from "@services/ApiService/HttpMethod";
 import { InputComponent } from "@components/InputComponent/InputComponent";
 import { ModalComponent } from "@components/ModalComponent/ModalComponent";
-import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
-import { emojis } from "@assets/Icons/EmojiIcons/EmojiList";
-import { useAuthContext } from "@services/context/AuthContext";
+import { apiGenericRequest } from "@services/ApiService/ApiGenericRequest";
+import { emojis } from "@assets/icons/EmojiIcons/EmojiList";
+import { useAuthContext } from "@services/Context/AuthContext";
 import { useEffect } from "react";
 import { useState } from "react";
 

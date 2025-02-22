@@ -1,15 +1,15 @@
 import "./Challenge.scss";
-import ChallengeAcceptedLottie from "@assets/Lotties/ChallengeAcceptedLottie.json";
+import ChallengeAcceptedLottie from "@assets/lotties/ChallengeAcceptedLottie.json";
 import Lottie from "react-lottie";
 import ModalModel from "@components/ModalComponent/ModalModel";
 import { CONSTANTS } from "@constants/Constants";
 import { ChallengeComponent } from "@components/ChallengeComponent/ChallengeComponent";
-import { HttpMethod } from "@services/apiService/HttpMethod";
+import { HttpMethod } from "@services/ApiService/HttpMethod";
 import { ModalComponent } from "@components/ModalComponent/ModalComponent";
 import { SnackbarComponent } from "@components/SnackbarComponent/SnackbarComponent";
-import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
+import { apiGenericRequest } from "@services/ApiService/ApiGenericRequest";
 import { useEffect, useState } from "react";
-import { useEnvironmentContext } from "@services/context/EnvironmentContext";
+import { useEnvironmentContext } from "@services/Context/EnvironmentContext";
 
 /**
  * Challenge Component

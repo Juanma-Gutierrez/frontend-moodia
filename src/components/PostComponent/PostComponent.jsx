@@ -2,16 +2,16 @@ import "./PostComponent.scss";
 import ModalModel from "@components/ModalComponent/ModalModel";
 import PropTypes from "prop-types";
 import { ChipComponent } from "@components/ChipComponent/ChipComponent";
-import { DeleteIcon } from "@assets/Icons/ButtonIcons/DeleteIcon";
-import { EditIcon } from "@assets/Icons/ButtonIcons/EditIcon";
+import { DeleteIcon } from "@assets/icons/ButtonIcons/DeleteIcon";
+import { EditIcon } from "@assets/icons/ButtonIcons/EditIcon";
 import { EditPostComponent } from "@components/EditPostComponent/EditPostComponent";
-import { HttpMethod } from "@services/apiService/HttpMethod";
+import { HttpMethod } from "@services/ApiService/HttpMethod";
 import { ModalComponent } from "@components/ModalComponent/ModalComponent";
-import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
-import { emojis } from "@assets/Icons/EmojiIcons/EmojiList";
-import { getFormattedDate } from "@services/utils/utils";
-import { useAuthContext } from "@services/context/AuthContext";
-import { useEnvironmentContext } from "@services/context/EnvironmentContext";
+import { apiGenericRequest } from "@services/ApiService/ApiGenericRequest";
+import { emojis } from "@assets/icons/EmojiIcons/EmojiList";
+import { getFormattedDate } from "@services/Utils/Utils";
+import { useAuthContext } from "@services/Context/AuthContext";
+import { useEnvironmentContext } from "@services/Context/EnvironmentContext";
 import { useState } from "react";
 
 /**

@@ -1,15 +1,15 @@
 import "./NavigationBar.scss";
-import { AdminIcon } from "@assets/Icons/NavigationBarIcons/AdminIcon";
-import { ChallengeIcon } from "@assets/Icons/NavigationBarIcons/ChallengeIcon";
+import { AdminIcon } from "@assets/icons/NavigationBarIcons/AdminIcon";
+import { ChallengeIcon } from "@assets/icons/NavigationBarIcons/ChallengeIcon";
 import { Link, useNavigate } from "react-router-dom";
-import { LoginIcon } from "@assets/Icons/NavigationBarIcons/LoginIcon";
-import { LogoIcon } from "@assets/Icons/NavigationBarIcons/LogoIcon";
-import { LogoutIcon } from "@assets/Icons/NavigationBarIcons/LogoutIcon";
+import { LoginIcon } from "@assets/icons/NavigationBarIcons/LoginIcon";
+import { LogoIcon } from "@assets/icons/NavigationBarIcons/LogoIcon";
+import { LogoutIcon } from "@assets/icons/NavigationBarIcons/LogoutIcon";
 import { NavigationButtonComponent } from "@components/NavigationButtonComponent/NavigationButtonComponent";
-import { PostIcon } from "@assets/Icons/NavigationBarIcons/PostIcon";
-import { RegisterIcon } from "@assets/Icons/NavigationBarIcons/RegisterIcon";
-import { ReportIcon } from "@assets/Icons/NavigationBarIcons/ReportIcon";
-import { useAuthContext } from "@services/context/AuthContext";
+import { PostIcon } from "@assets/icons/NavigationBarIcons/PostIcon";
+import { RegisterIcon } from "@assets/icons/NavigationBarIcons/RegisterIcon";
+import { ReportIcon } from "@assets/icons/NavigationBarIcons/ReportIcon";
+import { useAuthContext } from "@services/Context/AuthContext";
 import { useEffect, useState } from "react";
 
 /**

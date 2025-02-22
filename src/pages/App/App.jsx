@@ -1,6 +1,6 @@
-import "./app.scss";
-import Admin from "@pages/admin/Admin";
-import Auth from "@services/authService/Auth";
+import "./App.scss";
+import Admin from "@pages/Admin/Admin";
+import Auth from "@services/AuthService/Auth";
 import Challenge from "@pages/Challenge/Challenge";
 import Login from "@pages/Login/Login";
 import Logout from "@pages/Logout/Logout";
@@ -8,19 +8,19 @@ import Moodia from "@pages/Moodia/Moodia";
 import NavigationBar from "@pages/NavigationBar/NavigationBar";
 import NoPage from "@pages/NoPage/NoPage";
 import Post from "@pages/Post/Post";
-import PrivateRoute from "@services/privateRoute/privateRoute";
+import PrivateRoute from "@services/PrivateRoute/PrivateRoute";
 import Register from "@pages/Register/Register";
 import Report from "@pages/Report/Report";
-import { HttpMethod } from "@services/apiService/HttpMethod";
-import { IsLoadingComponent } from "@components/isLoadingComponent/isLoadingComponent";
-import { KOScreen } from "@components/KOScreenComponent/KOScreenComponent";
+import { HttpMethod } from "@services/ApiService/HttpMethod";
+import { IsLoadingComponent } from "@components/IsLoadingComponent/IsLoadingComponent";
+import { KOScreen } from "@components/KoScreenComponent/KoScreenComponent";
 import { LogoIsLoadingComponent } from "@components/LogoIsLoadingComponent/LogoIsLoadingComponent";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { SnackbarComponent } from "@components/SnackbarComponent/SnackbarComponent";
-import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
+import { apiGenericRequest } from "@services/ApiService/ApiGenericRequest";
 import { useAuthContext } from "@services/context/AuthContext";
 import { useEffect, useState } from "react";
-import { useEnvironmentContext } from "@services/context/EnvironmentContext";
+import { useEnvironmentContext } from "@services/Context/EnvironmentContext";
 
 /**
  * App Component

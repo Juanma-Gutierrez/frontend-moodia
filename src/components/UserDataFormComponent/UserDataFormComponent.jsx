@@ -1,6 +1,6 @@
 import "./UserDataFormComponent.scss";
 import PropTypes from "prop-types";
-import { calculateAge } from "@services/utils/utils";
+import { calculateAge } from "@services/Utils/Utils";
 
 /**
  * UserDataFormComponent

@@ -1,7 +1,7 @@
-import "./KOScreenComponent.scss";
+import "./KoScreenComponent.scss";
 import Lottie from "react-lottie";
 import PropTypes from "prop-types";
-import koScreenLottie from "@assets/Lotties/koScreenLottie.json";
+import koScreenLottie from "@assets/lotties/KoScreenLottie.json";
 import { CONSTANTS } from "@constants/Constants";
 
 /**

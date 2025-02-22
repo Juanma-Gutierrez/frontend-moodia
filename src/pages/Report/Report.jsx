@@ -6,10 +6,10 @@ import BarRaceChart from "./Charts/BarRaceChart.jsx";
 import CalendarHeatmap from "./Charts/CalendarHeatmapChart.jsx";
 import React, { useEffect, useState } from "react";
 import { CONSTANTS } from "@constants/Constants.jsx";
-import { HttpMethod } from "@services/apiService/HttpMethod";
-import { apiGenericRequest } from "@services/apiService/ApiGenericRequest";
-import { useAuthContext } from "@services/context/AuthContext";
-import { useEnvironmentContext } from "@services/context/EnvironmentContext";
+import { HttpMethod } from "@services/ApiService/HttpMethod";
+import { apiGenericRequest } from "@services/ApiService/ApiGenericRequest";
+import { useAuthContext } from "@services/Context/AuthContext";
+import { useEnvironmentContext } from "@services/Context/EnvironmentContext";
 import { useNavigate } from "react-router-dom";
 
 /**

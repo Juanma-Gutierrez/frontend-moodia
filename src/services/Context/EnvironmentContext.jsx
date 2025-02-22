@@ -6,7 +6,7 @@ import {
   apiGetEmployment,
   apiGetCategory,
   apiGetInspiringPhrases,
-} from "@services/apiService/ApiGenericRequest";
+} from "@services/ApiService/ApiGenericRequest";
 
 const EnvironmentContext = createContext();
 
