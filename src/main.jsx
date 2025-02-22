@@ -1,5 +1,5 @@
 import "./index.scss";
-import App from "./pages/App/App.jsx";
+import App from "./pages/app/App.jsx";
 import React from "react";
 import { AuthProvider } from "./services/context/AuthContext.jsx";
 import { BrowserRouter } from "react-router-dom";
