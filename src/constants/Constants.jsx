@@ -1,14 +1,10 @@
 // Determining the current environment (development or production)
 // The previous code that toggled the value based on the environment is disabled.
 // "prod" is set for working with the production configuration.
-// const env = import.meta.env.MODE === "development" ? "dev" : "prod";
-const env = "prod";
+const env = import.meta.env.MODE === "development" ? "dev" : "prod";
 
 // API URL: depending on the environment (dev or prod), the corresponding URL for the API is selected.
-export const API_URL =
-  env === "dev"
-    ? "http://127.0.0.1:8000/api" // configuración BBDD local
-    : "http://18.233.17.222/api"; // url Final configuración BBDD en producción // configuración API fake
+export const API_URL = "http://18.233.17.222/api"
 
 // Exporting the API version for use throughout the application.
 export const API_VERSION = "v1";

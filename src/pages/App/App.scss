@@ -15,7 +15,7 @@
     background-color: var(--app-background-color);
     overflow-y: auto;
     width: 100%;
-    height: calc(100% - var(--navigationBar-size));
+    height: 100%;
   }
 
   .navigation-link {
@@ -42,6 +42,7 @@
     .main-content {
       padding-left: 0;
       margin-bottom: var(--margin-responsive-bottom);
+      height: calc(100% - var(--navigationBar-size));
     }
   }
 }

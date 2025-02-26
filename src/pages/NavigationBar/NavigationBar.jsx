@@ -113,6 +113,11 @@ export default function NavigationBar() {
       {/* Mobile navbar */}
       <nav className="nav-mobile-width">
         <ul>
+          <li>
+            <Link to="/moodia">
+              <NavigationButtonComponent icon={LogoIcon} logo={true} />
+            </Link>
+          </li>
           {token !== null && (
             <li>
               <Link to="/">
