@@ -36,7 +36,7 @@
       select {
         width: 100%;
 
-        option{
+        option {
           padding-block: var(--padding-medium);
           padding-inline: var(--padding-large);
         }
@@ -50,6 +50,31 @@
       align-items: center;
       gap: var(--padding-medium);
       margin-top: var(--margin-general);
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .modal-assign-phrase-overlay {
+
+    .modal-assign-phrase-container {
+      margin-inline: var(--margin-large);
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-assign-phrase-overlay {
+    padding-left: 0px;
+
+    .modal-assign-phrase-container {
+      .modal-assign-phrase-buttons {
+        flex-direction: column;
+
+        .button {
+          width: 100% !important;
+        }
+      }
     }
   }
 }

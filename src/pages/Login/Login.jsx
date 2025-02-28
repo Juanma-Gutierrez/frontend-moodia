@@ -19,7 +19,7 @@ import { useEnvironmentContext } from "@services/Context/EnvironmentContext";
  */
 export default function Login() {
   const { setToken, setUser, extendedUser, setExtendedUser } = useAuthContext();
-  const { setLogoIsLoading } = useEnvironmentContext();
+  const { setLogoIsLoading, setIsKOScreenVisible } = useEnvironmentContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -122,8 +122,12 @@ export default function Login() {
         break;
       }
       case false: {
-        console.log("Error: Token no válido");
-        setIsModalVisible(true);
+        if (responseToken.error == "Failed to fetch") {
+          setIsKOScreenVisible(true);
+        } else {
+          console.log("Error: Token no válido", responseToken.error);
+          setIsModalVisible(true);
+        }
         break;
       }
     }

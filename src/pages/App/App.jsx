@@ -30,8 +30,10 @@ export default function App() {
   const [isSnackbarVisible, setIsSnackbarVisible] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const navigate = useNavigate();
-  const { isLoading, setIsLoading, logoIsLoading, setLogoIsLoading, isKOScreenVisible } = useEnvironmentContext();
+  const { isLoading, setIsLoading, logoIsLoading, setLogoIsLoading, isKOScreenVisible, setIsKOScreenVisible } =
+    useEnvironmentContext();
   const { setUser, setExtendedUser } = useAuthContext();
+  const [failureMessage, setFailureMessage] = useState("");
 
   /**
    * useEffect Hook
@@ -61,30 +63,45 @@ export default function App() {
 
     const token = localStorage.getItem("token");
     if (token) {
-      const responseUser = await apiGenericRequest("auth/me", null, HttpMethod.POST, token);
-      if (responseUser.success) {
-        const responseExtendedUser = await apiGenericRequest(
-          `extended_user/${responseUser.data.id}`,
-          null,
-          HttpMethod.POST,
-          token
-        );
-        if (responseUser.data) {
-          setUser(responseUser.data);
-          setExtendedUser(responseExtendedUser.data);
-          if (responseExtendedUser.data.idRole === 1) {
-            navigate("/post");
-          } else if (responseExtendedUser.data.idRole === 2) {
-            navigate("/admin");
+      try {
+        const responseUser = await apiGenericRequest("auth/me", null, HttpMethod.POST, token);
+        if (responseUser.success) {
+          const responseExtendedUser = await apiGenericRequest(
+            `extended_user/${responseUser.data.id}`,
+            null,
+            HttpMethod.POST,
+            token
+          );
+          if (responseUser.data) {
+            setUser(responseUser.data);
+            setExtendedUser(responseExtendedUser.data);
+            if (responseExtendedUser.data.idRole === 1) {
+              navigate("/post");
+            } else if (responseExtendedUser.data.idRole === 2) {
+              navigate("/admin");
+            }
           }
+        } else {
+          setFailureMessage(responseUser.error);
         }
-      } else {
-        setIsSnackbarVisible(true);
-        setSnackbarMessage(responseUser.error);
+      } catch (error) {
+        console.error("Request error:", error);
+        setFailureMessage("An error occurred while authenticating.");
       }
     }
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    console.log("entra por el if failure", failureMessage);
+    if (failureMessage!="") {
+      console.log("entra por el if failure", failureMessage);
+      setIsLoading(false);
+      setIsKOScreenVisible(true);
+      setIsSnackbarVisible(true);
+      setSnackbarMessage(failureMessage);
+    }
+  }, [failureMessage]);
 
   /**
    * handleClickSnackbar function
@@ -99,8 +116,8 @@ export default function App() {
       <Auth />
       {isLoading && <IsLoadingComponent isLoading={isLoading} />}
       {!isLoading && logoIsLoading && <LogoIsLoadingComponent />}
-      {isSnackbarVisible && <SnackbarComponent message={snackbarMessage} type="error" onClick={handleClickSnackbar} />}
       {isKOScreenVisible && <KOScreen />}
+      {isSnackbarVisible && <SnackbarComponent message={snackbarMessage} type="error" onClick={handleClickSnackbar} />}
       <div className="app-container">
         <NavigationBar className="navigation-bar" />
         <div className="main-content">
@@ -124,7 +141,7 @@ export default function App() {
               }
             />
             <Route
-              path="report"
+              path="report" 
               element={
                 <PrivateRoute>
                   <Report />

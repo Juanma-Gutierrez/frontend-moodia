@@ -48,7 +48,7 @@ export const EnvironmentProvider = ({ children }) => {
   const [employment, setEmployment] = useState([]);
   const [genres, setGenres] = useState([]);
   const [inspiringPhrases, setInspiringPhrases] = useState([]);
-  const [isKOScreenVisible, setKOScreenVisible] = useState(false);
+  const [isKOScreenVisible, setIsKOScreenVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [logoIsLoading, setLogoIsLoading] = useState(false);
 
@@ -69,7 +69,7 @@ export const EnvironmentProvider = ({ children }) => {
         if (categoryRes.success) setCategory([...categoryRes.data.data]);
         if (inspiringPhrasesRes.success) setInspiringPhrases([...inspiringPhrasesRes.data.data]);
       } catch (error) {
-        setKOScreenVisible(true);
+        setIsKOScreenVisible(true);
         console.error("Error al cargar los datos:", error);
       }
     };
@@ -86,7 +86,7 @@ export const EnvironmentProvider = ({ children }) => {
         category,
         inspiringPhrases,
         isKOScreenVisible,
-        setKOScreenVisible,
+        setIsKOScreenVisible,
         isLoading,
         setIsLoading,
         logoIsLoading,

@@ -20,10 +20,15 @@
   }
 
   .loading-text {
-
     font-size: var(--font-large);
     font-weight: var(--font-weight-bold);
     color: var(--primary-dark);
     margin-top: var(--margin-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  .loading-text {
+    padding: var(--padding-large);
   }
 }
