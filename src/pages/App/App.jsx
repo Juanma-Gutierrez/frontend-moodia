@@ -93,9 +93,7 @@ export default function App() {
   };
 
   useEffect(() => {
-    console.log("entra por el if failure", failureMessage);
     if (failureMessage!="") {
-      console.log("entra por el if failure", failureMessage);
       setIsLoading(false);
       setIsKOScreenVisible(true);
       setIsSnackbarVisible(true);

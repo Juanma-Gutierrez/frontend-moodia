@@ -8,6 +8,7 @@ import { HttpMethod } from "@services/ApiService/HttpMethod";
 import { ModalComponent } from "@components/ModalComponent/ModalComponent";
 import { SnackbarComponent } from "@components/SnackbarComponent/SnackbarComponent";
 import { apiGenericRequest } from "@services/ApiService/ApiGenericRequest";
+import { useAuthContext } from "@services/Context/AuthContext";
 import { useEffect, useState } from "react";
 import { useEnvironmentContext } from "@services/Context/EnvironmentContext";
 
@@ -23,6 +24,7 @@ export default function Challenge() {
   const [isSnackbarVisible, setIsSnackbarVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { setLogoIsLoading } = useEnvironmentContext();
+  const { token, extendedUser } = useAuthContext();
 
   /**
    * Modal Model
@@ -102,13 +104,39 @@ export default function Challenge() {
    * Handle Confirm Challenge Acceptance
    * @returns {void} - Confirms the challenge acceptance and shows a snackbar with the message.
    */
-  const handleConfirmChallenge = () => {
-    handleCloseModal();
-    setIsSnackbarVisible(true);
-    setIsChallengeAcepted(true);
-    setTimeout(() => {
-      setIsChallengeAcepted(false);
-    }, 3000);
+  const handleConfirmChallenge = async () => {
+    const defaultScore = 3;
+    const challengeTitle = "Reto aceptado: ";
+    const challengeMessage = "Hoy me he propuesto conseguir realizar el siguiente reto: ";
+
+    const body = {
+      title: challengeTitle + challenge.title,
+      message: challengeMessage + cleanMessage(challenge.message),
+      score: defaultScore,
+      idExtendedUser: extendedUser.idExtendedUser,
+      category: [challenge.idCategory],
+    };
+
+    const response = await apiGenericRequest("post/create", body, HttpMethod.POST, token);
+    if (response.success) {
+      handleCloseModal();
+      setIsSnackbarVisible(true);
+      setIsChallengeAcepted(true);
+      setTimeout(() => {
+        setIsChallengeAcepted(false);
+      }, 3000);
+    }
+  };
+
+  const cleanMessage = (message) => {
+    const tagsToRemove = ["breakLine", "bulletPoint"];
+    let cleanedText = message;
+    tagsToRemove.forEach((tag) => {
+      const regex = new RegExp(`<${tag}>`, "g");
+      cleanedText = cleanedText.replace(regex, " ");
+    });
+
+    return cleanedText.replace(/\s+/g, " ").trim();
   };
 
   /**

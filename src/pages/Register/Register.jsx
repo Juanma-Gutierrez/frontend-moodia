@@ -126,7 +126,6 @@ export default function Register() {
     };
     const response = await apiGenericRequest("auth/register", userData);
     if (response.success) {
-      console.log("User registered successfully");
       setUser(response.data.user);
       setExtendedUser(response.data.extendedUser);
       setIsModalConfirmVisible(false);

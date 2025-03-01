@@ -125,7 +125,7 @@ export default function Login() {
         if (responseToken.error == "Failed to fetch") {
           setIsKOScreenVisible(true);
         } else {
-          console.log("Error: Token no válido", responseToken.error);
+          console.error("Error: Token no válido", responseToken.error);
           setIsModalVisible(true);
         }
         break;
